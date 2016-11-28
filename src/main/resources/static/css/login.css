@@ -1,0 +1,28 @@
+main.container {
+  margin-top: 80px;
+  margin-bottom: 80px;
+}
+
+.panel-body {
+  margin: 50px 0 10px 0;
+}
+
+.heading-text {
+  /*padding-left: 40px;*/
+}
+
+.info-holder {
+  margin-bottom: 40px;
+  padding: 0 40px;
+}
+
+.control-label {
+  padding-left: 40px;
+}
+
+.btn-signin-holder {
+  text-align: center;
+}
+
+.btn-signin {
+}

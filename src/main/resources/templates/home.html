@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: site-head">
+  <title>Spring MVC Blog</title>
+  <link rel="stylesheet" th:href="@{css/styles.css}"/>
+</head>
+<body>
+<header th:replace="layout :: site-header"></header>
+<main class="container">
+  <div id="react"></div>
+  <div>
+    <tr th:each="role : ${roles}">
+      <td th:text="${role.roleId}">1</td>
+      <td><a href="#" th:text="${role.role}">Title ...</a></td>
+    </tr>
+  </div>
+  <script th:src="@{built/bundle.js}"></script>
+</main>
+<footer th:replace="layout :: site-footer"></footer>
+</body>
+</html>
