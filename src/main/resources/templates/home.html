@@ -7,11 +7,7 @@
 <body>
 <header th:replace="layout :: site-header"></header>
 <main class="container">
-  <div id="react">
-    <!--<input type="hidden"-->
-           <!--th:name="${_csrf.parameterName}"-->
-           <!--th:value="${_csrf.token}" />-->
-  </div>
+  <div id="root"></div>
   <script th:src="@{built/bundle.js}"></script>
 </main>
 <footer th:replace="layout :: site-footer"></footer>
