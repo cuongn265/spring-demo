@@ -1,4 +1,4 @@
-package com.example.domain;
+package com.eugene.domain;
 
 /**
  * Created by Eugene on 11/26/2016.

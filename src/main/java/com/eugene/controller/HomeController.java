@@ -1,11 +1,10 @@
-package com.example.controller;
+package com.eugene.controller;
 
-import com.example.repository.UserRolesRepository;
+import com.eugene.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Created by Eugene on 11/26/2016.
@@ -13,16 +12,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 
-  private final UserRolesRepository userRolesRepository;
+  private final CourseRepository courseRepository;
 
   @Autowired
-  public HomeController(UserRolesRepository userRolesRepository) {
-    this.userRolesRepository = userRolesRepository;
+  public HomeController(CourseRepository courseRepository) {
+    this.courseRepository = courseRepository;
   }
 
   @RequestMapping("/")
   public String home(Model model) {
-    model.addAttribute("roles", userRolesRepository.findAll());
+    model.addAttribute("courses", courseRepository.findAll());
     return "home";
   }
 
@@ -40,9 +39,4 @@ public class HomeController {
   public String error() {
     return "403";
   }
-
-//  @RequestMapping(value="/logout", method = RequestMethod.POST)
-//  public String deleteUser () {
-//    return "redirect:/";
-//  }
 }

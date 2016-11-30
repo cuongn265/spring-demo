@@ -1,6 +1,6 @@
-package com.example.repository;
+package com.eugene.repository;
 
-import com.example.domain.User;
+import com.eugene.domain.User;
 import org.springframework.data.repository.CrudRepository;
 
 /**

@@ -1,6 +1,6 @@
-package com.example.repository;
+package com.eugene.repository;
 
-import com.example.domain.UserRole;
+import com.eugene.domain.UserRole;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 

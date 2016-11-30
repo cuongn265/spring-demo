@@ -1,9 +1,9 @@
-package com.example.service;
+package com.eugene.service;
 
 import java.util.Collection;
 import java.util.List;
 
-import com.example.domain.User;
+import com.eugene.domain.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;

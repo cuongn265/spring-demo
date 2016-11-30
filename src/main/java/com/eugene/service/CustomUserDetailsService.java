@@ -1,4 +1,4 @@
-package com.example.service;
+package com.eugene.service;
 
 /**
  * Created by Eugene on 11/26/2016.
@@ -6,9 +6,9 @@ package com.example.service;
 
 import java.util.List;
 
-import com.example.domain.User;
-import com.example.repository.UserRepository;
-import com.example.repository.UserRolesRepository;
+import com.eugene.domain.User;
+import com.eugene.repository.UserRepository;
+import com.eugene.repository.UserRolesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

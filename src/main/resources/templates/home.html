@@ -7,12 +7,10 @@
 <body>
 <header th:replace="layout :: site-header"></header>
 <main class="container">
-  <div id="react"></div>
-  <div>
-    <tr th:each="role : ${roles}">
-      <td th:text="${role.roleId}">1</td>
-      <td><a href="#" th:text="${role.role}">Title ...</a></td>
-    </tr>
+  <div id="react">
+    <!--<input type="hidden"-->
+           <!--th:name="${_csrf.parameterName}"-->
+           <!--th:value="${_csrf.token}" />-->
   </div>
   <script th:src="@{built/bundle.js}"></script>
 </main>

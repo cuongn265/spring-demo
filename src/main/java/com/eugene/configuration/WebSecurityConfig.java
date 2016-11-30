@@ -1,6 +1,6 @@
-package com.example.config;
+package com.eugene.configuration;
 
-import com.example.service.CustomUserDetailsService;
+import com.eugene.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -33,13 +33,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests()
-      .antMatchers("/hello").access("hasRole('ROLE_ADMIN')")
-      .antMatchers("/").authenticated()
-      .anyRequest().permitAll()
+      .antMatchers("/login", "/css/**", "/built/**").permitAll()
+      .anyRequest().authenticated()
       .and()
       .formLogin()
       .loginPage("/login")
       .usernameParameter("username").passwordParameter("password")
+      .defaultSuccessUrl("/", true)
+      .and()
+      .httpBasic()
       .and()
       .logout()
       .logoutUrl("/logout")
@@ -47,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
       .and()
       .exceptionHandling().accessDeniedPage("/403")
       .and()
-      .csrf();
+      .csrf().disable();
   }
 
   @Bean(name = "passwordEncoder")
