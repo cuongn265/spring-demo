@@ -11,7 +11,7 @@ public class Unit {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "unit_id")
-  private Long Id;
+  private Long unitId;
   @Column(name =  "name", nullable = false, unique = true)
   private String unitName;
   @Column(name = "summary")
@@ -33,12 +33,12 @@ public class Unit {
     this.course = course;
   }
 
-  public Long getId() {
-    return Id;
+  public Long getUnitId() {
+    return unitId;
   }
 
-  public void setId(Long id) {
-    Id = id;
+  public void setUnitId(Long unitId) {
+    this.unitId = unitId;
   }
 
   public String getUnitName() {

@@ -11,16 +11,16 @@ public class UserRole {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "role_id")
-  private Integer roleId;
+  private Long roleId;
 
   @Column(name = "role", nullable = false, unique = true)
   private String role = "ROLE_USER";
 
-  public Integer getRoleId() {
+  public Long getRoleId() {
     return roleId;
   }
 
-  public void setRoleId(Integer roleId) {
+  public void setRoleId(Long roleId) {
     this.roleId = roleId;
   }
 

@@ -12,7 +12,7 @@ public class Assignment {
   @javax.persistence.Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "assignment_id")
-  private Long Id;
+  private Long assignmentId;
   @Column(name =  "name", nullable = false, unique = true)
   private String assignmentName;
   @Column(name = "start_date", nullable = false)
@@ -34,12 +34,12 @@ public class Assignment {
     this.unit = unit;
   }
 
-  public Long getId() {
-    return Id;
+  public Long getAssignmentId() {
+    return assignmentId;
   }
 
-  public void setId(Long id) {
-    Id = id;
+  public void setAssignmentId(Long assignmentId) {
+    this.assignmentId = assignmentId;
   }
 
   public String getAssignmentName() {

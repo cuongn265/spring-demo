@@ -1,7 +1,28 @@
-main.container {
-  margin-top: 80px;
-  margin-bottom: 80px;
-}
-.alert {
-  text-align: center;
-}
+main {
+  margin: 80px auto; }
+  main .row.courses-header {
+    margin-bottom: 10px;
+    padding: 20px; }
+  main .row.courses-body {
+    display: flex;
+    flex-wrap: wrap; }
+    main .row.courses-body > [class*='col-'] {
+      display: flex;
+      flex-direction: column; }
+    main .row.courses-body .box {
+      height: 100%;
+      position: relative;
+      display: inline-table; }
+    main .row.courses-body [class*="col-"] {
+      background: #fff; }
+      main .row.courses-body [class*="col-"] .caption {
+        margin-bottom: 30px; }
+      main .row.courses-body [class*="col-"] .course-footer {
+        position: absolute;
+        bottom: 0;
+        margin: 9px;
+        text-align: center; }
+        main .row.courses-body [class*="col-"] .course-footer .btn-action {
+          display: inline-block; }
+
+/*# sourceMappingURL=styles.css.map */

@@ -1,0 +1,32 @@
+main
+  margin: 80px auto
+  .row.courses-header
+    margin-bottom: 10px
+    padding: 20px
+  .row.courses-body
+    display: flex
+    flex-wrap: wrap
+    > [class*='col-']
+      display: flex
+      flex-direction: column
+
+    .box
+      height: 100%
+      position: relative
+      display: inline-table
+    [class*="col-"]
+      background: #fff
+
+      .caption
+        margin-bottom: 30px
+      .course-footer
+        //make button fix at bottom
+        position: absolute
+        bottom: 0
+        margin: 9px
+        //
+        //width: 100%s
+        text-align: center
+        .btn-action
+          display: inline-block
+

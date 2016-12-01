@@ -12,9 +12,6 @@ import java.util.List;
  */
 @Repository
 public interface CourseRepository extends CrudRepository<Course, Long> {
-  @Override
-  public List<Course> findAll();
-
   @Query("select a from Course a where a.user.userId=?1")
-  public List<Course> findCourseByUsernameXXX(Integer integer);
+  public List<Course> findCourseByUserId(Long userId);
 }

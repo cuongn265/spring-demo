@@ -2,13 +2,65 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout :: site-head">
   <title>Spring MVC Blog</title>
-  <link rel="stylesheet" th:href="@{css/styles.css}"/>
+  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
 </head>
 <body>
 <header th:replace="layout :: site-header"></header>
-<main class="container">
-  <div id="root"></div>
-  <script th:src="@{built/bundle.js}"></script>
+<main>
+  <div class="jumbotron">
+    <div class="container">
+      <h1>Welcome to C Learning Management System</h1>
+      <p>Easy to use, hard to give up and be your the best assistant</p>
+      <p>
+        <a class="btn btn-primary btn-lg" href="#" role="button">
+          <span class="glyphicon glyphicon-plus"></span>
+          Create Course
+        </a>
+      </p>
+    </div>
+
+  </div>
+  <div class="container">
+    <div class="row courses-body">
+      <!--/*@thymesVar id="courseList" type="java.util.List<com.eugene.domain.Course>"*/-->
+      <div class="col-sm-6 col-md-4" th:each="course: ${courseList}">
+        <div class="thumbnail box">
+          <img src="http://i.imgur.com/XiOn9vX.jpg" alt="img"/>
+          <div class="caption">
+            <h3 th:text="${course.courseName}"></h3>
+            <p th:text="${course.courseSummary}"></p>
+          </div>
+          <div class="course-footer row">
+            <form
+              th:action="@{/courses/{courseId}/remove(courseId=${course.courseId})}"
+              th:method="delete"
+            >
+              <!--<div class="btn-action btn-show">-->
+              <!--<a-->
+              <!--class="btn btn-primary"-->
+              <!--th:href="@{/courses/{unitId}(unitId=${course.courseId})}">-->
+              <!--Show detail-->
+              <!--</a>-->
+              <!--</div>-->
+              <!--<div class="btn-action  btn-modify">-->
+              <!--<a-->
+              <!--class="btn btn-warning"-->
+              <!--th:href="@{/courses/{unitId}(unitId=${course.courseId})}">-->
+              <!--<span class="glyphicon glyphicon-pencil"></span>-->
+              <!--</a>-->
+              <!--</div>-->
+              <div class="btn-action btn-delete">
+                <button type="submit" id="submitButton" class="btn btn-danger">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </main>
 <footer th:replace="layout :: site-footer"></footer>
 </body>

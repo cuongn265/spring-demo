@@ -3,9 +3,10 @@
 <head th:fragment="site-head">
   <meta charset="UTF-8"/>
   <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" th:href="@{css/layout.css}"/>
+  <link rel="stylesheet" th:href="@{/css/layout.css}"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+  <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet"/>
   <meta th:include="this :: head" th:remove="tag"/>
 </head>
 <body>
@@ -23,7 +24,7 @@
         <a class="navbar-brand" th:href="@{/}">CLMS</a>
       </div>
 
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <div class="collapse navbar-collapse" assignmentId="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right" sec:authorize="isAnonymous()">
             <li><a th:href="@{/login}">Login</a></li>
             <li><a href="#">Sign up</a></li>
