@@ -24,7 +24,7 @@ public class User implements Serializable {
   @Column(name = "enabled", nullable = false)
   private int enabled = 1;
   @Column(name = "image_url")
-  private String image_url;
+  private String userImageUrl;
 
   @ManyToOne(optional = false)
   @JoinColumn(name = "roleId", referencedColumnName = "role_id", insertable = false, updatable = false)
@@ -89,11 +89,11 @@ public class User implements Serializable {
     this.userRole = userRole;
   }
 
-  public String getImage_url() {
-    return image_url;
+  public String getUserImageUrl() {
+    return userImageUrl;
   }
 
-  public void setImage_url(String image_url) {
-    this.image_url = image_url;
+  public void setUserImageUrl(String userImageUrl) {
+    this.userImageUrl = userImageUrl;
   }
 }

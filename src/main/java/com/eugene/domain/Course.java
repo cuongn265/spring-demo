@@ -18,8 +18,10 @@ public class Course {
   private String courseSummary;
   @Column(name = "week_count", nullable = false)
   private Integer courseWeekCount;
+  @Column(name = "image_url")
+  private String courseImageUrl;
   @ManyToOne(optional = false)
-  @JoinColumn(name = "userId", referencedColumnName = "user_id", insertable = false, updatable = false)
+  @JoinColumn(name = "userId", referencedColumnName = "user_id")
   private User user;
 
   public Course() {
@@ -29,7 +31,7 @@ public class Course {
     this.courseName = courseName;
     this.courseSummary = courseSummary;
     this.courseWeekCount = courseWeekCount;
-//    this.user = user;
+    this.user = user;
   }
 
   public Long getCourseId() {
@@ -64,11 +66,19 @@ public class Course {
     this.courseWeekCount = courseWeekCount;
   }
 
-//  public User getUser() {
-//    return user;
-//  }
-//
-//  public void setUser(User user) {
-//    this.user = user;
-//  }
+  public String getCourseImageUrl() {
+    return courseImageUrl;
+  }
+
+  public void setCourseImageUrl(String courseImageUrl) {
+    this.courseImageUrl = courseImageUrl;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
 }
