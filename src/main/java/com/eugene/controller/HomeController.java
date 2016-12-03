@@ -69,8 +69,7 @@ public class HomeController {
     if (bindingResult.hasErrors()) {
       return "course_form";
     }
-    AWSCredentials credentials =
-      new BasicAWSCredentials("AKIAISUSR5JXVBOYEFGQ", "9LUgeUAWvd9A2m3JZj6D7Nbr9nq0G5vf5SwiJ0bs");
+    
     AmazonS3 s3client = new AmazonS3Client(credentials);
     String bucketName = "cuongngo-lms";
     boolean exist = false;
