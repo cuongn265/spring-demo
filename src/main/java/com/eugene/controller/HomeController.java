@@ -1,5 +1,11 @@
 package com.eugene.controller;
 
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.*;
 import com.eugene.domain.Course;
 import com.eugene.repository.CourseRepository;
 import com.eugene.repository.UserRepository;
@@ -11,11 +17,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.security.Principal;
 import java.util.List;
 
@@ -57,10 +62,36 @@ public class HomeController {
 
 
   @RequestMapping(value = "/course", method = RequestMethod.POST)
-  public String saveCourse(@Valid Course course, BindingResult bindingResult) {
+  public String saveCourse(@Valid Course course,
+                           BindingResult bindingResult,
+                           @RequestParam("file") MultipartFile file,
+                           @RequestParam("name") String name) {
     if (bindingResult.hasErrors()) {
       return "course_form";
     }
+    AWSCredentials credentials =
+      new BasicAWSCredentials("AKIAISUSR5JXVBOYEFGQ", "9LUgeUAWvd9A2m3JZj6D7Nbr9nq0G5vf5SwiJ0bs");
+    AmazonS3 s3client = new AmazonS3Client(credentials);
+    String bucketName = "cuongngo-lms";
+    boolean exist = false;
+    for (Bucket bucket : s3client.listBuckets()) {
+      if (bucketName.equals(bucket.getName())) {
+        exist = true;
+      }
+    }
+    if (!exist) {
+      s3client.createBucket(bucketName);
+    }
+    try {
+      InputStream is = file.getInputStream();
+      s3client.putObject(new PutObjectRequest(bucketName, name, is, new ObjectMetadata()).withCannedAcl(CannedAccessControlList.PublicRead));
+      S3Object s3Object = s3client.getObject(new GetObjectRequest(bucketName, name));
+      course.setCourseImageUrl(s3Object.getObjectContent().getHttpRequest().getURI().toString());
+      System.out.print(s3Object.getObjectContent().getHttpRequest().getURI().toString());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
     courseRepository.save(course);
     return "redirect:/courses/" + course.getCourseId();
   }
@@ -120,5 +151,41 @@ public class HomeController {
     } else {
       return "Unable to upload. File is empty.";
     }
+  }
+
+
+  @RequestMapping(value = "/singleUploadAWS", method = RequestMethod.POST)
+  public String handleFileUploadAWS(@RequestParam("file") MultipartFile file,
+                                    @RequestParam("desc") String desc,
+                                    RedirectAttributes redirectAttributes) {
+    AWSCredentials credentials =
+      new BasicAWSCredentials("AKIAISUSR5JXVBOYEFGQ", "9LUgeUAWvd9A2m3JZj6D7Nbr9nq0G5vf5SwiJ0bs");
+    AmazonS3 s3client = new AmazonS3Client(credentials);
+    String bucketName = "cuongngo.lms";
+    boolean exist = false;
+    for (Bucket bucket : s3client.listBuckets()) {
+      if (bucketName.equals(bucket.getName())) {
+        exist = true;
+      }
+    }
+
+    if (!exist) {
+      s3client.createBucket(bucketName);
+    }
+    try {
+      InputStream is = file.getInputStream();
+
+      //
+      s3client.putObject(new PutObjectRequest(bucketName, desc, is, new ObjectMetadata()).withCannedAcl(CannedAccessControlList.PublicRead));
+
+      S3Object s3Object = s3client.getObject(new GetObjectRequest(bucketName, desc));
+
+      redirectAttributes.addAttribute("picUrl", s3Object.getObjectContent().getHttpRequest().getURI().toString());
+      System.out.print(s3Object.getObjectContent().getHttpRequest().getURI().toString());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    return "redirect:/singleUpload";
   }
 }

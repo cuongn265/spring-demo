@@ -14,7 +14,11 @@
         <hr/>
         <div>
           <!--/*@thymesVar id="course" type="com.eugene.domain.Course"*/-->
-          <form class="form-horizontal" th:object="${course}" th:action="@{/course}" method="post">
+          <form class="form-horizontal"
+                enctype="multipart/form-data"
+                th:object="${course}"
+                th:action="@{/course}"
+                method="post">
             <input type="hidden" th:field="*{courseId}"/>
             <input type="hidden" th:field="*{user}" th:value="${course.getUser().getUserId()}"/>
             <div class="form-group">
@@ -39,23 +43,48 @@
             </div>
 
             <div class="form-group">
+              <label class="col-sm-3 control-label">Image:</label>
+              <div class="col-sm-9">
+                <div class="fileinput fileinput-new" data-provides="fileinput">
+                  <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                    <img data-src="holder.js/100%x100%" alt="..."/>
+                  </div>
+                  <div class="fileinput-preview fileinput-exists thumbnail"
+                       style="max-width: 200px; max-height: 150px;"></div>
+                  <div>
+                    <span class="btn btn-default btn-file">
+                      <span class="fileinput-new">Select image</span>
+                      <span class="fileinput-exists">Change</span>
+                      <input type="file"
+                             name="file"
+                             id="file-input"
+                             onchange="$('#image-name-input').val($('#file-input').val().split('\\').pop());"
+                      />
+                    </span>
+                    <input id="image-name-input" type="text" name="name"/>
+                    <button
+                      class="btn btn-default fileinput-exists"
+                      data-dismiss="fileinput">
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
               <div class="col-sm-9 col-sm-offset-3">
                 <button type="submit" class="btn btn-default">Submit</button>
               </div>
             </div>
           </form>
         </div>
-
-        <hr/>
-        <form th:action="@{/fileUpload}" method="post" enctype="multipart/form-data">
-          <input type="file" name="myFile" />
-          <input type="submit" />
-        </form>
-
       </div>
     </div>
   </div>
 </main>
 <footer th:replace="layout :: site-footer"></footer>
+<script type="text/javascript">
+</script>
 </body>
 </html>

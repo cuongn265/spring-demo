@@ -1,11 +1,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 <h1>Single File Upload</h1>
-<form method="post" enctype="multipart/form-data" th:action="@{/singleSave}">
-  Upload File: <input type="file" name="file"/>
+<form method="post" enctype="multipart/form-data" th:action="@{/singleUploadAWS}">
+  <label>Upload File:</label>
+  <input type="file" name="file"/>
   <br/><br/>
-  Description: <input type="text" name="desc"/>
-  <br/><br/><input type="submit" value="Upload"/>
+  <label>Description: </label>
+  <input type="text" name="desc"/>
+  <br/><br/>
+  <input type="submit" value="Upload"/>
 </form>
 </body>
 </html>

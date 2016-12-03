@@ -20,8 +20,8 @@ public class UploadFileConfig {
   @Bean
   public MultipartConfigElement multipartConfigElement() {
     MultipartConfigFactory factory = new MultipartConfigFactory();
-    factory.setMaxFileSize("128KB");
-    factory.setMaxRequestSize("128KB");
+    factory.setMaxFileSize("1MB");
+    factory.setMaxRequestSize("1MB");
     return factory.createMultipartConfig();
   }
 }
