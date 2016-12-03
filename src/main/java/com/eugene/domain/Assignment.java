@@ -1,5 +1,7 @@
 package com.eugene.domain;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -13,10 +15,13 @@ public class Assignment {
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "assignment_id")
   private Long assignmentId;
+  @NotEmpty
   @Column(name =  "name", nullable = false, unique = true)
   private String assignmentName;
+  @NotEmpty
   @Column(name = "start_date", nullable = false)
   private Date assignmentStartDate;
+  @NotEmpty
   @Column(name = "end_date", nullable = false)
   private Date assignmentEndDate;
 

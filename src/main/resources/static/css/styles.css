@@ -9,7 +9,7 @@ main {
     main .row.courses-body > [class*='col-'] {
       display: flex;
       flex-direction: column;
-      margin: 20px auto; }
+      margin: 20px 0; }
     main .row.courses-body .box {
       height: 100%;
       position: relative;

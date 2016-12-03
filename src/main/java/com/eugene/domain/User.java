@@ -4,6 +4,8 @@ package com.eugene.domain;
  * Created by Eugene on 11/26/2016.
  */
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -15,10 +17,13 @@ public class User implements Serializable {
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "user_id")
   private Long userId;
+  @NotEmpty
   @Column(name = "username", nullable = false, unique = true)
   private String username;
+  @NotEmpty
   @Column(name = "password", nullable = false)
   private String password;
+  @NotEmpty
   @Column(name = "email", nullable = false, unique = true)
   private String email;
   @Column(name = "enabled", nullable = false)

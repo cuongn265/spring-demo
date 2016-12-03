@@ -1,5 +1,7 @@
 package com.eugene.domain;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 
 /**
@@ -12,10 +14,12 @@ public class Unit {
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "unit_id")
   private Long unitId;
+  @NotEmpty
   @Column(name =  "name", nullable = false, unique = true)
   private String unitName;
   @Column(name = "summary")
   private String unitSummary;
+  @NotEmpty
   @Column(name = "position", nullable = false)
   private Integer unitPosition;
 

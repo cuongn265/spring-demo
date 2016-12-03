@@ -1,6 +1,11 @@
 package com.eugene.domain;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by Eugene on 11/28/2016.
@@ -13,11 +18,15 @@ public class Course {
   @Column(name = "course_id")
   private Long courseId;
   @Column(name = "name", nullable = false, unique = true)
+  @NotEmpty(message = "Course name should not be empty")
   private String courseName;
   @Column(name = "summary")
   private String courseSummary;
+
+  @Min(value = 1, message = "Week count should not be less than 1")
+  @NotNull(message = "Week count should not be null")
   @Column(name = "week_count", nullable = false)
-  private Integer courseWeekCount;
+  private Integer courseWeekCount = 1;
   @Column(name = "image_url")
   private String courseImageUrl;
   @ManyToOne(optional = false)

@@ -8,8 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.security.Principal;
 import java.util.List;
 
@@ -39,9 +45,8 @@ public class HomeController {
   }
 
 
-
   @RequestMapping("/course/new")
-  public String newCourse(Model model){
+  public String newCourse(Model model) {
     CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     Long userId = userDetails.getUserId();
     Course course = new Course();
@@ -51,15 +56,17 @@ public class HomeController {
   }
 
 
-
   @RequestMapping(value = "/course", method = RequestMethod.POST)
-  public String saveCourse(Course course){
+  public String saveCourse(@Valid Course course, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return "course_form";
+    }
     courseRepository.save(course);
     return "redirect:/courses/" + course.getCourseId();
   }
 
   @RequestMapping("/courses/{courseId}")
-  public String showCourse(@PathVariable Integer courseId, Model model){
+  public String showCourse(@PathVariable Integer courseId, Model model) {
     Course course = courseRepository.findOne(courseId.longValue());
     model.addAttribute("course", course);
     return "course";
@@ -84,5 +91,34 @@ public class HomeController {
   @RequestMapping("/403")
   public String error() {
     return "403";
+  }
+
+  @RequestMapping(value = "/singleUpload")
+  public String singleUpload() {
+    return "single_upload";
+  }
+
+  @RequestMapping(value = "/singleSave", method = RequestMethod.POST)
+  public
+  @ResponseBody
+  String singleSave(@RequestParam("file") MultipartFile file, @RequestParam("desc") String desc) {
+    System.out.println("File Description:" + desc);
+    String fileName = null;
+    if (!file.isEmpty()) {
+      try {
+        fileName = file.getOriginalFilename();
+        byte[] bytes = file.getBytes();
+        File location = new File("F:\\Hoc\\HK1-N4\\CNPMM\\final\\upload\\");
+        BufferedOutputStream buffStream =
+          new BufferedOutputStream(new FileOutputStream(location + fileName));
+        buffStream.write(bytes);
+        buffStream.close();
+        return "You have successfully uploaded " + fileName;
+      } catch (Exception e) {
+        return "You failed to upload " + fileName + ": " + e.getMessage();
+      }
+    } else {
+      return "Unable to upload. File is empty.";
+    }
   }
 }

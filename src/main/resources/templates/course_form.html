@@ -21,20 +21,23 @@
               <label class="col-sm-3 control-label">Course Name:</label>
               <div class="col-sm-9">
                 <input type="text" class="form-control" th:field="*{courseName}"/>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-3 control-label">Course Summary:</label>
-              <div class="col-sm-9">
-                <input type="text" class="form-control" th:field="*{courseSummary}"/>
+                <span th:if="${#fields.hasErrors('courseName')}" th:errors="*{courseName}">Name Error</span>
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-3 control-label">Course Weeks:</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" th:field="*{courseWeekCount}"/>
+                <input type="number" class="form-control" th:field="*{courseWeekCount}"/>
+                <span th:if="${#fields.hasErrors('courseWeekCount')}" th:errors="*{courseWeekCount}">courseWeekCount Error</span>
               </div>
             </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Course Summary:</label>
+              <div class="col-sm-9">
+                <textarea class="form-control" th:field="*{courseSummary}"></textarea>
+              </div>
+            </div>
+
             <div class="form-group">
               <div class="col-sm-9 col-sm-offset-3">
                 <button type="submit" class="btn btn-default">Submit</button>
@@ -42,6 +45,13 @@
             </div>
           </form>
         </div>
+
+        <hr/>
+        <form th:action="@{/fileUpload}" method="post" enctype="multipart/form-data">
+          <input type="file" name="myFile" />
+          <input type="submit" />
+        </form>
+
       </div>
     </div>
   </div>
