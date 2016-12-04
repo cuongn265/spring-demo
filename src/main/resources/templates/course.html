@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout :: site-head">
-  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
-  <title>Course</title>
+  <link rel="stylesheet" th:href="@{/css/course.css}"/>
+  <title>Course Detail</title>
 </head>
 <body>
 <header th:replace="layout :: site-header"></header>
@@ -12,12 +12,22 @@
       <!--/*@thymesVar id="course" type="com.eugene.domain.Course"*/-->
       <h1 th:text="${course.courseName}"></h1>
       <p th:text="${course.courseSummary}"></p>
-      <h4 th:text="${'Course lenght: ' + course.courseWeekCount + (course.courseWeekCount > 1 ? ' weeks' : ' week')}"></h4>
-      <h4 th:text="${'Total unit: ' + course.unitList.size()}"></h4>
+      <p
+        th:text="${'Course lenght: ' + course.courseWeekCount + (course.courseWeekCount > 1 ? ' weeks' : ' week')}">
+      </p>
+      <p th:text="${'Total unit: ' + course.unitList.size() + (course.unitList.size() > 1 ? ' units' : ' unit')}"></p>
     </div>
   </div>
-  <div class="container">
-
+  <div class="container unit-container">
+    <!--/*@thymesVar id="units" type="java.util.List<com.eugene.domain.Unit>"*/-->
+    <div class="unit" th:each="unit : ${units}">
+      <div class="page-header">
+        <h3 th:inline="text" class="unit-name">
+          [[${'Unit ' + unit.unitPosition + ': ' + unit.unitName}]]
+          <small th:text="${' - ' + unit.unitSummary}"></small>
+        </h3>
+      </div>
+    </div>
   </div>
 
 </main>

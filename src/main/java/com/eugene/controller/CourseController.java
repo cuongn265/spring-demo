@@ -6,7 +6,9 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.*;
 import com.eugene.domain.Course;
+import com.eugene.domain.Unit;
 import com.eugene.repository.CourseRepository;
+import com.eugene.repository.UnitRepository;
 import com.eugene.repository.UserRepository;
 import com.eugene.service.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * Created by Eugene on 12/4/2016.
@@ -31,11 +34,13 @@ import java.io.InputStream;
 public class CourseController {
   private final CourseRepository courseRepository;
   private final UserRepository userRepository;
+  private final UnitRepository unitRepository;
 
   @Autowired
-  public CourseController(CourseRepository courseRepository, UserRepository userRepository) {
+  public CourseController(CourseRepository courseRepository, UserRepository userRepository, UnitRepository unitRepository) {
     this.courseRepository = courseRepository;
     this.userRepository = userRepository;
+    this.unitRepository = unitRepository;
   }
 
   @RequestMapping("/course/new")
@@ -91,7 +96,13 @@ public class CourseController {
   @RequestMapping("/courses/{courseId}")
   public String showCourse(@PathVariable Integer courseId, Model model) {
     Course course = courseRepository.findOne(courseId.longValue());
+    List<Unit> units = unitRepository.findAllByOrderByUnitPositionAsc();
+    for (Unit unit: units) {
+      System.out.println("UNIT:" + unit.getUnitName());
+    }
+
     model.addAttribute("course", course);
+    model.addAttribute("units", units);
     return "course";
   }
 
