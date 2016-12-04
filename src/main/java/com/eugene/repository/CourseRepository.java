@@ -14,4 +14,8 @@ import java.util.List;
 public interface CourseRepository extends CrudRepository<Course, Long> {
   @Query("select a from Course a where a.user.userId=?1")
   public List<Course> findCourseByUserId(Long userId);
+
+  @Query("select count(a) from Course a where a.courseName=?1")
+  public Integer findCourseByCourseName(String courseName);
+
 }

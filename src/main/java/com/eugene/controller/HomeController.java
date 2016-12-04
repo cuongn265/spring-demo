@@ -21,7 +21,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.*;
-import java.security.Principal;
 import java.util.List;
 
 /**
@@ -31,7 +30,6 @@ import java.util.List;
 public class HomeController {
 
   private final CourseRepository courseRepository;
-  @Autowired
   private final UserRepository userRepository;
 
   @Autowired
@@ -66,10 +64,12 @@ public class HomeController {
                            BindingResult bindingResult,
                            @RequestParam("file") MultipartFile file,
                            @RequestParam("name") String name) {
+
     if (bindingResult.hasErrors()) {
       return "course_form";
     }
-    
+
+    AWSCredentials credentials = new ProfileCredentialsProvider().getCredentials();
     AmazonS3 s3client = new AmazonS3Client(credentials);
     String bucketName = "cuongngo-lms";
     boolean exist = false;
@@ -83,14 +83,17 @@ public class HomeController {
     }
     try {
       InputStream is = file.getInputStream();
+      if (is.available() > 0) {
       s3client.putObject(new PutObjectRequest(bucketName, name, is, new ObjectMetadata()).withCannedAcl(CannedAccessControlList.PublicRead));
       S3Object s3Object = s3client.getObject(new GetObjectRequest(bucketName, name));
       course.setCourseImageUrl(s3Object.getObjectContent().getHttpRequest().getURI().toString());
-      System.out.print(s3Object.getObjectContent().getHttpRequest().getURI().toString());
+      } else {
+        course.setCourseImageUrl("https://cuongngo-lms.s3.amazonaws.com/no-image.jpg");
+      }
     } catch (IOException e) {
       e.printStackTrace();
     }
-
+    System.out.println("COURSE CONTROLLER:" + course);
     courseRepository.save(course);
     return "redirect:/courses/" + course.getCourseId();
   }

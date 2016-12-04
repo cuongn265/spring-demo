@@ -1,23 +1,28 @@
 package com.eugene.domain;
 
+import com.eugene.validator.NotExistingCourseName;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Eugene on 11/28/2016.
  */
 @Entity
+
 @Table(name = "courses")
 public class Course {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "course_id")
   private Long courseId;
+
   @Column(name = "name", nullable = false, unique = true)
+  @NotExistingCourseName
   @NotEmpty(message = "Course name should not be empty")
   private String courseName;
   @Column(name = "summary")
@@ -33,14 +38,18 @@ public class Course {
   @JoinColumn(name = "userId", referencedColumnName = "user_id")
   private User user;
 
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "course")
+  private Set<Unit> unitList = new HashSet<>();
+
   public Course() {
   }
 
-  public Course(String courseName, String courseSummary, Integer courseWeekCount, User user) {
+  public Course(String courseName, String courseSummary, Integer courseWeekCount, User user, Set<Unit> unitList) {
     this.courseName = courseName;
     this.courseSummary = courseSummary;
     this.courseWeekCount = courseWeekCount;
     this.user = user;
+    this.unitList = unitList;
   }
 
   public Long getCourseId() {
@@ -89,5 +98,13 @@ public class Course {
 
   public void setUser(User user) {
     this.user = user;
+  }
+
+  public Set<Unit> getUnitList() {
+    return unitList;
+  }
+
+  public void setUnitList(Set<Unit> unitList) {
+    this.unitList = unitList;
   }
 }

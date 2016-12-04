@@ -17,6 +17,9 @@ main {
       padding: 0;
       border-radius: 0;
       width: 100%; }
+      main .row.courses-body .box img {
+        max-height: 70%;
+        width: 100%; }
     main .row.courses-body [class*="col-"] {
       background: #fff; }
       main .row.courses-body [class*="col-"] .caption {

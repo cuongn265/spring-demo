@@ -6,13 +6,20 @@
 </head>
 <body>
 <header th:replace="layout :: site-header"></header>
-<main class="container">
-  <div class="row">
-    <!--/*@thymesVar id="course" type="com.eugene.domain.Course"*/-->
-    <h1 th:text="${course.courseName}"></h1>
-    <p th:text="${course.courseSummary}"></p>
-    <p><small th:text="${course.courseWeekCount}"></small></p>
+<main>
+  <div class="jumbotron">
+    <div class="container">
+      <!--/*@thymesVar id="course" type="com.eugene.domain.Course"*/-->
+      <h1 th:text="${course.courseName}"></h1>
+      <p th:text="${course.courseSummary}"></p>
+      <h4 th:text="${'Course lenght: ' + course.courseWeekCount + (course.courseWeekCount > 1 ? ' weeks' : ' week')}"></h4>
+      <h4 th:text="${'Total unit: ' + course.unitList.size()}"></h4>
+    </div>
   </div>
+  <div class="container">
+
+  </div>
+
 </main>
 <footer th:replace="layout :: site-footer"></footer>
 </body>
