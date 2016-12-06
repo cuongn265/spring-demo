@@ -62,4 +62,14 @@ public class HomeController {
     return "403";
   }
 
+  @RequestMapping("/test_editor")
+  public String testEditor() {
+    return "test_editor";
+  }
+
+  @RequestMapping(value = "/save_editor", method = RequestMethod.POST)
+  public String saveEditor(@RequestParam("editor1") String editor1){
+    System.out.println("EDITORRRRRRRRRR:" + editor1);
+    return  "redirect:/test_editor";
+  }
 }

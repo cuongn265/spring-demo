@@ -96,7 +96,7 @@ public class CourseController {
   @RequestMapping("/courses/{courseId}")
   public String showCourse(@PathVariable Integer courseId, Model model) {
     Course course = courseRepository.findOne(courseId.longValue());
-    List<Unit> units = unitRepository.findAllByOrderByUnitPositionAsc();
+    List<Unit> units = unitRepository.findAllByCourseOrderByUnitPositionAsc(course);
     for (Unit unit: units) {
       System.out.println("UNIT:" + unit.getUnitName());
     }

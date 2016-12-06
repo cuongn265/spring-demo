@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AAAA,IAAI;EACF,MAAM,EAAE,SAAS",
+"mappings": ";AAAA,IAAI;EACF,MAAM,EAAE,SAAS;EAGb,qCAAU;IACR,WAAW,EAAE,MAAM;EAGrB,0DAAI;IACF,eAAe,EAAE,IAAI;EACvB,kCAAO;IACL,WAAW,EAAE,sBAAsB;IACnC,OAAO,EAAE,GAAO;EAClB,4CAAiB;IACf,WAAW,EAAE,sBAAsB;IACnC,OAAO,EAAE,GAAO",
 "sources": ["course.sass"],
 "names": [],
 "file": "course.css"

@@ -3,6 +3,9 @@ package com.eugene.domain;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by Eugene on 11/28/2016.
@@ -19,13 +22,18 @@ public class Unit {
   private String unitName;
   @Column(name = "summary")
   private String unitSummary;
-  @NotEmpty
+  @NotNull
+  @Min(1)
   @Column(name = "position", nullable = false)
   private Integer unitPosition;
 
   @ManyToOne(optional = false)
-  @JoinColumn(name = "courseId", referencedColumnName = "course_id", insertable = false, updatable = false)
+  @JoinColumn(name = "courseId", referencedColumnName = "course_id")
   private Course course;
+
+  @Column(name = "detail", columnDefinition = "LONGTEXT")
+  private String unitDetail;
+
 
   public Unit() {
   }
@@ -75,5 +83,13 @@ public class Unit {
 
   public void setCourse(Course course) {
     this.course = course;
+  }
+
+  public String getUnitDetail() {
+    return unitDetail;
+  }
+
+  public void setUnitDetail(String unitDetail) {
+    this.unitDetail = unitDetail;
   }
 }

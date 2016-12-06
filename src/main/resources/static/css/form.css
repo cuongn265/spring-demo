@@ -1,4 +1,6 @@
 main .container {
   margin: 80px auto; }
+  main .container .panel.panel-default .panel-body .form-horizontal {
+    margin: 40px; }
 
 /*# sourceMappingURL=form.css.map */

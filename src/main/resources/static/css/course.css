@@ -1,4 +1,15 @@
+@charset "UTF-8";
 main {
   margin: 80px auto; }
+  main .unit-container .unit .unit-name {
+    font-weight: normal; }
+  main .jumbotron .container a, main .jumbotron .container u {
+    text-decoration: none; }
+  main .jumbotron .container a:after {
+    font-family: "Glyphicons Halflings";
+    content: ""; }
+  main .jumbotron .container a.collapsed:after {
+    font-family: "Glyphicons Halflings";
+    content: ""; }
 
 /*# sourceMappingURL=course.css.map */

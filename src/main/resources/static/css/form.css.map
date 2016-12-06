@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AACE,eAAU;EACR,MAAM,EAAE,SAAS",
+"mappings": "AACE,eAAU;EACR,MAAM,EAAE,SAAS;EAGb,iEAAgB;IACd,MAAM,EAAE,IAAI",
 "sources": ["form.sass"],
 "names": [],
 "file": "form.css"

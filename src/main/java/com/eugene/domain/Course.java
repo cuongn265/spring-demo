@@ -13,11 +13,10 @@ import java.util.Set;
  * Created by Eugene on 11/28/2016.
  */
 @Entity
-
 @Table(name = "courses")
 public class Course {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "course_id")
   private Long courseId;
 
@@ -25,6 +24,7 @@ public class Course {
   @NotExistingCourseName
   @NotEmpty(message = "Course name should not be empty")
   private String courseName;
+
   @Column(name = "summary")
   private String courseSummary;
 
@@ -38,18 +38,22 @@ public class Course {
   @JoinColumn(name = "userId", referencedColumnName = "user_id")
   private User user;
 
+  @Column(name = "outline", columnDefinition = "LONGTEXT")
+  private String courseOutline;
+
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "course")
   private Set<Unit> unitList = new HashSet<>();
 
   public Course() {
   }
 
-  public Course(String courseName, String courseSummary, Integer courseWeekCount, User user, Set<Unit> unitList) {
+  public Course(String courseName, String courseSummary, Integer courseWeekCount, User user, Set<Unit> unitList, String courseOutline) {
     this.courseName = courseName;
     this.courseSummary = courseSummary;
     this.courseWeekCount = courseWeekCount;
     this.user = user;
     this.unitList = unitList;
+    this.courseOutline = courseOutline;
   }
 
   public Long getCourseId() {
@@ -106,5 +110,13 @@ public class Course {
 
   public void setUnitList(Set<Unit> unitList) {
     this.unitList = unitList;
+  }
+
+  public String getCourseOutline() {
+    return courseOutline;
+  }
+
+  public void setCourseOutline(String courseOutline) {
+    this.courseOutline = courseOutline;
   }
 }
