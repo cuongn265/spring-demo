@@ -1,8 +1,19 @@
 @charset "UTF-8";
 main {
   margin: 80px auto; }
+  main .unit-container .unit .panel.panel-default .panel-title {
+    font-weight: bold; }
+    main .unit-container .unit .panel.panel-default .panel-title .panel-title:hover {
+      cursor: pointer; }
   main .unit-container .unit .unit-name {
-    font-weight: normal; }
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: normal;
+    width: 75%;
+    padding-top: 8px; }
+  main .jumbotron p {
+    font-size: 16px; }
   main .jumbotron .container a, main .jumbotron .container u {
     text-decoration: none; }
   main .jumbotron .container a:after {

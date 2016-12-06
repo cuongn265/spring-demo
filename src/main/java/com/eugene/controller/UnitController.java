@@ -4,12 +4,11 @@ import com.eugene.domain.Unit;
 import com.eugene.repository.CourseRepository;
 import com.eugene.repository.UnitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -44,5 +43,12 @@ public class UnitController {
     }
     unitRepository.save(unit);
     return "redirect:/";
+  }
+
+  @RequestMapping(value="units/delete/{unitId}", method=RequestMethod.DELETE,
+    produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+  @ResponseBody
+  public void deleteUnit(@PathVariable Integer unitId) {
+    unitRepository.delete(unitId.longValue());
   }
 }

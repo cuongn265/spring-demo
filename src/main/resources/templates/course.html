@@ -10,8 +10,8 @@
   <div class="jumbotron">
     <div class="container">
       <!--/*@thymesVar id="course" type="com.eugene.domain.Course"*/-->
-      <h1
-        th:text="${course.courseName + ' (' + course.courseWeekCount + (course.courseWeekCount > 1 ? ' weeks' : ' week') + ')'}"></h1>
+      <h3
+        th:text="${course.courseName + ' (' + course.courseWeekCount + (course.courseWeekCount > 1 ? ' weeks' : ' week') + ')'}"></h3>
       <p>
         <span th:remove="tag" th:utext="${course.courseSummary}"></span>
       </p>
@@ -33,30 +33,90 @@
     </div>
   </div>
   <div class="container unit-container">
-    <h2
-      class="page-header"
-      th:inline="text">
-      [[${'Total: ' + course.unitList.size() + (course.unitList.size() > 1 ? ' units' : ' unit')}]]
-      <a th:href="@{__${#httpServletRequest.requestURI}__/units/new}"
-         class="btn btn-info pull-right">
-        Create Unit
-      </a>
-    </h2>
-    <!--/*@thymesVar id="units" type="java.util.List<com.eugene.domain.Unit>"*/-->
-    <div class="unit" th:each="unit : ${units}">
-      <div class="page-header">
-        <h3 th:inline="text" class="unit-name">
-          [[${'Unit ' + unit.unitPosition + ': ' + unit.unitName}]]
-          <small th:text="${' - ' + unit.unitSummary}"></small>
-          <a th:href="@{/test_editor}"
+    <div class="row">
+      <div class="col-md-8">
+        <h2
+          th:inline="text">
+          <!--[[${'Total: ' + course.unitList.size() + (course.unitList.size() > 1 ? ' units' : ' unit')}]]-->
+          [[${'Unit List'}]]
+          <a th:href="@{__${#httpServletRequest.requestURI}__/units/new}"
              class="btn btn-info pull-right">
-            Modify
+            Create Unit
           </a>
-        </h3>
+        </h2>
+        <hr/>
+        <!--/*@thymesVar id="units" type="java.util.List<com.eugene.domain.Unit>"*/-->
+        <div class="unit" th:each="unit : ${units}">
+          <div class="panel panel-default" th:id="'panel-' + ${unit.unitId}">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a
+                  th:inline="text"
+                  class="unit-name collapsed panel-title pull-left"
+                  data-toggle="collapse"
+                  th:attr="data-target='#demo' + ${unit.unitId}"
+                  data-target="#demo1">
+                  [[${'Unit ' + unit.unitPosition + ': ' + unit.unitName}]]
+                  <small th:text="${' - ' + unit.unitSummary}"></small>
+                </a>
+              </h4>
+              <a th:href="@{/test_editor}"
+                 class="btn btn-warning pull-right">
+                <span class="glyphicon glyphicon-pencil"></span>
+              </a>
+
+              <a th:href="@{delete/{unitId}(unitId=${unit.unitId})}"
+                th:id="'delete-unit-' + ${unit.unitId}"
+                 class="btn btn-danger pull-right">
+                <span class="glyphicon glyphicon-trash"></span>
+              </a>
+              <div class="clearfix"></div>
+            </div>
+            <div th:id="${'demo' + unit.unitId}" class="collapse">
+              <div class="panel-body">
+                <div
+                >
+                  <p th:remove="tag"
+                     th:utext="${unit.unitDetail}">
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
   </div>
 </main>
 <footer th:replace="layout :: site-footer"></footer>
+<script type="text/javascript" th:inline="javascript">
+  $(document).ready(function () {
+    var deleteLink = $("[id^=delete-unit]");
+
+    $(deleteLink).click(function (event) {
+      var prefix = window.location.pathname;
+      console.log("prefix" + prefix);
+      var suffix = $(this).attr("href");
+      console.log("suffix" + suffix);
+      var url = prefix + '/units/' + suffix;
+      console.log(url);
+      $.ajax({
+        url: url,
+        type: "DELETE",
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader("Accept", "application/json");
+          xhr.setRequestHeader("Content-Type", "application/json");
+        },
+        success: function (unit) {
+          console.log($(event.target).closest(".panel").attr('id'));
+          $(event.target).closest(".panel").remove();
+        }
+      });
+      event.preventDefault();
+    });
+  });
+
+</script>
 </body>
 </html>
