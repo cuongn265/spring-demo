@@ -1,9 +1,11 @@
 @charset "UTF-8";
 main {
   margin: 80px auto; }
-  main .unit-container .unit .panel.panel-default .panel-title {
+  main .unit-container .unit .panel.panel-default .panel-heading .btn-action {
+    margin: 0 5px; }
+  main .unit-container .unit .panel.panel-default .panel-heading .panel-title {
     font-weight: bold; }
-    main .unit-container .unit .panel.panel-default .panel-title .panel-title:hover {
+    main .unit-container .unit .panel.panel-default .panel-heading .panel-title .panel-title:hover {
       cursor: pointer; }
   main .unit-container .unit .unit-name {
     white-space: nowrap;

@@ -12,14 +12,12 @@ import com.eugene.repository.UnitRepository;
 import com.eugene.repository.UserRepository;
 import com.eugene.service.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
@@ -106,9 +104,10 @@ public class CourseController {
     return "course";
   }
 
-  @RequestMapping(value = "/courses/{courseId}/remove", method = RequestMethod.DELETE)
-  public String removeCourse(@PathVariable Integer courseId) {
+  @RequestMapping(value="courses/delete/{courseId}", method=RequestMethod.DELETE,
+    produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+  @ResponseBody
+  public void deleteCourse(@PathVariable Integer courseId) {
     courseRepository.delete(courseId.longValue());
-    return "redirect:/";
   }
 }

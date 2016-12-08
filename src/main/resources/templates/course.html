@@ -61,13 +61,13 @@
                 </a>
               </h4>
               <a th:href="@{/test_editor}"
-                 class="btn btn-warning pull-right">
+                 class="btn btn-warning pull-right btn-action">
                 <span class="glyphicon glyphicon-pencil"></span>
               </a>
 
               <a th:href="@{delete/{unitId}(unitId=${unit.unitId})}"
                 th:id="'delete-unit-' + ${unit.unitId}"
-                 class="btn btn-danger pull-right">
+                 class="btn btn-danger pull-right btn-action">
                 <span class="glyphicon glyphicon-trash"></span>
               </a>
               <div class="clearfix"></div>
@@ -90,33 +90,30 @@
   </div>
 </main>
 <footer th:replace="layout :: site-footer"></footer>
-<script type="text/javascript" th:inline="javascript">
+<script type="text/javascript">
   $(document).ready(function () {
     var deleteLink = $("[id^=delete-unit]");
-
     $(deleteLink).click(function (event) {
       var prefix = window.location.pathname;
-      console.log("prefix" + prefix);
       var suffix = $(this).attr("href");
-      console.log("suffix" + suffix);
       var url = prefix + '/units/' + suffix;
-      console.log(url);
-      $.ajax({
-        url: url,
-        type: "DELETE",
-        beforeSend: function (xhr) {
-          xhr.setRequestHeader("Accept", "application/json");
-          xhr.setRequestHeader("Content-Type", "application/json");
-        },
-        success: function (unit) {
-          console.log($(event.target).closest(".panel").attr('id'));
-          $(event.target).closest(".panel").remove();
-        }
-      });
+      if (confirm("Are you sure?")) {
+        $.ajax({
+          url: url,
+          type: "DELETE",
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Content-Type", "application/json");
+          },
+          success: function (unit) {
+            console.log($(event.target).closest(".panel").attr('id'));
+            $(event.target).closest(".panel").remove();
+          }
+        });
+      }
       event.preventDefault();
     });
   });
-
 </script>
 </body>
 </html>

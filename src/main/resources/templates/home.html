@@ -50,14 +50,17 @@
               <div class="btn-action btn-modify">
                 <a
                   class="btn btn-success"
-                  th:href="@{/courses/{unitId}(unitId=${course.courseId})}">
+                  th:href="@{/courses/{courseId}(courseId=${course.courseId})}">
                   <span class="glyphicon glyphicon-pencil"></span>
                 </a>
               </div>
               <div class="btn-action btn-delete">
-                <button type="submit" id="btn-submit-delete" class="btn btn-danger">
-                  <span class="glyphicon glyphicon-trash"></span>
-                </button>
+                <a
+                  class="btn btn-danger"
+                  th:id="'delete-course-' + ${course.courseId}"
+                  th:href="@{/courses/delete/{courseId}(courseId=${course.courseId})}">
+                  <span class="glyphicon glyphicon-pencil"></span>
+                </a>
               </div>
               <div class="btn-action btn-test">
                 <button th:id="btn-submit-modify- + ${course.courseId}" class="btn btn-warning">
@@ -73,5 +76,30 @@
 
 </main>
 <footer th:replace="layout :: site-footer"></footer>
+<script type="text/javascript">
+  $(document).ready(function () {
+    var deleteLink = $("[id^=delete-course]");
+    $(deleteLink).click(function (event) {
+      var suffix = $(this).attr("href");
+      console.log(suffix);
+
+      if (confirm("Are you sure?")) {
+        $.ajax({
+          url: suffix,
+          type: "DELETE",
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Content-Type", "application/json");
+          },
+          success: function (unit) {
+            console.log($(event.target).closest(".panel").attr('id'));
+            $(event.target).closest("[class^=col-]").remove();
+          }
+        });
+      }
+      event.preventDefault();
+    });
+  });
+</script>
 </body>
 </html>

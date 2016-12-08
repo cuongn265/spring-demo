@@ -42,7 +42,7 @@ public class UnitController {
       return "unit";
     }
     unitRepository.save(unit);
-    return "redirect:/";
+    return "redirect:/courses/{courseId}";
   }
 
   @RequestMapping(value="units/delete/{unitId}", method=RequestMethod.DELETE,
