@@ -43,14 +43,14 @@
               <div class="btn-action btn-show">
                 <a
                   class="btn btn-primary"
-                  th:href="@{/courses/{unitId}(unitId=${course.courseId})}">
+                  th:href="@{/courses/{courseId}(courseId=${course.courseId})}">
                   <span class="glyphicon glyphicon-share-alt"></span>
                 </a>
               </div>
               <div class="btn-action btn-modify">
                 <a
-                  class="btn btn-success"
-                  th:href="@{/courses/{courseId}(courseId=${course.courseId})}">
+                  class="btn btn-warning"
+                  th:href="@{/courses/edit/{courseId}(courseId=${course.courseId})}">
                   <span class="glyphicon glyphicon-pencil"></span>
                 </a>
               </div>
@@ -59,13 +59,8 @@
                   class="btn btn-danger"
                   th:id="'delete-course-' + ${course.courseId}"
                   th:href="@{/courses/delete/{courseId}(courseId=${course.courseId})}">
-                  <span class="glyphicon glyphicon-pencil"></span>
+                  <span class="glyphicon glyphicon-trash"></span>
                 </a>
-              </div>
-              <div class="btn-action btn-test">
-                <button th:id="btn-submit-modify- + ${course.courseId}" class="btn btn-warning">
-                  <span class="glyphicon glyphicon-alert"></span>
-                </button>
               </div>
             </form>
           </div>

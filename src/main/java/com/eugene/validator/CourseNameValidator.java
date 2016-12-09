@@ -16,6 +16,7 @@ import javax.validation.ConstraintValidatorContext;
 public class CourseNameValidator implements ConstraintValidator<NotExistingCourseName, String> {
 
   private final CourseRepository courseRepository;
+  private boolean isUpdate;
 
   @Autowired
   public CourseNameValidator(CourseRepository courseRepository) {
@@ -24,13 +25,15 @@ public class CourseNameValidator implements ConstraintValidator<NotExistingCours
 
 
   public void initialize(NotExistingCourseName notExistingCourseName) {
+    isUpdate = notExistingCourseName.isUpdate();
     SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
   }
 
   public boolean isValid(String courseName, ConstraintValidatorContext constraintValidatorContext) {
-//    constraintValidatorContext.disableDefaultConstraintViolation();
-//    constraintValidatorContext.buildConstraintViolationWithTemplate("Course" + courseName + "already exists!").addConstraintViolation();
-
-    return courseRepository.findCourseByCourseName(courseName) == 0;
+    if (isUpdate) {
+      return false;
+    } else {
+      return courseRepository.findCourseByCourseName(courseName) == 0;
+    }
   }
 }

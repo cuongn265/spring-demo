@@ -1,6 +1,7 @@
 package com.eugene.repository;
 
 import com.eugene.domain.Course;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -17,5 +18,4 @@ public interface CourseRepository extends CrudRepository<Course, Long> {
 
   @Query("select count(a) from Course a where a.courseName=?1")
   public Integer findCourseByCourseName(String courseName);
-
 }

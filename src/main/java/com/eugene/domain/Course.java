@@ -21,7 +21,7 @@ public class Course {
   private Long courseId;
 
   @Column(name = "name", nullable = false, unique = true)
-  @NotExistingCourseName
+  @NotExistingCourseName(isUpdate = false)
   @NotEmpty(message = "Course name should not be empty")
   private String courseName;
 

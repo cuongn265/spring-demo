@@ -18,4 +18,6 @@ public @interface NotExistingCourseName {
   Class<?>[] groups() default {};
 
   Class<? extends Payload>[] payload() default {};
+
+  boolean isUpdate() default true;
 }

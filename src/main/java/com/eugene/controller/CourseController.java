@@ -41,6 +41,7 @@ public class CourseController {
     this.unitRepository = unitRepository;
   }
 
+  //GET new page
   @RequestMapping("/course/new")
   public String newCourse(Model model) {
     CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -51,9 +52,9 @@ public class CourseController {
     return "course_form";
   }
 
-
+  // POST new page
   @RequestMapping(value = "/course", method = RequestMethod.POST)
-  public String saveCourse(@Valid Course course,
+  public String saveCourse(@ModelAttribute Course course,
                            BindingResult bindingResult,
                            @RequestParam("file") MultipartFile file,
                            @RequestParam("name") String name) {
@@ -87,10 +88,18 @@ public class CourseController {
       e.printStackTrace();
     }
     System.out.println("COURSE CONTROLLER:" + course);
+//    if (courseRepository.findById(course.getCourseId()) == null) {
+//      courseRepository.save(course);
+//    } else {
+//      courseRepository.upda(course);
+//    }
+
     courseRepository.save(course);
+
     return "redirect:/courses/" + course.getCourseId();
   }
 
+  // GET show page
   @RequestMapping("/courses/{courseId}")
   public String showCourse(@PathVariable Integer courseId, Model model) {
     Course course = courseRepository.findOne(courseId.longValue());
@@ -104,10 +113,20 @@ public class CourseController {
     return "course";
   }
 
+  //DELETE page
+  //  TODO: Make response body when deleting fail
   @RequestMapping(value="courses/delete/{courseId}", method=RequestMethod.DELETE,
     produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
   @ResponseBody
   public void deleteCourse(@PathVariable Integer courseId) {
     courseRepository.delete(courseId.longValue());
+  }
+
+  //GET edit page
+  @RequestMapping("courses/edit/{courseId}")
+  public String editCourse(@PathVariable Integer courseId, Model model) {
+    Course course = courseRepository.findOne(courseId.longValue());
+    model.addAttribute("course", course);
+    return "edit_course";
   }
 }

@@ -45,6 +45,7 @@ public class UnitController {
     return "redirect:/courses/{courseId}";
   }
 
+  //  TODO: Make response body when deleting fail
   @RequestMapping(value="units/delete/{unitId}", method=RequestMethod.DELETE,
     produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
   @ResponseBody
