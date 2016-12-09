@@ -24,5 +24,7 @@ main {
   main .jumbotron .container a.collapsed:after {
     font-family: "Glyphicons Halflings";
     content: ""; }
+  main .message-row .container span#close:hover {
+    cursor: pointer; }
 
 /*# sourceMappingURL=course.css.map */

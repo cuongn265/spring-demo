@@ -7,6 +7,16 @@
 <body>
 <header th:replace="layout :: site-header"></header>
 <main>
+  <div class="row alert alert-info message-row"
+       style="display:none"
+       id="message">
+    <div class="container">
+      <div>
+        <span id="message-detail"></span>
+        <span class="pull-right" id="close">&times;</span>
+      </div>
+    </div>
+  </div>
   <div class="jumbotron">
     <div class="container">
       <h2>Welcome to C Learning Management System</h2>
@@ -89,6 +99,8 @@
           success: function (unit) {
             console.log($(event.target).closest(".panel").attr('id'));
             $(event.target).closest("[class^=col-]").remove();
+            $("#message").show();
+            $("#message").find("#message-detail").text("Course was successfully removed")
           }
         });
       }

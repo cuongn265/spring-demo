@@ -7,6 +7,14 @@
 <body>
 <header th:replace="layout :: site-header"></header>
 <main>
+  <div class="row alert alert-info message-row" th:if="${message}">
+    <div class="container">
+      <div>
+        <span th:text="${message}"></span>
+        <span class="pull-right" id="close">&times;</span>
+      </div>
+    </div>
+  </div>
   <div class="jumbotron">
     <div class="container">
       <!--/*@thymesVar id="course" type="com.eugene.domain.Course"*/-->
@@ -15,12 +23,12 @@
       <p>
         <span th:remove="tag" th:utext="${course.courseSummary}"></span>
       </p>
-      <p>
+      <p th:if="${course.courseOutline.length() != 0}">
         <a href="#"
            class="collapsed"
            data-toggle="collapse"
            data-target="#demo"
-           th:if="${course.courseOutline != null}">
+           >
           Click to see Course outline &nbsp;
         </a>
       </p>
@@ -66,7 +74,7 @@
               </a>
 
               <a th:href="@{delete/{unitId}(unitId=${unit.unitId})}"
-                th:id="'delete-unit-' + ${unit.unitId}"
+                 th:id="'delete-unit-' + ${unit.unitId}"
                  class="btn btn-danger pull-right btn-action">
                 <span class="glyphicon glyphicon-trash"></span>
               </a>
@@ -92,6 +100,9 @@
 <footer th:replace="layout :: site-footer"></footer>
 <script type="text/javascript">
   $(document).ready(function () {
+    $("#close").on('click', function (event) {
+      $(event.target).closest(".row").remove();
+    });
     var deleteLink = $("[id^=delete-unit]");
     $(deleteLink).click(function (event) {
       var prefix = window.location.pathname;

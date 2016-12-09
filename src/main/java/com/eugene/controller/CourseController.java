@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -57,7 +58,8 @@ public class CourseController {
   public String saveCourse(@ModelAttribute Course course,
                            BindingResult bindingResult,
                            @RequestParam("file") MultipartFile file,
-                           @RequestParam("name") String name) {
+                           @RequestParam("name") String name,
+                           RedirectAttributes redirectAttributes) {
 
     if (bindingResult.hasErrors()) {
       return "course_form";
@@ -87,12 +89,13 @@ public class CourseController {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    System.out.println("COURSE CONTROLLER:" + course);
-//    if (courseRepository.findById(course.getCourseId()) == null) {
-//      courseRepository.save(course);
-//    } else {
-//      courseRepository.upda(course);
-//    }
+    System.out.println("COURSE CONTROLLER:" + course.getCourseId());
+
+    if (course.getCourseId() == null) {
+      redirectAttributes.addFlashAttribute("message", "Course was successfully created!!");
+    } else {
+      redirectAttributes.addFlashAttribute("message", "Course was successfully updated!!");
+    }
 
     courseRepository.save(course);
 
