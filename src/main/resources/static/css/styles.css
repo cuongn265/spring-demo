@@ -28,5 +28,7 @@ main {
         text-align: center; }
         main .row.courses-body [class*="col-"] .course-footer .btn-action {
           display: inline-block; }
+  main .message-row .container span#close:hover {
+    cursor: pointer; }
 
 /*# sourceMappingURL=styles.css.map */
