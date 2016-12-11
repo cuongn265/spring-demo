@@ -7,13 +7,16 @@ body {
       border-color: darkslategray; }
       body header .navbar-default .navbar-toggle .icon-bar {
         background-color: white; }
+      body header .navbar-default .navbar-toggle:hover, body header .navbar-default .navbar-toggle:active, body header .navbar-default .navbar-toggle:visited, body header .navbar-default .navbar-toggle:focus {
+        background-color: #3b5998; }
     body header .navbar-default .navbar-brand {
-      color: white; }
+      color: white;
+      padding: 0; }
+      body header .navbar-default .navbar-brand img {
+        height: 100%; }
     body header .navbar-default .navbar-brand:hover {
       color: white; }
-    body header .navbar-default .navbar-collapse a {
-      color: white; }
-    body header .navbar-default .navbar-collapse a:hover {
+    body header .navbar-default .navbar-nav a, body header .navbar-default .navbar-nav a:hover {
       color: white; }
   body .footer {
     position: fixed;

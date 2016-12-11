@@ -8,21 +8,23 @@ body
         border-color: darkslategray
         .icon-bar
           background-color: white
+        &:hover, &:active, &:visited, &:focus
+          background-color: #3b5998
       .navbar-brand
         color: white
+        padding: 0
+        img
+          height: 100%
       .navbar-brand:hover
         color: white
-      .navbar-collapse
-        a
-          color: white
-        a:hover
+      .navbar-nav
+        a, a:hover
           color: white
   .footer
     position: fixed
     bottom: 0
     background-color: #3b5998
     width: 100%
-
     .container
       padding: 15px
       color: white
