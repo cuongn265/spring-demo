@@ -1,8 +1,10 @@
 main
-  margin: 80px auto
+  padding: 80px 0
+  background-color: #FCFCFC
   .row.courses-header
     margin-bottom: 10px
     padding: 20px
+
   .row.courses-body
     display: flex
     flex-wrap: wrap
@@ -18,21 +20,14 @@ main
       padding: 0
       border-radius: 0
       width: 100%
-      //img
-      //  max-height: 70%
-      //  width: 100%
+      box-shadow: 0 20px 20px rgba(0,0,0,.08)
     [class*="col-"]
-      background: #fff
-
       .caption
         margin-bottom: 30px
       .course-footer
-        //make button fix at bottom
         position: absolute
         bottom: 0
         margin: 9px
-        //
-        //width: 100%s
         text-align: center
         .btn-action
           display: inline-block
@@ -40,3 +35,10 @@ main
     .container
       span#close:hover
         cursor: pointer
+  .jumbotron
+    padding: 24px 0
+    background: none
+    margin-bottom: 0
+    a
+      background-color: #3b5998
+

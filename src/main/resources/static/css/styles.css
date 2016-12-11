@@ -1,5 +1,6 @@
 main {
-  margin: 80px auto; }
+  padding: 80px 0;
+  background-color: #FCFCFC; }
   main .row.courses-header {
     margin-bottom: 10px;
     padding: 20px; }
@@ -16,19 +17,24 @@ main {
       display: inline-table;
       padding: 0;
       border-radius: 0;
-      width: 100%; }
-    main .row.courses-body [class*="col-"] {
-      background: #fff; }
-      main .row.courses-body [class*="col-"] .caption {
-        margin-bottom: 30px; }
-      main .row.courses-body [class*="col-"] .course-footer {
-        position: absolute;
-        bottom: 0;
-        margin: 9px;
-        text-align: center; }
-        main .row.courses-body [class*="col-"] .course-footer .btn-action {
-          display: inline-block; }
+      width: 100%;
+      box-shadow: 0 20px 20px rgba(0, 0, 0, 0.08); }
+    main .row.courses-body [class*="col-"] .caption {
+      margin-bottom: 30px; }
+    main .row.courses-body [class*="col-"] .course-footer {
+      position: absolute;
+      bottom: 0;
+      margin: 9px;
+      text-align: center; }
+      main .row.courses-body [class*="col-"] .course-footer .btn-action {
+        display: inline-block; }
   main .message-row .container span#close:hover {
     cursor: pointer; }
+  main .jumbotron {
+    padding: 24px 0;
+    background: none;
+    margin-bottom: 0; }
+    main .jumbotron a {
+      background-color: #3b5998; }
 
 /*# sourceMappingURL=styles.css.map */

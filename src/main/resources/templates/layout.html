@@ -38,13 +38,13 @@
 
       <div class="collapse navbar-collapse" assignmentId="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right" sec:authorize="isAnonymous()">
-          <li><a th:href="@{/login}">Login</a></li>
-          <li><a href="#">Sign up</a></li>
+          <li><a th:href="@{/login}">SIGN IN</a></li>
+          <li><a href="#">SIGN UP</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right" sec:authorize="isAuthenticated()">
-          <li><a th:href="@{/logout}">Logout</a></li>
-          <li><a th:href="@{/hello}">Hello</a></li>
+          <li><a th:href="@{/logout}">SIGN OUT</a></li>
+          <!--<li><a th:href="@{/hello}">Hello</a></li>-->
         </ul>
 
       </div>
@@ -55,7 +55,7 @@
 <p>Welcome to the Spring MVC Blog.</p>
 <footer th:fragment="site-footer" class="footer">
   <div class="container">
-    &copy; Learning Management System, 2016
+    &copy; Learning Management System 2016
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"

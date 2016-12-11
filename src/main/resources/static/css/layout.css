@@ -1,12 +1,27 @@
 body {
   font-family: "Noto Sans", sans-serif !important; }
-
-.footer {
-  position: fixed;
-  bottom: 0;
-  background-color: #f5f5f5;
-  width: 100%; }
-  .footer .container {
-    padding: 15px; }
+  body header .navbar-default {
+    background-color: #3b5998;
+    border-color: #3b5998; }
+    body header .navbar-default .navbar-toggle {
+      border-color: darkslategray; }
+      body header .navbar-default .navbar-toggle .icon-bar {
+        background-color: white; }
+    body header .navbar-default .navbar-brand {
+      color: white; }
+    body header .navbar-default .navbar-brand:hover {
+      color: white; }
+    body header .navbar-default .navbar-collapse a {
+      color: white; }
+    body header .navbar-default .navbar-collapse a:hover {
+      color: white; }
+  body .footer {
+    position: fixed;
+    bottom: 0;
+    background-color: #3b5998;
+    width: 100%; }
+    body .footer .container {
+      padding: 15px;
+      color: white; }
 
 /*# sourceMappingURL=layout.css.map */
