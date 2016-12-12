@@ -35,7 +35,7 @@
   <div class="container">
     <div class="row courses-body">
       <!--/*@thymesVar id="courseList" type="java.util.List<com.eugene.domain.Course>"*/-->
-      <div class="col-sm-6 col-md-4" th:each="course: ${courseList}">
+      <div class="col-sm-6 col-md-4 col-xs-12" th:each="course: ${courseList}">
         <div class="thumbnail box">
           <img th:src="${course.courseImageUrl}" alt="img"/>
           <div class="caption">

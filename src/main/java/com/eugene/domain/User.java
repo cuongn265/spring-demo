@@ -44,6 +44,7 @@ public class User implements Serializable {
     this.email = user.email;
     this.password = user.password;
     this.enabled = user.enabled;
+    this.userImageUrl = user.userImageUrl;
   }
 
   public Long getUserId() {

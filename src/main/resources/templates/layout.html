@@ -34,7 +34,6 @@
           </span>
         </a>
       </div>
-
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right" sec:authorize="isAnonymous()">
           <li><a th:href="@{/login}">SIGN IN</a></li>
@@ -42,8 +41,18 @@
         </ul>
 
         <ul class="nav navbar-nav navbar-right" sec:authorize="isAuthenticated()">
-          <li><a th:href="@{/logout}">SIGN OUT</a></li>
-          <!--<li><a th:href="@{/hello}">Hello</a></li>-->
+          <li><a href="#" th:text="${#authentication.name}"></a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" id="menu1" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <img th:src="${#authentication.principal.userImageUrl}" alt="avatar"/>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="menu1">
+              <li><a href="#">Change profile</a></li>
+              <li><a href="#">Change Password</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a th:href="@{/logout}">Sign out</a></li>
+            </ul>
+          </li>
         </ul>
 
       </div>

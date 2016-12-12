@@ -1,9 +1,23 @@
 body
   font-family: 'Noto Sans', sans-serif !important
+  background-color: #FCFCFC !important
+  .panel.panel-default
+    .panel-heading.heading
+      background-color: #3b5998
+      color: white
+      > p
+        font-size: 24px
+        margin: 0
+    .panel-body
+      .form-horizontal
+        margin: 40px
+  .btn.btn-primary
+    background-color: #3b5998
   header
     .navbar-default
       background-color: #3b5998
       border-color: #3b5998
+      box-shadow: 0px 2px 40px 0px rgba(0, 0, 0, 0.54)
       .navbar-toggle
         border-color: darkslategray
         .icon-bar
@@ -20,6 +34,20 @@ body
       .navbar-nav
         a, a:hover
           color: white
+        .dropdown
+          >a, a:focus, a:hover, a:visited
+            color: white
+            background-color: #3b5998
+          .dropdown-menu
+            background-color: #3b5998
+            a:hover
+              background-color: #4065b3
+          .dropdown-toggle
+            padding: 5px
+            img
+              border-radius: 4px
+              max-width: 40px
+              max-height: 40px
   .footer
     position: fixed
     bottom: 0

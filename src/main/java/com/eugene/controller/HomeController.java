@@ -42,6 +42,11 @@ public class HomeController {
   public String home(Model model) {
     CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     Long userId = userDetails.getUserId();
+    System.out.println("____________________" + userDetails.getUserId());
+    System.out.println("____________________" + userDetails.getUsername());
+    System.out.println("____________________" + userDetails.getEmail());
+    System.out.println("____________________" + userDetails.getUserImageUrl());
+    System.out.println("____________________" + userDetails.getEnabled());
     List<Course> courseList = courseRepository.findCourseByUserId(userId);
     model.addAttribute("courseList", courseList);
     return "home";
