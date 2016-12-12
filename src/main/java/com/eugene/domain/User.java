@@ -30,10 +30,15 @@ public class User implements Serializable {
   private int enabled = 1;
   @Column(name = "image_url")
   private String userImageUrl;
-
   @ManyToOne(optional = false)
   @JoinColumn(name = "roleId", referencedColumnName = "role_id", insertable = false, updatable = false)
   private UserRole userRole;
+  @Column(name = "full_name")
+  private String fullName;
+  @Column(name = "phone_number")
+  private String phoneNumber;
+  @Column(name = "bio")
+  private String bio;
 
   public User() {
   }
