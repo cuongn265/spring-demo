@@ -47,7 +47,7 @@
               <img th:src="${#authentication.principal.userImageUrl}" alt="avatar"/>
             </a>
             <ul class="dropdown-menu" aria-labelledby="menu1">
-              <li><a href="#">Change profile</a></li>
+              <li><a th:href="@{profile}">Change profile</a></li>
               <li><a href="#">Change Password</a></li>
               <li role="separator" class="divider"></li>
               <li><a th:href="@{/logout}">Sign out</a></li>

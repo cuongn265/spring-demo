@@ -28,7 +28,7 @@ body {
         height: 100%; }
     body header .navbar-default .navbar-brand:hover {
       color: white; }
-    body header .navbar-default .navbar-nav a, body header .navbar-default .navbar-nav a:hover {
+    body header .navbar-default .navbar-nav a, body header .navbar-default .navbar-nav a:focus, body header .navbar-default .navbar-nav a:hover, body header .navbar-default .navbar-nav a:visited {
       color: white; }
     body header .navbar-default .navbar-nav .dropdown > a, body header .navbar-default .navbar-nav .dropdown a:focus, body header .navbar-default .navbar-nav .dropdown a:hover, body header .navbar-default .navbar-nav .dropdown a:visited {
       color: white;
