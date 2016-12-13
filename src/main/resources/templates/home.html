@@ -82,9 +82,9 @@
 <footer th:replace="layout :: site-footer"></footer>
 <script type="text/javascript">
   $(document).ready(function () {
-    var deleteLink = $("[id^=delete-course]");
+    let deleteLink = $("[id^=delete-course]");
     $(deleteLink).click(function (event) {
-      var suffix = $(this).attr("href");
+      let suffix = $(this).attr("href");
       console.log(suffix);
 
       if (confirm("Are you sure?")) {
@@ -95,11 +95,12 @@
             xhr.setRequestHeader("Accept", "application/json");
             xhr.setRequestHeader("Content-Type", "application/json");
           },
-          success: function (unit) {
+          success: function () {
             console.log($(event.target).closest(".panel").attr('id'));
             $(event.target).closest("[class^=col-]").remove();
-            $("#message").show();
-            $("#message").find("#message-detail").text("Course was successfully removed")
+            let message =$('#message');
+            $(message).show();
+            $(message).find("#message-detail").text("Course was successfully removed")
           }
         });
       }

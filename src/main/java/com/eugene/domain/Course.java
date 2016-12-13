@@ -47,13 +47,14 @@ public class Course {
   public Course() {
   }
 
-  public Course(String courseName, String courseSummary, Integer courseWeekCount, User user, Set<Unit> unitList, String courseOutline) {
+  public Course(String courseName, String courseSummary, Integer courseWeekCount, User user, Set<Unit> unitList, String courseOutline, String courseImageUrl) {
     this.courseName = courseName;
     this.courseSummary = courseSummary;
     this.courseWeekCount = courseWeekCount;
     this.user = user;
     this.unitList = unitList;
     this.courseOutline = courseOutline;
+    this.courseImageUrl = courseImageUrl;
   }
 
   public Long getCourseId() {

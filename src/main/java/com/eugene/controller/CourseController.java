@@ -59,7 +59,7 @@ public class CourseController {
                            BindingResult bindingResult,
                            @RequestParam("file") MultipartFile file,
                            @RequestParam("name") String name,
-                           RedirectAttributes redirectAttributes) {
+                           RedirectAttributes redirectAttributes) {;
 
     if (bindingResult.hasErrors()) {
       return "course_form";
@@ -83,13 +83,12 @@ public class CourseController {
         s3client.putObject(new PutObjectRequest(bucketName, name, is, new ObjectMetadata()).withCannedAcl(CannedAccessControlList.PublicRead));
         S3Object s3Object = s3client.getObject(new GetObjectRequest(bucketName, name));
         course.setCourseImageUrl(s3Object.getObjectContent().getHttpRequest().getURI().toString());
-      } else {
+      } else if(course.getCourseImageUrl() == null){
         course.setCourseImageUrl("https://cuongngo-lms.s3.amazonaws.com/no-image.jpg");
       }
     } catch (IOException e) {
       e.printStackTrace();
     }
-    System.out.println("COURSE CONTROLLER:" + course.getCourseId());
 
     if (course.getCourseId() == null) {
       redirectAttributes.addFlashAttribute("message", "Course was successfully created!!");

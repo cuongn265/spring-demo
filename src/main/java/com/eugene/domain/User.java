@@ -50,6 +50,9 @@ public class User implements Serializable {
     this.password = user.password;
     this.enabled = user.enabled;
     this.userImageUrl = user.userImageUrl;
+    this.fullName = user.fullName;
+    this.phoneNumber = user.phoneNumber;
+    this.bio = user.bio;
   }
 
   public Long getUserId() {
@@ -100,6 +103,30 @@ public class User implements Serializable {
     this.userRole = userRole;
   }
 
+  public String getFullName() {
+    return fullName;
+  }
+
+  public void setFullName(String fullName) {
+    this.fullName = fullName;
+  }
+
+  public String getPhoneNumber() {
+    return phoneNumber;
+  }
+
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+  }
+
+  public String getBio() {
+    return bio;
+  }
+
+  public void setBio(String bio) {
+    this.bio = bio;
+  }
+
   public String getUserImageUrl() {
     return userImageUrl;
   }
@@ -107,4 +134,6 @@ public class User implements Serializable {
   public void setUserImageUrl(String userImageUrl) {
     this.userImageUrl = userImageUrl;
   }
+
+
 }

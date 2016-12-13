@@ -24,6 +24,7 @@
                     th:action="@{/course}"
                     th:method="post">
                 <input type="hidden" th:field="*{courseId}"/>
+                <input type="hidden" th:field="*{courseImageUrl}"/>
                 <input type="hidden" th:field="*{user}" th:value="${course.getUser().getUserId()}"/>
                 <div class="form-group">
                   <label class="col-sm-3 control-label">Course Name:</label>
