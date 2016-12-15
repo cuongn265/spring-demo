@@ -17,7 +17,7 @@ body
     .navbar-default
       background-color: #3b5998
       border-color: #3b5998
-      box-shadow: 0px 2px 40px 0px rgba(0, 0, 0, 0.54)
+      box-shadow: 0 2px 40px 0 rgba(0, 0, 0, 0.54)
       .navbar-toggle
         border-color: darkslategray
         .icon-bar
@@ -35,7 +35,7 @@ body
         a, a:focus, a:hover, a:visited
           color: white
         .dropdown
-          >a, a:focus, a:hover, a:visited
+          > a, a:focus, a:hover, a:visited
             color: white
             background-color: #3b5998
           .dropdown-menu
@@ -48,12 +48,25 @@ body
               border-radius: 4px
               max-width: 40px
               max-height: 40px
+      .navbar-header
+        .info-nav
+          .navbar-text
+            color: white
+          .dropdown
+            .dropdown-toggle
+              color: white
+              background-color: #3b5998
+              padding: 5px
+              img
+                border-radius: 4px
+                max-width: 40px
+                max-height: 40px
   .footer
     position: fixed
     bottom: 0
     background-color: #3b5998
     width: 100%
-    box-shadow: 0px 2px 40px 0px rgba(0, 0, 0, 0.54)
+    box-shadow: 0 2px 40px 0 rgba(0, 0, 0, 0.54)
     .container
       padding: 15px
       color: white

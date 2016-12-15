@@ -18,15 +18,7 @@
 <header th:fragment="site-header">
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                data-target="#bs-example-navbar-collapse-1"
-                aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
+      <div class="navbar-header navbar-left pull-left">
         <a class="navbar-brand" th:href="@{/}">
           <span>
           <img src="https://bwatwood.edublogs.org/files/2015/07/icon-e-learning-1b72z9p.png" alt="icon"/>
@@ -34,16 +26,16 @@
           </span>
         </a>
       </div>
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right" sec:authorize="isAnonymous()">
-          <li><a th:href="@{/login}">SIGN IN</a></li>
-          <li><a href="#">SIGN UP</a></li>
-        </ul>
-
-        <ul class="nav navbar-nav navbar-right" sec:authorize="isAuthenticated()">
-          <li><a href="#" th:text="${#authentication.name}"></a></li>
-          <li class="dropdown">
-            <a class="dropdown-toggle" id="menu1" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+      <div class="navbar-header navbar-right pull-right">
+        <ul class="nav pull-left info-nav" sec:authorize="isAuthenticated()">
+          <!--<li id="hidden-text"><a th:text="${#authentication.name}"></a></li>-->
+          <li class="navbar-text pull-left" th:text="${#authentication.name}">User Name</li>
+          <li class="dropdown pull-right">
+            <a class="dropdown-toggle"
+               id="menu1"
+               data-toggle="dropdown"
+               role="button"
+            >
               <img th:src="${#authentication.principal.userImageUrl}" alt="avatar"/>
             </a>
             <ul class="dropdown-menu" aria-labelledby="menu1">
@@ -54,7 +46,22 @@
             </ul>
           </li>
         </ul>
-
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1"
+                aria-expanded="false"
+                sec:authorize="isAnonymous()">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="visible-xs-block clearfix"></div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" sec:authorize="isAnonymous()">
+        <ul class="nav-x nav navbar-nav navbar-right">
+          <li><a th:href="@{/login}">SIGN IN</a></li>
+          <li><a href="#">SIGN UP</a></li>
+        </ul>
       </div>
     </div>
   </nav>
@@ -75,6 +82,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
+  <script type="text/javascript">
+    $('#bs-example-navbar-collapse-1').on('show.bs.collapse', function () {
+//      alert("Show")
+    })
+  </script>
 </footer>
 </body>
 </html>
