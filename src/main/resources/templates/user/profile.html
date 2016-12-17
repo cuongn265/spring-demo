@@ -41,7 +41,7 @@
                 <div class="col-md-7 col-sm-7">
                   <div class="form-group">
                     <label>Username:</label>
-                    <input type="text" class="form-control" th:field="*{username}"/>
+                    <input type="text" class="form-control" th:field="*{username}" readonly="readonly"/>
                     <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name Error</span>
                   </div>
                   <div class="form-group">

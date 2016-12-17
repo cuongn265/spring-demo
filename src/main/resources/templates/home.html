@@ -36,45 +36,47 @@
     <div class="row courses-body">
       <!--/*@thymesVar id="courseList" type="java.util.List<com.eugene.domain.Course>"*/-->
       <div class="col-sm-6 col-md-4 col-xs-12" th:each="course: ${courseList}">
-        <div class="thumbnail box">
-          <img th:src="${course.courseImageUrl}" alt="img"/>
-          <div class="caption">
-            <h3
-              th:text="${course.courseName + ' (' + course.courseWeekCount + (course.courseWeekCount > 1 ? ' weeks' : ' week') + ')'}"></h3>
-            <p th:text="${course.courseSummary}"></p>
+        <a th:href="@{/courses/{courseId}(courseId=${course.courseId})}">
+          <div class="thumbnail box">
+            <img th:src="${course.courseImageUrl}" alt="img"/>
+            <div class="caption">
+              <h3
+                th:text="${course.courseName + ' (' + course.courseWeekCount + (course.courseWeekCount > 1 ? ' weeks' : ' week') + ')'}"></h3>
+              <p th:text="${course.courseSummary}"></p>
+            </div>
+            <div class="course-footer row">
+              <!-- TODO Change onSubmit to thymeleaf-->
+              <form
+                th:action="@{/courses/{courseId}/remove(courseId=${course.courseId})}"
+                th:method="delete"
+                onsubmit="return !!confirm('Are you sure?')"
+              >
+                <div class="btn-action btn-show">
+                  <a
+                    class="btn btn-primary"
+                    th:href="@{/courses/{courseId}(courseId=${course.courseId})}">
+                    <span class="glyphicon glyphicon-share-alt"></span>
+                  </a>
+                </div>
+                <div class="btn-action btn-modify">
+                  <a
+                    class="btn btn-warning"
+                    th:href="@{/courses/edit/{courseId}(courseId=${course.courseId})}">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                  </a>
+                </div>
+                <div class="btn-action btn-delete">
+                  <a
+                    class="btn btn-danger"
+                    th:id="'delete-course-' + ${course.courseId}"
+                    th:href="@{/courses/delete/{courseId}(courseId=${course.courseId})}">
+                    <span class="glyphicon glyphicon-trash"></span>
+                  </a>
+                </div>
+              </form>
+            </div>
           </div>
-          <div class="course-footer row">
-            <!-- TODO Change onSubmit to thymeleaf-->
-            <form
-              th:action="@{/courses/{courseId}/remove(courseId=${course.courseId})}"
-              th:method="delete"
-              onsubmit="return !!confirm('Are you sure?')"
-            >
-              <div class="btn-action btn-show">
-                <a
-                  class="btn btn-primary"
-                  th:href="@{/courses/{courseId}(courseId=${course.courseId})}">
-                  <span class="glyphicon glyphicon-share-alt"></span>
-                </a>
-              </div>
-              <div class="btn-action btn-modify">
-                <a
-                  class="btn btn-warning"
-                  th:href="@{/courses/edit/{courseId}(courseId=${course.courseId})}">
-                  <span class="glyphicon glyphicon-pencil"></span>
-                </a>
-              </div>
-              <div class="btn-action btn-delete">
-                <a
-                  class="btn btn-danger"
-                  th:id="'delete-course-' + ${course.courseId}"
-                  th:href="@{/courses/delete/{courseId}(courseId=${course.courseId})}">
-                  <span class="glyphicon glyphicon-trash"></span>
-                </a>
-              </div>
-            </form>
-          </div>
-        </div>
+        </a>
       </div>
     </div>
   </div>
@@ -98,7 +100,7 @@
           success: function () {
             console.log($(event.target).closest(".panel").attr('id'));
             $(event.target).closest("[class^=col-]").remove();
-            let message =$('#message');
+            let message = $('#message');
             $(message).show();
             $(message).find("#message-detail").text("Course was successfully removed")
           }

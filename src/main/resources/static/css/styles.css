@@ -35,5 +35,7 @@ main {
     margin-bottom: 0; }
     main .jumbotron a {
       background-color: #3b5998; }
+  main a, main a:hover, main a:visited {
+    text-decoration: none; }
 
 /*# sourceMappingURL=styles.css.map */
