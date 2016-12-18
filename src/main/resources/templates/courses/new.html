@@ -21,7 +21,7 @@
               <form class="form-horizontal"
                     enctype="multipart/form-data"
                     th:object="${course}"
-                    th:action="@{/course}"
+                    th:action="@{/course/create}"
                     method="post">
                 <input type="hidden" th:field="*{courseId}"/>
                 <input type="hidden" th:field="*{user}" th:value="${course.getUser().getUserId()}"/>

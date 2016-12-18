@@ -9,7 +9,7 @@ import java.lang.annotation.*;
  */
 @Target({ElementType.FIELD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = CourseNameValidator.class)
+  @Constraint(validatedBy = CourseNameValidator.class)
 @Documented
 public @interface NotExistingCourseName {
 

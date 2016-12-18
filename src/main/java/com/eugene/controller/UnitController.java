@@ -33,13 +33,13 @@ public class UnitController {
     Unit unit = new Unit();
     unit.setCourse(courseRepository.findOne(courseId.longValue()));
     model.addAttribute("unit", unit);
-    return "unit";
+    return "courses/units/new";
   }
 
   @RequestMapping(value = "/units/add", method = RequestMethod.POST)
   public String addUnit(@Valid Unit unit,BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
-      return "unit";
+      return "courses/units/new";
     }
     unitRepository.save(unit);
     return "redirect:/courses/{courseId}";

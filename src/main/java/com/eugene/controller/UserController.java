@@ -46,7 +46,7 @@ public class UserController {
     Long userId = userDetails.getUserId();
     User user = userRepository.findOne(userId);
     model.addAttribute("user", user);
-    return "user/profile";
+    return "users/profile";
   }
 
   @RequestMapping(value = "/profile/update", method = RequestMethod.POST)
@@ -88,5 +88,22 @@ public class UserController {
     user.setPassword(user.getPassword());
     userRepository.setUserInfoById(user.getEmail(), user.getFullName(), user.getPhoneNumber(), user.getBio(), user.getUserImageUrl(), user.getUserId());
     return "redirect:/profile";
+  }
+
+  @RequestMapping("/password")
+  public String password(Model model) {
+    CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    Long userId = userDetails.getUserId();
+    User user = userRepository.findOne(userId);
+    model.addAttribute("user", user);
+    return "users/password";
+  }
+
+  @RequestMapping(value = "password/update", method = RequestMethod.POST)
+  public String updatePassword(@ModelAttribute User user,
+                           @RequestParam("file") MultipartFile file,
+                           @RequestParam("name") String name,
+                           RedirectAttributes redirectAttributes) {
+    return "redirect:/password";
   }
 }

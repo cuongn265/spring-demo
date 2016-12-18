@@ -7,6 +7,7 @@
 <body>
 <header th:replace="layout :: site-header"></header>
 <main>
+  <!--/*@thymesVar id="message" type=""*/-->
   <div class="row alert alert-info message-row" th:if="${message}">
     <div class="container">
       <div>
@@ -94,7 +95,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </main>
 <footer th:replace="layout :: site-footer"></footer>

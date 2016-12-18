@@ -1,11 +1,13 @@
 package com.eugene.domain;
 
+import com.eugene.inter.CreateCourse;
 import com.eugene.validator.NotExistingCourseName;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.groups.Default;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,7 +23,7 @@ public class Course {
   private Long courseId;
 
   @Column(name = "name", nullable = false, unique = true)
-  @NotExistingCourseName(isUpdate = false)
+  @NotExistingCourseName(groups = CreateCourse.class)
   @NotEmpty(message = "Course name should not be empty")
   private String courseName;
 
