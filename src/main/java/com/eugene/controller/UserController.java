@@ -86,7 +86,7 @@ public class UserController {
     userDetails.setUserImageUrl(user.getUserImageUrl());
     redirectAttributes.addFlashAttribute("message", "Your profile was successfully updated!!");
     user.setPassword(user.getPassword());
-    userRepository.setUserInfoById(user.getEmail(), user.getFullName(), user.getPhoneNumber(), user.getBio(), user.getUserId());
+    userRepository.setUserInfoById(user.getEmail(), user.getFullName(), user.getPhoneNumber(), user.getBio(), user.getUserImageUrl(), user.getUserId());
     return "redirect:/profile";
   }
 }
