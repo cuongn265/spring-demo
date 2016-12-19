@@ -4,6 +4,7 @@ package com.eugene.domain;
  * Created by Eugene on 11/26/2016.
  */
 
+import com.eugene.inter.ChangePassword;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import java.io.Serializable;
@@ -20,10 +21,9 @@ public class User implements Serializable {
   @NotEmpty
   @Column(name = "username", nullable = false, unique = true)
   private String username;
-  @NotEmpty
   @Column(name = "password", nullable = false)
   private String password;
-  @NotEmpty
+  @NotEmpty(message="Email should not be empty")
   @Column(name = "email", nullable = false, unique = true)
   private String email;
   @Column(name = "enabled", nullable = false)
@@ -40,6 +40,16 @@ public class User implements Serializable {
   @Column(name = "bio")
   private String bio;
 
+  @Transient
+  @NotEmpty(message = "New password may not be empty" ,groups = ChangePassword.class)
+  private String newPassword;
+  @NotEmpty(message = "Confirm password may not be empty", groups = ChangePassword.class)
+  @Transient
+  private String retypePassword;
+  @Transient
+  @NotEmpty(message = "Old password may not be empty", groups = ChangePassword.class)
+  private String oldPassword;
+
   public User() {
   }
 
@@ -53,6 +63,9 @@ public class User implements Serializable {
     this.fullName = user.fullName;
     this.phoneNumber = user.phoneNumber;
     this.bio = user.bio;
+    this.retypePassword = user.retypePassword;
+    this.newPassword = user.newPassword;
+    this.oldPassword = user.oldPassword;
   }
 
   public Long getUserId() {
@@ -135,5 +148,27 @@ public class User implements Serializable {
     this.userImageUrl = userImageUrl;
   }
 
+  public String getNewPassword() {
+    return newPassword;
+  }
 
+  public void setNewPassword(String newPassword) {
+    this.newPassword = newPassword;
+  }
+
+  public String getRetypePassword() {
+    return retypePassword;
+  }
+
+  public void setRetypePassword(String retypePassword) {
+    this.retypePassword = retypePassword;
+  }
+
+  public String getOldPassword() {
+    return oldPassword;
+  }
+
+  public void setOldPassword(String oldPassword) {
+    this.oldPassword = oldPassword;
+  }
 }
