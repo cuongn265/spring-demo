@@ -44,15 +44,23 @@
   <div class="container unit-container">
     <div class="row">
       <div class="col-md-8">
-        <h2
+        <h3 th:if="${units.size() > 0}"
           th:inline="text">
-          <!--[[${'Total: ' + course.unitList.size() + (course.unitList.size() > 1 ? ' units' : ' unit')}]]-->
-          [[${'Unit List'}]]
+          [[${'Total: ' + course.unitList.size() + (course.unitList.size() > 1 ? ' units' : ' unit')}]]
           <a th:href="@{__${#httpServletRequest.requestURI}__/units/new}"
              class="btn btn-info pull-right">
             Create Unit
           </a>
-        </h2>
+        </h3>
+        <h3 th:if="${units.size() == 0}"
+            th:inline="text">
+          <!--[[${'Total: ' + course.unitList.size() + (course.unitList.size() > 1 ? ' units' : ' unit')}]]-->
+          [[${"There's no Unit yet"}]]
+          <a th:href="@{__${#httpServletRequest.requestURI}__/units/new}"
+             class="btn btn-info pull-right">
+            Create Unit
+          </a>
+        </h3>
         <hr/>
         <!--/*@thymesVar id="units" type="java.util.List<com.eugene.domain.Unit>"*/-->
         <div class="unit" th:each="unit : ${units}">
@@ -66,7 +74,7 @@
                   th:attr="data-target='#demo' + ${unit.unitId}"
                   data-target="#demo1">
                   [[${'Unit ' + unit.unitPosition + ': ' + unit.unitName}]]
-                  <small th:text="${' - ' + unit.unitSummary}"></small>
+                  <small th:if="${unit.unitSummary.length() > 0}" th:text="${' - ' + unit.unitSummary}"></small>
                 </a>
               </h4>
               <a th:href="@{/test_editor}"
@@ -81,12 +89,15 @@
               </a>
               <div class="clearfix"></div>
             </div>
-            <div th:id="${'demo' + unit.unitId}" class="collapse">
+            <div  th:id="${'demo' + unit.unitId}" class="collapse">
               <div class="panel-body">
                 <div
                 >
-                  <p th:remove="tag"
+                  <p th:if="${unit.unitDetail.length() > 0}" th:remove="tag"
                      th:utext="${unit.unitDetail}">
+                  </p>
+                  <p th:if="${unit.unitDetail.length() == 0}" th:remove="tag"
+                     th:utext="${'There is no unit detail yet'}">
                   </p>
                 </div>
               </div>
