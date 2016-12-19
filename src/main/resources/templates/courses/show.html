@@ -77,7 +77,7 @@
                   <small th:if="${unit.unitSummary.length() > 0}" th:text="${' - ' + unit.unitSummary}"></small>
                 </a>
               </h4>
-              <a th:href="@{/test_editor}"
+              <a th:href="@{__${#httpServletRequest.requestURI}__/units/{unitId}/edit(unitId=${unit.unitId})}"
                  class="btn btn-warning pull-right btn-action">
                 <span class="glyphicon glyphicon-pencil"></span>
               </a>

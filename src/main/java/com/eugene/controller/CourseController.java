@@ -153,7 +153,7 @@ public class CourseController {
     if (course.getCourseId() == null) {
       redirectAttributes.addFlashAttribute("message", "Course was successfully created!!");
     } else {
-      redirectAttributes.addFlashAttribute("message", "Course was successfully updated!!");
+        redirectAttributes.addFlashAttribute("message", "Course was successfully updated!!");
     }
 
     courseRepository.save(course);

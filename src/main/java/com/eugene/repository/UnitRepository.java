@@ -12,4 +12,5 @@ import java.util.List;
  */
 public interface UnitRepository extends JpaRepository<Unit, Long> {
   List<Unit> findAllByCourseOrderByUnitPositionAsc(Course course);
+  List<Unit> findByUnitName(String name);
 }

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: site-head">
+  <link rel="stylesheet" th:href="@{/css/form.css}"/>
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet"/>
+  <title>Edit Unit</title>
+</head>
+<body>
+<header th:replace="layout :: site-header"></header>
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-sm-12 col-md-offset-1">
+        <div class="panel panel-default">
+          <div class="panel-heading heading">
+            <h4>EDIT UNIT</h4>
+          </div>
+          <div class="panel-body">
+            <div>
+              <!--/*@thymesVar id="unit" type="com.eugene.domain.Unit"*/-->
+              <form class="form-horizontal"
+                    enctype="multipart/form-data"
+                    th:object="${unit}"
+                    th:action="@{edit}"
+                    method="post">
+                <input type="hidden" th:field="*{unitId}"/>
+                <input type="hidden" th:field="*{course}" th:value="${unit.getCourse().getCourseId()}"/>
+                <!--<input type="hidden" th:field="*{user}" th:value="${course.getUser().getUserId()}"/>-->
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Unit Name:</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{unitName}"/>
+                    <span th:if="${#fields.hasErrors('unitName')}" th:errors="*{unitName}">Name Error</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Unit Position (Week):</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" th:field="*{unitPosition}"/>
+                    <span th:if="${#fields.hasErrors('unitPosition')}" th:errors="*{unitPosition}">Position Error</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Unit Summary:</label>
+                  <div class="col-sm-10">
+                    <textarea class="form-control" th:field="*{unitSummary}"></textarea>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Unit Detail:</label>
+                  <div class="col-sm-10">
+                    <textarea class="form-control" id="summernote" th:field="*{unitDetail}"></textarea>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-sm-10 col-sm-offset-2">
+                    <button type="submit" class="btn btn-primary">Update Unit</button>
+                  </div>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer th:replace="layout :: site-footer"></footer>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
+<script>
+  $(document).ready(function () {
+    $('#summernote').summernote({
+      height: 300
+    })
+  });
+</script>
+</body>
+</html>
