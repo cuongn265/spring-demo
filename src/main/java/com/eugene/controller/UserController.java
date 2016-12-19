@@ -122,6 +122,8 @@ public class UserController {
     }
     BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     String hashedPassword = passwordEncoder.encode(user.getNewPassword());
+    CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    userDetails.setPassword(hashedPassword);
     userRepository.changeUserPassword(hashedPassword, user.getUserId());
     redirectAttributes.addFlashAttribute("message", "Your password was successfully updated!");
     return "redirect:/password";

@@ -7,7 +7,7 @@ body {
     body .panel.panel-default .panel-heading.heading > p {
       font-size: 24px;
       margin: 0; }
-  body .panel.panel-default .panel-body .form-horizontal {
+  body .panel.panel-default .panel-body .form {
     margin: 40px; }
   body .btn.btn-primary {
     background-color: #3b5998; }
