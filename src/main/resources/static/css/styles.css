@@ -1,41 +1,39 @@
-main {
-  padding: 80px 0; }
-  main .row.courses-header {
-    margin-bottom: 10px;
-    padding: 20px; }
-  main .row.courses-body {
+main .row.courses-header {
+  margin-bottom: 10px;
+  padding: 20px; }
+main .row.courses-body {
+  display: flex;
+  flex-wrap: wrap; }
+  main .row.courses-body > [class*='col-'] {
     display: flex;
-    flex-wrap: wrap; }
-    main .row.courses-body > [class*='col-'] {
-      display: flex;
-      flex-direction: column;
-      margin: 20px 0; }
-    main .row.courses-body .box {
-      height: 100%;
-      position: relative;
-      display: inline-table;
-      padding: 0;
-      border-radius: 0;
-      width: 100%;
-      box-shadow: 0 20px 20px rgba(0, 0, 0, 0.08); }
-    main .row.courses-body [class*="col-"] .caption {
-      margin-bottom: 30px; }
-    main .row.courses-body [class*="col-"] .course-footer {
-      position: absolute;
-      bottom: 0;
-      margin: 9px;
-      text-align: center; }
-      main .row.courses-body [class*="col-"] .course-footer .btn-action {
-        display: inline-block; }
-  main .message-row .container span#close:hover {
-    cursor: pointer; }
-  main .jumbotron {
-    padding: 24px 0;
-    background: none;
-    margin-bottom: 0; }
-    main .jumbotron a {
-      background-color: #3b5998; }
-  main a, main a:hover, main a:visited {
-    text-decoration: none; }
+    flex-direction: column;
+    margin: 20px 0; }
+  main .row.courses-body .box {
+    height: 100%;
+    position: relative;
+    display: inline-table;
+    padding: 0;
+    border-radius: 0;
+    width: 100%;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.08); }
+  main .row.courses-body [class*="col-"] .caption {
+    margin-bottom: 30px; }
+  main .row.courses-body [class*="col-"] .course-footer {
+    position: absolute;
+    bottom: 0;
+    margin: 9px;
+    text-align: center; }
+    main .row.courses-body [class*="col-"] .course-footer .btn-action {
+      display: inline-block; }
+main .message-row .container span#close:hover {
+  cursor: pointer; }
+main .jumbotron {
+  padding: 24px 0;
+  background: none;
+  margin-bottom: 0; }
+  main .jumbotron a {
+    background-color: #3b5998; }
+main a, main a:hover, main a:visited {
+  text-decoration: none; }
 
 /*# sourceMappingURL=styles.css.map */

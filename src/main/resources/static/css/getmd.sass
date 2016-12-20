@@ -29,9 +29,8 @@ a img
   color: $text-color
 //border-bottom: 1px solid white
 
-.header .mdl-menu__container
-  z-index: 50
-  margin: 0 !important
+.header
+  box-shadow: 0 0.2rem 0.4rem rgba(0,0,0,0.23)
 
 .mdl-textfield--expandable
   width: auto
@@ -124,16 +123,20 @@ a img
   margin: 8px 0
 
 .drawer
+  .nav-heading
+    margin-left: 10px
   .mdl-navigation__link.mdl-navigation__link
     .nav-text
       vertical-align: middle
       margin-left: 20px
-    .nav-heading
-      margin-left: 10px
-    font-size: 18px
+    .material-icons
+      opacity: 0.5
+    font-size: 14px
     color: $text-color
     &:hover
       text-decoration: none
+      .material-icons
+        opacity: 1
 
   .mdl-layout-title
     position: relative

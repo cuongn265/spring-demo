@@ -26,9 +26,8 @@ a img {
 .search-box .mdl-textfield__input {
   color: black; }
 
-.header .mdl-menu__container {
-  z-index: 50;
-  margin: 0 !important; }
+.header {
+  box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.23); }
 
 .mdl-textfield--expandable {
   width: auto; }
@@ -114,16 +113,20 @@ a img {
   background-color: #dcdcdc;
   margin: 8px 0; }
 
+.drawer .nav-heading {
+  margin-left: 10px; }
 .drawer .mdl-navigation__link.mdl-navigation__link {
-  font-size: 18px;
+  font-size: 14px;
   color: black; }
   .drawer .mdl-navigation__link.mdl-navigation__link .nav-text {
     vertical-align: middle;
     margin-left: 20px; }
-  .drawer .mdl-navigation__link.mdl-navigation__link .nav-heading {
-    margin-left: 10px; }
+  .drawer .mdl-navigation__link.mdl-navigation__link .material-icons {
+    opacity: 0.5; }
   .drawer .mdl-navigation__link.mdl-navigation__link:hover {
     text-decoration: none; }
+    .drawer .mdl-navigation__link.mdl-navigation__link:hover .material-icons {
+      opacity: 1; }
 .drawer .mdl-layout-title {
   position: relative;
   background: #4b4b4b;
