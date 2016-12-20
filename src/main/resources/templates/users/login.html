@@ -1,50 +1,58 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout :: site-head">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml"
+      layout:decorate="layout">
+<head layout:replace="layout :: site-head">
   <title>LMS SYSTEM</title>
   <link rel="stylesheet" th:href="@{css/login.css}"/>
 </head>
 <body>
-<header th:replace="layout :: site-header"></header>
-<main class="container">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3 col-sm-12">
-      <!--/*@thymesVar id="param" type=""*/-->
-      <div th:if="${param.error}" class="alert alert-danger">
-        Invalid username and password.
-      </div>
-      <div th:if="${param.logout}" class="alert alert-info">
-        You have been logged out.
-      </div>
-      <div class="panel panel-default">
-        <div class="panel-heading heading">
-          <h4 class="heading-text">SIGN IN</h4>
+
+<div layout:include="layout :: site-content">
+  <div layout:fragment="content" th:remove="tag">
+    <main class="container login-container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-sm-12">
+          <!--/*@thymesVar id="param" type=""*/-->
+          <div th:if="${param.error}" class="alert alert-danger">
+            Invalid username and password.
+          </div>
+          <div th:if="${param.logout}" class="alert alert-info">
+            You have been logged out.
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading heading">
+              <h4 class="heading-text">SIGN IN</h4>
+            </div>
+            <div class="panel-body form-horizontal">
+              <form th:action="@{/login}" method="post">
+                <div class="form-group">
+                  <label class="control-label col-md-2 col-sm-2">Username:</label>
+                  <div class="col-md-10 col-sm-10 info-holder">
+                    <input type="text" name="username" title="Username" class="form-control"/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-2 col-sm-2"> Password: </label>
+                  <div class="col-md-10 col-sm-10 info-holder">
+                    <input type="password" name="password" class="form-control" title="Password"/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-10 col-sm-10 col-md-offset-2 col-sm-offset-2 info-holder">
+                    <input type="submit" value="SIGN IN" class="btn btn-primary btn-signin"/>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-        <div class="panel-body form-horizontal">
-          <form th:action="@{/login}" method="post">
-            <div class="form-group">
-              <label class="control-label col-md-2 col-sm-2">Username:</label>
-              <div class="col-md-10 col-sm-10 info-holder">
-                <input type="text" name="username" title="Username" class="form-control"/>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-2 col-sm-2"> Password: </label>
-              <div class="col-md-10 col-sm-10 info-holder">
-                <input type="password" name="password" class="form-control" title="Password"/>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-md-10 col-sm-10 col-md-offset-2 col-sm-offset-2 info-holder">
-                <input type="submit" value="SIGN IN" class="btn btn-primary btn-signin"/>
-              </div>
-            </div>
-          </form>
-        </div>
       </div>
-    </div>
+    </main>
   </div>
-</main>
-<footer th:replace="layout :: site-footer"></footer>
+</div>
+<div layout:fragment="content">Hello2</div>
+<footer layout:replace="layout :: site-footer"></footer>
 </body>
 </html>

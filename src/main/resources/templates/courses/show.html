@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout :: site-head">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head layout:replace="layout :: site-head">
   <link rel="stylesheet" th:href="@{/css/course.css}"/>
   <title>Course Detail</title>
 </head>
 <body>
-<header th:replace="layout :: site-header"></header>
+<header layout:replace="layout :: site-content"></header>
 <main>
   <!--/*@thymesVar id="message" type=""*/-->
   <div class="row alert alert-info message-row" th:if="${message}">
@@ -108,7 +108,7 @@
     </div>
   </div>
 </main>
-<footer th:replace="layout :: site-footer"></footer>
+<footer layout:replace="layout :: site-footer"></footer>
 <script type="text/javascript">
   $(document).ready(function () {
     $("#close").on('click', function (event) {

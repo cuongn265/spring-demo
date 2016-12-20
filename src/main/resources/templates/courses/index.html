@@ -1,82 +1,85 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout :: site-head">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head layout:replace="layout :: site-head">
   <title>Spring MVC Blog</title>
   <link rel="stylesheet" th:href="@{/css/styles.css}"/>
 </head>
 <body>
-<header th:replace="layout :: site-header"></header>
-<main>
-  <div class="row alert alert-info message-row"
-       style="display:none"
-       id="message">
-    <div class="container">
-      <div>
-        <span id="message-detail"></span>
-        <span class="pull-right" id="close">&times;</span>
-      </div>
-    </div>
-  </div>
-  <div class="jumbotron">
-    <div class="container">
-      <h2>Welcome to C Learning Management System</h2>
-      <p>Easy to use, hard to give up and be your the best assistant</p>
-      <p>
-        <a class="btn btn-primary btn-lg"
-           role="button"
-           th:href="@{courses/new}">
-          <span class="glyphicon glyphicon-plus"></span>
-          Create Course
-        </a>
-      </p>
-    </div>
-
-  </div>
-  <div class="container">
-    <div class="row courses-body">
-      <!--/*@thymesVar id="courseList" type="java.util.List<com.eugene.domain.Course>"*/-->
-      <div class="col-sm-6 col-md-4 col-xs-12" th:each="course: ${courseList}">
-        <a th:href="@{/courses/{courseId}(courseId=${course.courseId})}">
-          <div class="thumbnail box">
-            <img th:src="${course.courseImageUrl}" alt="img"/>
-            <div class="caption">
-              <h3
-                th:text="${course.courseName + ' (' + course.courseWeekCount + (course.courseWeekCount > 1 ? ' weeks' : ' week') + ')'}"></h3>
-              <p th:text="${course.courseSummary}"></p>
-            </div>
-            <div class="course-footer row">
-
-              <div class="btn-action btn-show">
-                <a
-                  class="btn btn-primary"
-                  th:href="@{/courses/{courseId}(courseId=${course.courseId})}">
-                  <span class="glyphicon glyphicon-share-alt"></span>
-                </a>
-              </div>
-              <div class="btn-action btn-modify">
-                <a
-                  class="btn btn-warning"
-                  th:href="@{/courses/{courseId}/edit(courseId=${course.courseId})}">
-                  <span class="glyphicon glyphicon-pencil"></span>
-                </a>
-              </div>
-              <div class="btn-action btn-delete">
-                <a
-                  class="btn btn-danger"
-                  th:id="'delete-course-' + ${course.courseId}"
-                  th:href="@{/courses/delete/{courseId}(courseId=${course.courseId})}">
-                  <span class="glyphicon glyphicon-trash"></span>
-                </a>
-              </div>
-
-            </div>
+<div layout:replace="layout :: site-content">
+  <div layout:fragment="content" th:remove="tag">
+    <main>
+      <div class="row alert alert-info message-row"
+           style="display:none"
+           id="message">
+        <div class="container">
+          <div>
+            <span id="message-detail"></span>
+            <span class="pull-right" id="close">&times;</span>
           </div>
-        </a>
+        </div>
       </div>
-    </div>
+      <div class="jumbotron">
+        <div class="container">
+          <h2>Welcome to C Learning Management System</h2>
+          <p>Easy to use, hard to give up and be your the best assistant</p>
+          <p>
+            <a class="btn btn-primary btn-lg"
+               role="button"
+               th:href="@{courses/new}">
+              <span class="glyphicon glyphicon-plus"></span>
+              Create Course
+            </a>
+          </p>
+        </div>
+
+      </div>
+      <div class="container">
+        <div class="row courses-body">
+          <!--/*@thymesVar id="courseList" type="java.util.List<com.eugene.domain.Course>"*/-->
+          <div class="col-sm-6 col-md-4 col-xs-12" th:each="course: ${courseList}">
+            <a th:href="@{/courses/{courseId}(courseId=${course.courseId})}">
+              <div class="thumbnail box">
+                <img th:src="${course.courseImageUrl}" alt="img"/>
+                <div class="caption">
+                  <h3
+                    th:text="${course.courseName + ' (' + course.courseWeekCount + (course.courseWeekCount > 1 ? ' weeks' : ' week') + ')'}"></h3>
+                  <p th:text="${course.courseSummary}"></p>
+                </div>
+                <div class="course-footer row">
+
+                  <div class="btn-action btn-show">
+                    <a
+                      class="btn btn-primary"
+                      th:href="@{/courses/{courseId}(courseId=${course.courseId})}">
+                      <span class="glyphicon glyphicon-share-alt"></span>
+                    </a>
+                  </div>
+                  <div class="btn-action btn-modify">
+                    <a
+                      class="btn btn-warning"
+                      th:href="@{/courses/{courseId}/edit(courseId=${course.courseId})}">
+                      <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                  </div>
+                  <div class="btn-action btn-delete">
+                    <a
+                      class="btn btn-danger"
+                      th:id="'delete-course-' + ${course.courseId}"
+                      th:href="@{/courses/delete/{courseId}(courseId=${course.courseId})}">
+                      <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                  </div>
+
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer layout:replace="layout :: site-footer" th:remove="tag"></footer>
   </div>
-</main>
-<footer th:replace="layout :: site-footer"></footer>
+</div>
 <script type="text/javascript">
   $(document).ready(function () {
     let deleteLink = $("[id^=delete-course]");

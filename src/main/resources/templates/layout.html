@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head th:fragment="site-head">
+<html
+  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head layout:fragment="site-head">
   <meta charset="UTF-8"/>
   <link rel="stylesheet" th:href="@{/css/layout.css}"/>
   <!--Bootstrap-->
@@ -14,80 +16,152 @@
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css"/>
   <!--SweetAlert2-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/sweetalert2/6.2.1/sweetalert2.min.css"/>
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+  <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.min.css"/>
+  <link rel="stylesheet" th:href="@{/css/getmd.css}"/>
+  <style>
+    #view-source {
+      position: fixed;
+      display: block;
+      right: 0;
+      bottom: 0;
+      margin-right: 40px;
+      margin-bottom: 40px;
+      z-index: 900;
+    }
+  </style>
   <meta th:include="this :: head" th:remove="tag"/>
 </head>
 <body>
-<header th:fragment="site-header">
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container nav-container">
-      <div class="navbar-header navbar-left pull-left">
-        <a class="navbar-brand" th:href="@{/}">
-          <span>
-          <img src="https://bwatwood.edublogs.org/files/2015/07/icon-e-learning-1b72z9p.png" alt="icon"/>
-          LMS
+<div layout:fragment="site-content">
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <div class="android-header mdl-layout__header mdl-layout__header--waterfall">
+      <div class="mdl-layout__header-row">
+          <span class="android-title mdl-layout-title">
+            <img class="android-logo-image" src="images/android-logo.png"/>
           </span>
-        </a>
-      </div>
-      <div class="navbar-header navbar-right pull-right">
-        <ul class="nav pull-left info-nav" sec:authorize="isAuthenticated()">
-          <!--<li id="hidden-text"><a th:text="${#authentication.name}"></a></li>-->
-          <li class="navbar-text pull-left" th:text="${#authentication.name}">User Name</li>
-          <li class="dropdown pull-right">
-            <a class="dropdown-toggle"
-               id="menu1"
-               data-toggle="dropdown"
-               role="button"
-            >
-              <img th:src="${#authentication.principal.userImageUrl}" alt="avatar"/>
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="menu1">
-              <li><a th:href="@{/profile}">Change profile</a></li>
-              <li><a th:href="@{/password}">Change Password</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a th:href="@{/logout}">Sign out</a></li>
-            </ul>
-          </li>
-        </ul>
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                data-target="#bs-example-navbar-collapse-1"
-                aria-expanded="false"
-                sec:authorize="isAnonymous()">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
+        <!-- Add spacer, to align navigation to the right in desktop -->
+        <div class="android-header-spacer mdl-layout-spacer"></div>
+        <div
+          class="android-search-box mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width">
+          <label class="mdl-button mdl-js-button mdl-button--icon" for="search-field">
+            <i class="material-icons">search</i>
+          </label>
+          <div class="mdl-textfield__expandable-holder">
+            <input class="mdl-textfield__input" type="text" id="search-field"/>
+          </div>
+        </div>
+        <!-- Navigation -->
+        <div class="android-navigation-container">
+          <nav class="android-navigation mdl-navigation">
+            <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Phones</a>
+            <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Tablets</a>
+          </nav>
+        </div>
+        <span class="android-mobile-title mdl-layout-title">
+            <img class="android-logo-image" src="images/android-logo.png"/>
+          </span>
+        <button class="android-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect"
+                id="more-button">
+          <i class="material-icons">more_vert</i>
         </button>
-      </div>
-      <div class="visible-xs-block clearfix"></div>
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" sec:authorize="isAnonymous()">
-        <ul class="nav-x nav navbar-nav navbar-right">
-          <li><a th:href="@{/login}">SIGN IN</a></li>
-          <li><a href="#">SIGN UP</a></li>
+        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
+          <li disabled="disabled" class="mdl-menu__item">4.3 Jelly Bean</li>
+          <li class="mdl-menu__item">Android History</li>
         </ul>
       </div>
     </div>
-  </nav>
-</header>
-<h1>Welcome</h1>
-<p>Welcome to the Spring MVC Blog.</p>
-<footer th:fragment="site-footer" class="footer">
-  <div class="container">
-    &copy; Learning Management System 2016
+    <div class="android-drawer mdl-layout__drawer">
+        <span class="mdl-layout-title">
+          <img class="android-logo-image" src="images/android-logo-white.png"/>
+        </span>
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="">Phones</a>
+        <a class="mdl-navigation__link" href="">Tablets</a>
+        <div class="android-drawer-separator"></div>
+        <span class="mdl-navigation__link" href="">Versions</span>
+        <a class="mdl-navigation__link" href="">Lollipop 5.0</a>
+        <a class="mdl-navigation__link" href="">KitKat 4.4</a>
+      </nav>
+    </div>
+    <div class="android-content mdl-layout__content">
+      <a name="top"></a>
+      <div layout:fragment="content">
+        <!-- children goes here -->
+      </div>
+    </div>
   </div>
-  <script
-    src="https://code.jquery.com/jquery-3.1.1.min.js"
-    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-          integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-          crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/sweetalert2/6.2.1/sweetalert2.js"></script>
-  <script type="text/javascript">
+  <footer layout:fragment="site-footer" class="footer">
+    <div class="container">
+      &copy; Learning Management System 2016
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/sweetalert2/6.2.1/sweetalert2.js"></script>
+    <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+    <script type="text/javascript">
+    </script>
+  </footer>
 
-  </script>
-</footer>
+  <!--<nav class="navbar navbar-default navbar-fixed-top">-->
+  <!--<div class="container nav-container">-->
+  <!--<div class="navbar-header navbar-left pull-left">-->
+  <!--<a class="navbar-brand" th:href="@{/}">-->
+  <!--<span>-->
+  <!--<img src="https://bwatwood.edublogs.org/files/2015/07/icon-e-learning-1b72z9p.png" alt="icon"/>-->
+  <!--LMS-->
+  <!--</span>-->
+  <!--</a>-->
+  <!--</div>-->
+  <!--<div class="navbar-header navbar-right pull-right">-->
+  <!--<ul class="nav pull-left info-nav" sec:authorize="isAuthenticated()">-->
+  <!--&lt;!&ndash;<li id="hidden-text"><a th:text="${#authentication.name}"></a></li>&ndash;&gt;-->
+  <!--<li class="navbar-text pull-left" th:text="${#authentication.name}">User Name</li>-->
+  <!--<li class="dropdown pull-right">-->
+  <!--<a class="dropdown-toggle"-->
+  <!--id="menu1"-->
+  <!--data-toggle="dropdown"-->
+  <!--role="button"-->
+  <!--&gt;-->
+  <!--<img th:src="${#authentication.principal.userImageUrl}" alt="avatar"/>-->
+  <!--</a>-->
+  <!--<ul class="dropdown-menu" aria-labelledby="menu1">-->
+  <!--<li><a th:href="@{/profile}">Change profile</a></li>-->
+  <!--<li><a th:href="@{/password}">Change Password</a></li>-->
+  <!--<li role="separator" class="divider"></li>-->
+  <!--<li><a th:href="@{/logout}">Sign out</a></li>-->
+  <!--</ul>-->
+  <!--</li>-->
+  <!--</ul>-->
+  <!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"-->
+  <!--data-target="#bs-example-navbar-collapse-1"-->
+  <!--aria-expanded="false"-->
+  <!--sec:authorize="isAnonymous()">-->
+  <!--<span class="sr-only">Toggle navigation</span>-->
+  <!--<span class="icon-bar"></span>-->
+  <!--<span class="icon-bar"></span>-->
+  <!--<span class="icon-bar"></span>-->
+  <!--</button>-->
+  <!--</div>-->
+  <!--<div class="visible-xs-block clearfix"></div>-->
+  <!--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" sec:authorize="isAnonymous()">-->
+  <!--<ul class="nav-x nav navbar-nav navbar-right">-->
+  <!--<li><a th:href="@{/login}">SIGN IN</a></li>-->
+  <!--<li><a href="#">SIGN UP</a></li>-->
+  <!--</ul>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</nav>-->
+</div>
 </body>
 </html>
