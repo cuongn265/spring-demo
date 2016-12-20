@@ -95,6 +95,7 @@ a img
     //border-bottom: 4px solid $primary-color
     text-decoration: none
 
+
 .navigation .mdl-navigation__link.header-link
   color: $nav-text-color
 
@@ -104,6 +105,8 @@ a img
   order: 2
   margin-left: 16px
   margin-right: 16px
+  .mdl-button:hover
+    background-color: $primary-color
 
 .more-button
   -webkit-order: 3
@@ -122,10 +125,16 @@ a img
 
 .drawer
   .mdl-navigation__link.mdl-navigation__link
-    font-size: 14px
+    .nav-text
+      vertical-align: middle
+      margin-left: 20px
+    .nav-heading
+      margin-left: 10px
+    font-size: 18px
     color: $text-color
-  span.mdl-navigation__link.mdl-navigation__link
-    color: $text-color
+    &:hover
+      text-decoration: none
+
   .mdl-layout-title
     position: relative
     background: $primary-color
@@ -161,3 +170,5 @@ a img
       width: calc(100% - 48px)
     .mdl-textfield__expandable-holder
       width: 100%
+  .mdl-textfield--expandable .mdl-button--icon
+    top: 24px

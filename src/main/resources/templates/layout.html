@@ -19,7 +19,7 @@
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en"/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
-  <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.teal-indigo.min.css" />
+  <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.teal-indigo.min.css"/>
   <link rel="stylesheet" th:href="@{/css/getmd.css}"/>
   <style>
     #view-source {
@@ -40,14 +40,22 @@
     <div class="header mdl-layout__header mdl-layout__header--waterfall">
       <div class="mdl-layout__header-row">
           <span class="title mdl-layout-title">
-            <img class="logo-image" src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_light_clr_74x24px.svg"/>
+            <img class="logo-image"
+                 src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_light_clr_74x24px.svg"/>
           </span>
         <!-- Add spacer, to align navigation to the right in desktop -->
         <div class="header-spacer mdl-layout-spacer"></div>
-        <div class="search-box mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width">
-          <label class="mdl-button mdl-js-button mdl-button--icon" id="more-button" for="search-field">
+        <div
+          class="search-box mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width">
+          <button class="mdl-button mdl-js-button mdl-button--icon" id="add-button">
+            <i class="material-icons">add</i>
+          </button>
+          <div class="mdl-textfield__expandable-holder">
+            <!--<input class="mdl-textfield__input" type="text" id="search-field"/>-->
+          </div>
+          <button class="mdl-button mdl-js-button mdl-button--icon" id="more-button">
             <i class="material-icons">more_vert</i>
-          </label>
+          </button>
           <div class="mdl-textfield__expandable-holder">
             <!--<input class="mdl-textfield__input" type="text" id="search-field"/>-->
           </div>
@@ -55,15 +63,17 @@
         <!-- Navigation -->
         <div class="navigation-container">
           <nav class="navigation mdl-navigation">
-            <a class="mdl-navigation__link mdl-typography--text-uppercase header-link" th:text="${#authentication.name}"></a>
+            <a class="mdl-navigation__link mdl-typography--text-uppercase header-link"
+               th:text="${#authentication.name}"></a>
           </nav>
         </div>
         <span class="mobile-title mdl-layout-title">
-            <img class="logo-image" src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_light_clr_74x24px.svg"/>
+            <img class="logo-image"
+                 src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_light_clr_74x24px.svg"/>
           </span>
         <!--<button class="more-button mdl-button mdl-js-button mdl-button&#45;&#45;icon mdl-js-ripple-effect"-->
-                <!--&gt;-->
-          <!--<i class="material-icons">more_vert</i>-->
+        <!--&gt;-->
+        <!--<i class="material-icons">more_vert</i>-->
         <!--</button>-->
         <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
           <li class="mdl-menu__item"><a th:href="@{/profile}">Change profile</a></li>
@@ -73,19 +83,43 @@
           <!--<li class="mdl-menu__item">4.3 Jelly Bean</li>-->
           <!--<li class="mdl-menu__item">Android History</li>-->
         </ul>
+        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="add-button">
+          <li class="mdl-menu__item"><a th:href="@{/courses/new}">Create course</a></li>
+          <li class="drawer-separator"></li>
+          <li class="mdl-menu__item"><a th:href="@{/}">Some action else</a></li>
+          <!--<li class="mdl-menu__item">4.3 Jelly Bean</li>-->
+          <!--<li class="mdl-menu__item">Android History</li>-->
+        </ul>
       </div>
     </div>
     <div class="drawer mdl-layout__drawer">
-        <span class="mdl-layout-title">
-          <img class="logo-image" src="images/logo-white.png"/>
-        </span>
       <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="">Phones</a>
-        <a class="mdl-navigation__link" href="">Tablets</a>
+        <div>
+          <a class="mdl-navigation__link" href="">
+            <i class="material-icons">home</i>
+            <span class="nav-text">Course</span>
+          </a>
+        </div>
+        <div>
+          <a class="mdl-navigation__link" href="">
+            <i class="material-icons">event_note</i>
+            <span class="nav-text">Calendar</span>
+          </a>
+        </div>
         <div class="drawer-separator"></div>
-        <span class="mdl-navigation__link" href="">Versions</span>
-        <a class="mdl-navigation__link" href="">Lollipop 5.0</a>
-        <a class="mdl-navigation__link" href="">KitKat 4.4</a>
+        <span class="nav-heading">Teaching</span>
+        <div>
+          <a class="mdl-navigation__link" href="">
+            <i class="material-icons">assignment</i>
+            <span class="nav-text">Assignment</span>
+          </a>
+        </div>
+        <div>
+          <a class="mdl-navigation__link" href="">
+            <i class="material-icons">class</i>
+            <span class="nav-text">Class</span>
+          </a>
+        </div>
       </nav>
     </div>
     <div class="content mdl-layout__content">

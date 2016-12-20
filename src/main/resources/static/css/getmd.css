@@ -96,6 +96,8 @@ a img {
   order: 2;
   margin-left: 16px;
   margin-right: 16px; }
+  .search-box .mdl-button:hover {
+    background-color: #4b4b4b; }
 
 .more-button {
   -webkit-order: 3;
@@ -113,10 +115,15 @@ a img {
   margin: 8px 0; }
 
 .drawer .mdl-navigation__link.mdl-navigation__link {
-  font-size: 14px;
+  font-size: 18px;
   color: black; }
-.drawer span.mdl-navigation__link.mdl-navigation__link {
-  color: black; }
+  .drawer .mdl-navigation__link.mdl-navigation__link .nav-text {
+    vertical-align: middle;
+    margin-left: 20px; }
+  .drawer .mdl-navigation__link.mdl-navigation__link .nav-heading {
+    margin-left: 10px; }
+  .drawer .mdl-navigation__link.mdl-navigation__link:hover {
+    text-decoration: none; }
 .drawer .mdl-layout-title {
   position: relative;
   background: #4b4b4b;
@@ -155,6 +162,9 @@ a img {
   .search-box.is-focused {
     width: calc(100% - 48px); }
   .search-box .mdl-textfield__expandable-holder {
-    width: 100%; } }
+    width: 100%; }
+
+  .mdl-textfield--expandable .mdl-button--icon {
+    top: 24px; } }
 
 /*# sourceMappingURL=getmd.css.map */
