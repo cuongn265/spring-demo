@@ -6,103 +6,106 @@
   <title>Create new Course</title>
 </head>
 <body>
-<header layout:replace="layout :: site-content"></header>
-<main>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-10 col-sm-12 col-md-offset-1">
-        <div class="panel panel-default">
-          <div class="panel-heading heading">
-            <h4>CREATE COURSE</h4>
-          </div>
-          <div class="panel-body">
-            <div>
-              <!--/*@thymesVar id="course" type="com.eugene.domain.Course"*/-->
-              <form class="form"
-                    enctype="multipart/form-data"
-                    th:object="${course}"
-                    th:action="@{/course/create}"
-                    method="post">
-                <input type="hidden" th:field="*{courseId}"/>
-                <input type="hidden" th:field="*{user}" th:value="${course.getUser().getUserId()}"/>
-                <div class="row">
-                  <div class="col-md-8 col-sm-8">
-                    <div class="form-group">
-                      <label class="">Course Name:</label>
-                      <div class="">
-                        <input type="text" class="form-control" th:field="*{courseName}"/>
-                        <span th:if="${#fields.hasErrors('courseName')}" th:errors="*{courseName}">Name Error</span>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="">Course Weeks:</label>
-                      <div class="">
-                        <input type="number" class="form-control" th:field="*{courseWeekCount}"/>
-                        <span th:if="${#fields.hasErrors('courseWeekCount')}" th:errors="*{courseWeekCount}">courseWeekCount Error</span>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="">Course Summary:</label>
-                      <div class="">
-                        <textarea class="form-control" th:field="*{courseSummary}"></textarea>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="">Course Outline:</label>
-                      <div class="">
-                        <textarea class="form-control" id="summernote" th:field="*{courseOutline}"></textarea>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 col-sm-4">
-                    <div class="form-group">
-                      <label class="">Image:</label>
-                      <div class="">
-                        <div class="fileinput fileinput-new" data-provides="fileinput">
-                          <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-                            <img data-src="holder.js/400x300" alt="..."/>
+<div layout:replace="layout :: site-content">
+  <div layout:fragment="content" th:remove="tag">
+    <main>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10 col-sm-12 col-md-offset-1">
+            <div class="panel panel-default">
+              <div class="panel-heading heading">
+                <h4>Create Course</h4>
+              </div>
+              <div class="panel-body">
+                <div>
+                  <!--/*@thymesVar id="course" type="com.eugene.domain.Course"*/-->
+                  <form class="form"
+                        enctype="multipart/form-data"
+                        th:object="${course}"
+                        th:action="@{/course/create}"
+                        method="post">
+                    <input type="hidden" th:field="*{courseId}"/>
+                    <input type="hidden" th:field="*{user}" th:value="${course.getUser().getUserId()}"/>
+                    <div class="row">
+                      <div class="col-md-8 col-sm-8">
+                        <div class="form-group">
+                          <label class="">Course Name:</label>
+                          <div class="">
+                            <input type="text" class="form-control" th:field="*{courseName}"/>
+                            <span th:if="${#fields.hasErrors('courseName')}" th:errors="*{courseName}">Name Error</span>
                           </div>
-                          <div class="fileinput-preview fileinput-exists thumbnail"
-                               style="max-width: 200px; max-height: 150px;"></div>
-                          <div>
-                    <span class="btn btn-default btn-file">
-                      <span class="fileinput-new">Select image</span>
-                      <span class="fileinput-exists">Change</span>
-                      <input type="file"
-                             name="file"
-                             id="file-input"
-                             onchange="$('#image-name-input').val($('#file-input').val().split('\\').pop());"
-                      />
-                    </span>
-                            <input id="image-name-input" type="hidden" name="name"/>
-                            <button
-                              class="btn btn-default fileinput-exists"
-                              data-dismiss="fileinput">
-                              Remove
-                            </button>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="">Course Weeks:</label>
+                          <div class="">
+                            <input type="number" class="form-control" th:field="*{courseWeekCount}"/>
+                            <span th:if="${#fields.hasErrors('courseWeekCount')}" th:errors="*{courseWeekCount}">courseWeekCount Error</span>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="">Course Summary:</label>
+                          <div class="">
+                            <textarea class="form-control" th:field="*{courseSummary}"></textarea>
                           </div>
                         </div>
                       </div>
+                      <div class="col-md-4 col-sm-4">
+                        <div class="form-group">
+                          <label class="">Image:</label>
+                          <div class="">
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                              <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                <img data-src="holder.js/400x300" alt="..."/>
+                              </div>
+                              <div class="fileinput-preview fileinput-exists thumbnail"
+                                   style="max-width: 200px; max-height: 150px;"></div>
+                              <div>
+                                <span class="btn btn-default btn-file">
+                                  <span class="fileinput-new">Select image</span>
+                                  <span class="fileinput-exists">Change</span>
+                                  <input type="file"
+                                         name="file"
+                                         id="file-input"
+                                         onchange="$('#image-name-input').val($('#file-input').val().split('\\').pop());"
+                                  />
+                                </span>
+                                <input id="image-name-input" type="hidden" name="name"/>
+                                <button
+                                  class="btn btn-default fileinput-exists"
+                                  data-dismiss="fileinput">
+                                  Remove
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                          <label class="">Course Outline:</label>
+                          <div class="">
+                            <textarea class="form-control" id="summernote" th:field="*{courseOutline}"></textarea>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <button type="submit" class="btn btn-primary">Create Course</button>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-md-12 col-sm-12">
-                    <div class="form-group">
-                      <button type="submit" class="btn btn-primary">Create Course</button>
-                    </div>
-                  </div>
+                  </form>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </main>
+    <footer layout:replace="layout :: site-footer"></footer>
   </div>
-</main>
-<footer layout:replace="layout :: site-footer"></footer>
+</div>
+
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
 <script>
   $(document).ready(function () {
