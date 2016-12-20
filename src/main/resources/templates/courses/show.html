@@ -29,7 +29,7 @@
            class="collapsed"
            data-toggle="collapse"
            data-target="#demo"
-           >
+        >
           Click to see Course outline &nbsp;
         </a>
       </p>
@@ -45,7 +45,7 @@
     <div class="row">
       <div class="col-md-8">
         <h3 th:if="${units.size() > 0}"
-          th:inline="text">
+            th:inline="text">
           [[${'Total: ' + course.unitList.size() + (course.unitList.size() > 1 ? ' units' : ' unit')}]]
           <a th:href="@{__${#httpServletRequest.requestURI}__/units/new}"
              class="btn btn-info pull-right">
@@ -89,7 +89,7 @@
               </a>
               <div class="clearfix"></div>
             </div>
-            <div  th:id="${'demo' + unit.unitId}" class="collapse">
+            <div th:id="${'demo' + unit.unitId}" class="collapse">
               <div class="panel-body">
                 <div
                 >
@@ -112,14 +112,31 @@
 <script type="text/javascript">
   $(document).ready(function () {
     $("#close").on('click', function (event) {
-      $(event.target).closest(".row").remove();
+      $(event.target).closest(".row").fadeOut();
     });
-    var deleteLink = $("[id^=delete-unit]");
+    let deleteLink = $("[id^=delete-unit]");
     $(deleteLink).click(function (event) {
-      var prefix = window.location.pathname;
-      var suffix = $(this).attr("href");
-      var url = prefix + '/units/' + suffix;
-      if (confirm("Are you sure?")) {
+      event.preventDefault();
+      let prefix = window.location.pathname;
+      let suffix = $(this).attr("href");
+      let url = prefix + '/units/' + suffix;
+      swal({
+        title: "Are you sure?",
+        text: "You will not be able to recover this item!",
+        type: "warning",
+        showCancelButton: true,
+        cancelButtonColor: "#3085d6",
+        confirmButtonColor: "#DD6B55",
+        focusCancel: true,
+        confirmButtonText: "Delete",
+        showLoaderOnConfirm: true,
+        allowOutsideClick: false,
+        preConfirm: function () {
+          return new Promise(function (resolve) {
+            resolve();
+          });
+        }
+      }).then(function () {
         $.ajax({
           url: url,
           type: "DELETE",
@@ -128,12 +145,22 @@
             xhr.setRequestHeader("Content-Type", "application/json");
           },
           success: function (unit) {
-            console.log($(event.target).closest(".panel").attr('id'));
-            $(event.target).closest(".panel").remove();
+            swal(
+              'Deleted!',
+              'Your item has been deleted.',
+              'success'
+            );
+            $(event.target).closest(".panel").fadeOut();
+          },
+          error: function () {
+            swal(
+              'Error!',
+              'Your item has not been deleted.',
+              'error'
+            );
           }
         });
-      }
-      event.preventDefault();
+      }).catch(swal.noop);
     });
   });
 </script>

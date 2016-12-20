@@ -27,7 +27,7 @@ public class Unit {
   @Column(name = "position", nullable = false)
   private Integer unitPosition;
 
-  @ManyToOne(optional = false)
+  @ManyToOne()
   @JoinColumn(name = "courseId", referencedColumnName = "course_id")
   private Course course;
 

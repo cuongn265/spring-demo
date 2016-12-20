@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout :: site-head">
   <title>Spring MVC Blog</title>
-  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+  <!--<link rel="stylesheet" th:href="@{/css/styles.css}"/>-->
 </head>
 <body>
 <header th:replace="layout :: site-header"></header>
@@ -46,28 +46,28 @@
             </div>
             <div class="course-footer row">
 
-                <div class="btn-action btn-show">
-                  <a
-                    class="btn btn-primary"
-                    th:href="@{/courses/{courseId}(courseId=${course.courseId})}">
-                    <span class="glyphicon glyphicon-share-alt"></span>
-                  </a>
-                </div>
-                <div class="btn-action btn-modify">
-                  <a
-                    class="btn btn-warning"
-                    th:href="@{/courses/{courseId}/edit(courseId=${course.courseId})}">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                  </a>
-                </div>
-                <div class="btn-action btn-delete">
-                  <a
-                    class="btn btn-danger"
-                    th:id="'delete-course-' + ${course.courseId}"
-                    th:href="@{/courses/delete/{courseId}(courseId=${course.courseId})}">
-                    <span class="glyphicon glyphicon-trash"></span>
-                  </a>
-                </div>
+              <div class="btn-action btn-show">
+                <a
+                  class="btn btn-primary"
+                  th:href="@{/courses/{courseId}(courseId=${course.courseId})}">
+                  <span class="glyphicon glyphicon-share-alt"></span>
+                </a>
+              </div>
+              <div class="btn-action btn-modify">
+                <a
+                  class="btn btn-warning"
+                  th:href="@{/courses/{courseId}/edit(courseId=${course.courseId})}">
+                  <span class="glyphicon glyphicon-pencil"></span>
+                </a>
+              </div>
+              <div class="btn-action btn-delete">
+                <a
+                  class="btn btn-danger"
+                  th:id="'delete-course-' + ${course.courseId}"
+                  th:href="@{/courses/delete/{courseId}(courseId=${course.courseId})}">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </a>
+              </div>
 
             </div>
           </div>
@@ -81,10 +81,26 @@
   $(document).ready(function () {
     let deleteLink = $("[id^=delete-course]");
     $(deleteLink).click(function (event) {
+      event.preventDefault();
       let suffix = $(this).attr("href");
       console.log(suffix);
-
-      if (confirm("Are you sure?")) {
+      swal({
+        title: "Are you sure?",
+        text: "You will not be able to recover this item!",
+        type: "warning",
+        showCancelButton: true,
+        cancelButtonColor: "#3085d6",
+        confirmButtonColor: "#DD6B55",
+        focusCancel: true,
+        confirmButtonText: "Delete",
+        showLoaderOnConfirm: true,
+        allowOutsideClick: false,
+        preConfirm: function () {
+          return new Promise(function (resolve) {
+            resolve();
+          });
+        }
+      }).then(function () {
         $.ajax({
           url: suffix,
           type: "DELETE",
@@ -93,19 +109,30 @@
             xhr.setRequestHeader("Content-Type", "application/json");
           },
           success: function () {
+            swal(
+              'Deleted!',
+              'Your item has been deleted.',
+              'success'
+            );
             console.log($(event.target).closest(".panel").attr('id'));
-            $(event.target).closest("[class^=col-]").remove();
-            let message = $('#message');
-            $(message).show();
-            $(message).find("#message-detail").text("Course was successfully removed")
+            $(event.target).closest("[class^=col-]").fadeOut();
+//            let message = $('#message');
+//            $(message).show();
+//            $(message).find("#message-detail").text("Course was successfully removed")
+          },
+          error: function () {
+            swal(
+              'Error!',
+              'Your item has not been deleted.',
+              'error'
+            );
           }
         });
-      }
-      event.preventDefault();
+      }).catch(swal.noop);
     });
 
     $("#close").on('click', function (event) {
-      $(event.target).closest(".row").remove();
+      $(event.target).closest(".row").fadeOut();
     });
   });
 </script>

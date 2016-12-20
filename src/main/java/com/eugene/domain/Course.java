@@ -43,7 +43,7 @@ public class Course {
   @Column(name = "outline", columnDefinition = "LONGTEXT")
   private String courseOutline;
 
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "course")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "course", cascade = CascadeType.ALL)
   private Set<Unit> unitList = new HashSet<>();
 
   public Course() {
