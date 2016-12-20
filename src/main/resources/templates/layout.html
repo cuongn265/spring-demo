@@ -40,13 +40,15 @@
     <div class="header mdl-layout__header mdl-layout__header--waterfall">
       <div class="mdl-layout__header-row">
           <span class="title mdl-layout-title">
-            <img class="logo-image"
-                 src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_light_clr_74x24px.svg"/>
+            <a th:href="@{/}">
+              <img class="logo-image"
+                    src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_light_clr_74x24px.svg"/>
+            </a>
           </span>
         <!-- Add spacer, to align navigation to the right in desktop -->
         <div class="header-spacer mdl-layout-spacer"></div>
         <div sec:authorize="isAuthenticated()"
-          class="search-box mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width">
+             class="search-box mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width">
           <button class="mdl-button mdl-js-button mdl-button--icon" id="add-button">
             <i class="material-icons">add</i>
           </button>
@@ -131,7 +133,7 @@
   </div>
   <footer layout:fragment="site-footer" class="footer">
     <!--<div class="container">-->
-      <!--&copy; Learning Management System 2016-->
+    <!--&copy; Learning Management System 2016-->
     <!--</div>-->
     <script
       src="https://code.jquery.com/jquery-3.1.1.min.js"

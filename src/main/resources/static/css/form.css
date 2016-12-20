@@ -18,7 +18,7 @@
   background: url(/images/loader-64x/Preloader_1.gif) center no-repeat #fff; }
 
 main .container {
-  margin: 80px auto; }
+  margin: 40px auto; }
   main .container .message-row span#close:hover {
     cursor: pointer; }
 
