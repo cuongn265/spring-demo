@@ -9,6 +9,9 @@
   .header .search-box .mdl-button:hover {
     background-color: transparent; }
 
+.mdl-menu__container {
+  margin-right: 20px; }
+
 header {
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://freewallpaperspictures.com/wp-content/uploads/2016/02/Wallpapers-Full-HD-random-35881387-1920-1080.jpg);
   height: 50vh;
@@ -24,11 +27,24 @@ header {
   header p.course-name {
     font-size: 36px; }
 
-.my-mdl-layout .mdl-layout__header .mdl-layout__header-row .mdl-navigation .mdl-navigation__link:hover {
-  text-decoration: none;
-  border-bottom: 4px solid white; }
+.my-mdl-layout .mdl-layout__header .mdl-layout__header-row .mdl-menu a {
+  font-size: 14px;
+  color: black; }
+  .my-mdl-layout .mdl-layout__header .mdl-layout__header-row .mdl-menu a:hover {
+    text-decoration: none; }
+.my-mdl-layout .mdl-layout__header .mdl-layout__header-row .mdl-navigation {
+  justify-content: center;
+  flex: 6; }
+  .my-mdl-layout .mdl-layout__header .mdl-layout__header-row .mdl-navigation .mdl-navigation__link {
+    text-align: center; }
+  .my-mdl-layout .mdl-layout__header .mdl-layout__header-row .mdl-navigation .is-active {
+    border-bottom: 4px solid white; }
+  .my-mdl-layout .mdl-layout__header .mdl-layout__header-row .mdl-navigation .mdl-navigation__link:hover {
+    text-decoration: none;
+    border-bottom: 4px solid white; }
 .my-mdl-layout .mdl-layout__header .mdl-layout__header-row .search-box {
-  display: none; }
+  display: none;
+  flex: 1; }
 .my-mdl-layout .mdl-layout__header .mdl-layout__drawer-button {
   display: none; }
 .my-mdl-layout .mdl-layout__drawer .nav-heading {
@@ -53,9 +69,14 @@ header {
   header {
     display: none; }
 
-  .my-mdl-layout .mdl-layout__header .mdl-layout__header-row .mdl-navigation .mdl-navigation__link:hover {
-    text-decoration: none;
-    border-bottom: 4px solid white; }
+  .my-mdl-layout .mdl-layout__header .mdl-layout__header-row {
+    padding: 0 0 0 72px; }
+    .my-mdl-layout .mdl-layout__header .mdl-layout__header-row .mdl-navigation .mdl-navigation__link:hover {
+      text-decoration: none;
+      border-bottom: 4px solid white; }
+    .my-mdl-layout .mdl-layout__header .mdl-layout__header-row .search-box {
+      display: block;
+      top: -9px; }
   .my-mdl-layout .mdl-layout__header .mdl-layout__drawer-button {
     display: block; } }
 main {

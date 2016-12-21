@@ -19,28 +19,46 @@
          class="my-mdl-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
       <div class="mdl-layout__header">
         <div class="mdl-layout__header-row">
-          <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="#">Unit</a>
-            <a class="mdl-navigation__link" href="#">Assignment</a>
-            <a class="mdl-navigation__link" href="#">Summary</a>
+          <nav class="mdl-navigation mdl-cell">
+            <a class="mdl-navigation__link flex-link mdl-cell" href="#"></a>
+            <a class="mdl-navigation__link flex-link mdl-cell mdl-typography--text-uppercase is-active" href="#">Unit</a>
+            <a class="mdl-navigation__link flex-link mdl-cell mdl-typography--text-uppercase" href="#">Assignment</a>
+            <a class="mdl-navigation__link flex-link mdl-cell mdl-typography--text-uppercase" href="#">Summary</a>
+            <a class="mdl-navigation__link flex-link mdl-cell" href="#"></a>
           </nav>
           <div sec:authorize="isAuthenticated()"
-               class="search-box mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width">
-            <button class="mdl-button mdl-js-button mdl-button--icon" id="add-button">
+               class="search-box mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width flex-link">
+            <button class="mdl-button mdl-js-button mdl-button--icon" id="add-button-1">
               <i class="material-icons">add</i>
             </button>
             <div class="mdl-textfield__expandable-holder">
               <!--<input class="mdl-textfield__input" type="text" id="search-field"/>-->
             </div>
             <!--<div>-->
-            <button class="mdl-button mdl-js-button mdl-button--icon" id="more-button">
+            <button class="mdl-button mdl-js-button mdl-button--icon" id="more-button-1">
               <i class="material-icons">more_vert</i>
             </button>
             <div class="mdl-textfield__expandable-holder">
               <!--<input class="mdl-textfield__input" type="text" id="search-field"/>-->
             </div>
             <!--</div>-->
+            <!--<div th:include="layout :: right-menu(2)"></div>-->
           </div>
+          <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button-1">
+            <li class="mdl-menu__item"><a th:href="@{/profile}">Change profile</a></li>
+            <li class="mdl-menu__item"><a th:href="@{/password}">Change Password</a></li>
+            <li class="drawer-separator"></li>
+            <li class="mdl-menu__item"><a th:href="@{/logout}">Sign out</a></li>
+            <!--<li class="mdl-menu__item">4.3 Jelly Bean</li>-->
+            <!--<li class="mdl-menu__item">Android History</li>-->
+          </ul>
+          <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="add-button-1">
+            <li class="mdl-menu__item"><a th:href="@{/courses/new}">Create course</a></li>
+            <li class="drawer-separator"></li>
+            <li class="mdl-menu__item"><a th:href="@{/}">Some action else</a></li>
+            <!--<li class="mdl-menu__item">4.3 Jelly Bean</li>-->
+            <!--<li class="mdl-menu__item">Android History</li>-->
+          </ul>
         </div>
       </div>
       <div class="mdl-layout__drawer">
@@ -158,7 +176,25 @@
 <footer layout:replace="layout :: site-footer" th:remove="tag">
 </footer>
 <script type="text/javascript">
+  //<![CDATA[
   $(document).ready(function () {
+    let top = $("#my-layout").offset().top; //gets offset of header
+    window.onresize = function (event) {
+      console.log("resize cmnr");
+      top = $("#my-layout").offset().top;
+      console.log(top);
+      let viewportWidth = $(window).width();
+      if (viewportWidth <= 900) {
+        $(layout).find(".mdl-layout__drawer-button").css({"display": "block"});
+        $(layout).find(".search-box").css({"display": "block"})
+      }
+
+      if (viewportWidth > 900) {
+        $("#top-nav").show();
+        $(layout).find(".mdl-layout__drawer-button").css({"display": "none"});
+        $(layout).find(".search-box").css({"display": "none"})
+      }
+    };
     $("#close").on('click', function (event) {
       $(event.target).closest(".row").fadeOut();
     });
@@ -211,20 +247,24 @@
       }).catch(swal.noop);
     });
 
-
     let layout = $(".mdl-layout__content");
 
-    let top = $("#my-layout").offset().top; //gets offset of header
     $(layout).scroll(function () {
-      if (Math.round($(layout).scrollTop()) >= (Math.round(top))) {
+      console.log("TOP" + (Math.round(top)));
+      console.log("scrollTop" + Math.round($(layout).scrollTop()));
+      if (Math.round($(layout).scrollTop() + 1) >= (Math.round(top))) {
         $("#top-nav").hide();
+        $(layout).find(".mdl-layout__drawer-button").css({"display": "block"});
+        $(layout).find(".search-box").css({"display": "block"})
       }
       else {
         $("#top-nav").show();
+        $(layout).find(".mdl-layout__drawer-button").css({"display": "none"});
+        $(layout).find(".search-box").css({"display": "none"})
       }
     });
   });
+  //]]>
 </script>
-
 </body>
 </html>

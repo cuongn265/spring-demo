@@ -11,6 +11,6 @@ import java.util.List;
  * Created by Eugene on 12/4/2016.
  */
 public interface UnitRepository extends JpaRepository<Unit, Long> {
-  List<Unit> findAllByCourseOrderByUnitPositionAsc(Course course);
+List<Unit> findAllByCourseOrderByUnitPositionAsc(Course course);
   List<Unit> findByUnitName(String name);
 }

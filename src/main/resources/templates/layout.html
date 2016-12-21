@@ -35,12 +35,12 @@
   <meta th:include="this :: head" th:remove="tag"/>
 </head>
 <body>
-<div layout:fragment="site-content"  id="all">
+<div layout:fragment="site-content" id="all">
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <div id="top-nav"
-      class="header mdl-layout__header mdl-layout__header--waterfall">
+         class="header mdl-layout__header mdl-layout__header--waterfall">
       <div class="mdl-layout__header-row">
-          <span class="title mdl-layout-title">
+        <span class="title mdl-layout-title">
             <a th:href="@{/}">
               <img class="logo-image"
                    src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_light_clr_74x24px.svg"/>
@@ -57,12 +57,12 @@
             <!--<input class="mdl-textfield__input" type="text" id="search-field"/>-->
           </div>
           <!--<div>-->
-            <button class="mdl-button mdl-js-button mdl-button--icon" id="more-button">
-              <i class="material-icons">more_vert</i>
-            </button>
-            <div class="mdl-textfield__expandable-holder">
-              <!--<input class="mdl-textfield__input" type="text" id="search-field"/>-->
-            </div>
+          <button class="mdl-button mdl-js-button mdl-button--icon" id="more-button">
+            <i class="material-icons">more_vert</i>
+          </button>
+          <div class="mdl-textfield__expandable-holder">
+            <!--<input class="mdl-textfield__input" type="text" id="search-field"/>-->
+          </div>
           <!--</div>-->
         </div>
         <!-- Navigation -->
@@ -95,6 +95,7 @@
           <!--<li class="mdl-menu__item">4.3 Jelly Bean</li>-->
           <!--<li class="mdl-menu__item">Android History</li>-->
         </ul>
+
       </div>
     </div>
     <div class="drawer mdl-layout__drawer">
