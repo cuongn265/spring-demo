@@ -35,14 +35,15 @@
   <meta th:include="this :: head" th:remove="tag"/>
 </head>
 <body>
-<div layout:fragment="site-content">
+<div layout:fragment="site-content"  id="all">
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <div class="header mdl-layout__header mdl-layout__header--waterfall">
+    <div id="top-nav"
+      class="header mdl-layout__header mdl-layout__header--waterfall">
       <div class="mdl-layout__header-row">
           <span class="title mdl-layout-title">
             <a th:href="@{/}">
               <img class="logo-image"
-                    src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_light_clr_74x24px.svg"/>
+                   src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_light_clr_74x24px.svg"/>
             </a>
           </span>
         <!-- Add spacer, to align navigation to the right in desktop -->
@@ -55,12 +56,14 @@
           <div class="mdl-textfield__expandable-holder">
             <!--<input class="mdl-textfield__input" type="text" id="search-field"/>-->
           </div>
-          <button class="mdl-button mdl-js-button mdl-button--icon" id="more-button">
-            <i class="material-icons">more_vert</i>
-          </button>
-          <div class="mdl-textfield__expandable-holder">
-            <!--<input class="mdl-textfield__input" type="text" id="search-field"/>-->
-          </div>
+          <!--<div>-->
+            <button class="mdl-button mdl-js-button mdl-button--icon" id="more-button">
+              <i class="material-icons">more_vert</i>
+            </button>
+            <div class="mdl-textfield__expandable-holder">
+              <!--<input class="mdl-textfield__input" type="text" id="search-field"/>-->
+            </div>
+          <!--</div>-->
         </div>
         <!-- Navigation -->
         <div class="navigation-container">
@@ -95,7 +98,7 @@
       </div>
     </div>
     <div class="drawer mdl-layout__drawer">
-      <nav class="mdl-navigation">
+      <nav layout:fragment="site-drawer-navigation" class="mdl-navigation">
         <div>
           <a class="mdl-navigation__link" href="">
             <i class="material-icons">home</i>
@@ -131,75 +134,20 @@
       </div>
     </div>
   </div>
-  <footer layout:fragment="site-footer" class="footer">
-    <!--<div class="container">-->
-    <!--&copy; Learning Management System 2016-->
-    <!--</div>-->
-    <script
-      src="https://code.jquery.com/jquery-3.1.1.min.js"
-      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-      crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/sweetalert2/6.2.1/sweetalert2.js"></script>
-    <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
-    <script type="text/javascript">
-    </script>
-  </footer>
-
-  <!--<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container nav-container">
-  <div class="navbar-header navbar-left pull-left">
-  <a class="navbar-brand" th:href="@{/}">
-  <span>
-  <img src="https://bwatwood.edublogs.org/files/2015/07/icon-e-learning-1b72z9p.png" alt="icon"/>
-  LMS
-  </span>
-  </a>
-  </div>
-  <div class="navbar-header navbar-right pull-right">
-  <ul class="nav pull-left info-nav" sec:authorize="isAuthenticated()">
-  &lt;!&ndash;<li id="hidden-text"><a th:text="${#authentication.name}"></a></li>&ndash;&gt;
-  <li class="navbar-text pull-left" th:text="${#authentication.name}">User Name</li>
-  <li class="dropdown pull-right">
-  <a class="dropdown-toggle"
-  id="menu1"
-  data-toggle="dropdown"
-  role="button"
-  >
-  <img th:src="${#authentication.principal.userImageUrl}" alt="avatar"/>
-  </a>
-  <ul class="dropdown-menu" aria-labelledby="menu1">
-  <li><a th:href="@{/profile}">Change profile</a></li>
-  <li><a th:href="@{/password}">Change Password</a></li>
-  <li role="separator" class="divider"></li>
-  <li><a th:href="@{/logout}">Sign out</a></li>
-  </ul>
-  </li>
-  </ul>
-  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-  data-target="#bs-example-navbar-collapse-1"
-  aria-expanded="false"
-  sec:authorize="isAnonymous()">
-  <span class="sr-only">Toggle navigation</span>
-  <span class="icon-bar"></span>
-  <span class="icon-bar"></span>
-  <span class="icon-bar"></span>
-  </button>
-  </div>
-  <div class="visible-xs-block clearfix"></div>
-  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" sec:authorize="isAnonymous()">
-  <ul class="nav-x nav navbar-nav navbar-right">
-  <li><a th:href="@{/login}">SIGN IN</a></li>
-  <li><a href="#">SIGN UP</a></li>
-  </ul>
-  </div>
-  </div>
-  </nav>-->
 </div>
+<footer layout:fragment="site-footer" class="footer">
+  <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+          integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+          crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/sweetalert2/6.2.1/sweetalert2.js"></script>
+  <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+</footer>
 </body>
 </html>

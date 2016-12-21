@@ -1,3 +1,75 @@
+@import "variable"
+.mdl-layout__header--waterfall.is-casting-shadow
+  box-shadow: none !important
+.header
+  position: fixed
+  background-color: transparent
+  box-shadow: none
+
+  .search-box
+    .mdl-button:hover
+      background-color: transparent
+
+header
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://freewallpaperspictures.com/wp-content/uploads/2016/02/Wallpapers-Full-HD-random-35881387-1920-1080.jpg)
+  height: 50vh
+  background-size: cover
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  //background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/cheese-curds.jpg);
+  //background-size: cover
+  p
+    max-width: 600px
+    font-size: 24px
+    //font-weight: bold
+    color: $material-color
+    //text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000
+  p.course-name
+    font-size: 36px
+
+.my-mdl-layout
+  .mdl-layout__header
+    .mdl-layout__header-row
+      .mdl-navigation
+        .mdl-navigation__link:hover
+          text-decoration: none
+          border-bottom: 4px solid white
+      .search-box
+        display: none
+    .mdl-layout__drawer-button
+      display: none
+  .mdl-layout__drawer
+    .nav-heading
+      margin-left: 10px
+    .mdl-navigation__link.mdl-navigation__link
+      .nav-text
+        vertical-align: middle
+        margin-left: 20px
+      .material-icons
+        opacity: 0.5
+      font-size: 14px
+      color: $text-color
+      &:hover
+        text-decoration: none
+        .material-icons
+          opacity: 1
+
+@media (max-width: 900px)
+  .header
+    display: none !important
+  header
+    display: none
+  .my-mdl-layout
+    .mdl-layout__header
+      .mdl-layout__header-row
+        .mdl-navigation
+          .mdl-navigation__link:hover
+            text-decoration: none
+            border-bottom: 4px solid white
+      .mdl-layout__drawer-button
+        display: block
 main
   margin: 80px auto
   .unit-container

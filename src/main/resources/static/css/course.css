@@ -1,4 +1,63 @@
 @charset "UTF-8";
+.mdl-layout__header--waterfall.is-casting-shadow {
+  box-shadow: none !important; }
+
+.header {
+  position: fixed;
+  background-color: transparent;
+  box-shadow: none; }
+  .header .search-box .mdl-button:hover {
+    background-color: transparent; }
+
+header {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://freewallpaperspictures.com/wp-content/uploads/2016/02/Wallpapers-Full-HD-random-35881387-1920-1080.jpg);
+  height: 50vh;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  header p {
+    max-width: 600px;
+    font-size: 24px;
+    color: white; }
+  header p.course-name {
+    font-size: 36px; }
+
+.my-mdl-layout .mdl-layout__header .mdl-layout__header-row .mdl-navigation .mdl-navigation__link:hover {
+  text-decoration: none;
+  border-bottom: 4px solid white; }
+.my-mdl-layout .mdl-layout__header .mdl-layout__header-row .search-box {
+  display: none; }
+.my-mdl-layout .mdl-layout__header .mdl-layout__drawer-button {
+  display: none; }
+.my-mdl-layout .mdl-layout__drawer .nav-heading {
+  margin-left: 10px; }
+.my-mdl-layout .mdl-layout__drawer .mdl-navigation__link.mdl-navigation__link {
+  font-size: 14px;
+  color: black; }
+  .my-mdl-layout .mdl-layout__drawer .mdl-navigation__link.mdl-navigation__link .nav-text {
+    vertical-align: middle;
+    margin-left: 20px; }
+  .my-mdl-layout .mdl-layout__drawer .mdl-navigation__link.mdl-navigation__link .material-icons {
+    opacity: 0.5; }
+  .my-mdl-layout .mdl-layout__drawer .mdl-navigation__link.mdl-navigation__link:hover {
+    text-decoration: none; }
+    .my-mdl-layout .mdl-layout__drawer .mdl-navigation__link.mdl-navigation__link:hover .material-icons {
+      opacity: 1; }
+
+@media (max-width: 900px) {
+  .header {
+    display: none !important; }
+
+  header {
+    display: none; }
+
+  .my-mdl-layout .mdl-layout__header .mdl-layout__header-row .mdl-navigation .mdl-navigation__link:hover {
+    text-decoration: none;
+    border-bottom: 4px solid white; }
+  .my-mdl-layout .mdl-layout__header .mdl-layout__drawer-button {
+    display: block; } }
 main {
   margin: 80px auto; }
   main .unit-container .unit .panel.panel-default .panel-heading .btn-action {

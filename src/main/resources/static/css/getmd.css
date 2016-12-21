@@ -20,7 +20,7 @@ a img {
   border: 0; }
 
 ::-moz-selection, ::selection {
-  background-color: #114b13;
+  background-color: #009688;
   color: #fff; }
 
 .search-box .mdl-textfield__input {
@@ -40,7 +40,7 @@ a img {
 
 .header {
   overflow: visible;
-  background-color: #114b13; }
+  background-color: #009688; }
   .header .material-icons {
     color: white !important;
     font-size: 28px; }
@@ -96,7 +96,7 @@ a img {
   margin-left: 16px;
   margin-right: 16px; }
   .search-box .mdl-button:hover {
-    background-color: #114b13; }
+    background-color: #009688; }
 
 .more-button {
   -webkit-order: 3;
@@ -129,7 +129,7 @@ a img {
       opacity: 1; }
 .drawer .mdl-layout-title {
   position: relative;
-  background: #114b13;
+  background: #009688;
   height: 160px; }
 .drawer .logo-image {
   position: absolute;

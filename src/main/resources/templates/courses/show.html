@@ -1,114 +1,162 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head layout:replace="layout :: site-head">
   <link rel="stylesheet" th:href="@{/css/course.css}"/>
   <title>Course Detail</title>
 </head>
 <body>
-<header layout:replace="layout :: site-content"></header>
-<main>
-  <!--/*@thymesVar id="message" type=""*/-->
-  <div class="row alert alert-info message-row" th:if="${message}">
-    <div class="container">
-      <div>
-        <span th:text="${message}"></span>
-        <span class="pull-right" id="close">&times;</span>
-      </div>
-    </div>
-  </div>
-  <div class="jumbotron">
-    <div class="container">
-      <!--/*@thymesVar id="course" type="com.eugene.domain.Course"*/-->
-      <h3
-        th:text="${course.courseName + ' (' + course.courseWeekCount + (course.courseWeekCount > 1 ? ' weeks' : ' week') + ')'}"></h3>
-      <p>
-        <span th:remove="tag" th:utext="${course.courseSummary}"></span>
-      </p>
-      <p th:if="${course.courseOutline.length() != 0}">
-        <a href="#"
-           class="collapsed"
-           data-toggle="collapse"
-           data-target="#demo"
-        >
-          Click to see Course outline &nbsp;
-        </a>
-      </p>
-      <div id="demo"
-           class="collapse">
-        <p th:remove="tag"
-           th:utext="${course.courseOutline}">
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="container unit-container">
-    <div class="row">
-      <div class="col-md-8">
-        <h3 th:if="${units.size() > 0}"
-            th:inline="text">
-          [[${'Total: ' + course.unitList.size() + (course.unitList.size() > 1 ? ' units' : ' unit')}]]
-          <a th:href="@{__${#httpServletRequest.requestURI}__/units/new}"
-             class="btn btn-info pull-right">
-            Create Unit
-          </a>
-        </h3>
-        <h3 th:if="${units.size() == 0}"
-            th:inline="text">
-          <!--[[${'Total: ' + course.unitList.size() + (course.unitList.size() > 1 ? ' units' : ' unit')}]]-->
-          [[${"There's no Unit yet"}]]
-          <a th:href="@{__${#httpServletRequest.requestURI}__/units/new}"
-             class="btn btn-info pull-right">
-            Create Unit
-          </a>
-        </h3>
-        <hr/>
-        <!--/*@thymesVar id="units" type="java.util.List<com.eugene.domain.Unit>"*/-->
-        <div class="unit" th:each="unit : ${units}">
-          <div class="panel panel-default" th:id="'panel-' + ${unit.unitId}">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a
-                  th:inline="text"
-                  class="unit-name collapsed panel-title pull-left"
-                  data-toggle="collapse"
-                  th:attr="data-target='#demo' + ${unit.unitId}"
-                  data-target="#demo1">
-                  [[${'Unit ' + unit.unitPosition + ': ' + unit.unitName}]]
-                  <small th:if="${unit.unitSummary.length() > 0}" th:text="${' - ' + unit.unitSummary}"></small>
-                </a>
-              </h4>
-              <a th:href="@{__${#httpServletRequest.requestURI}__/units/{unitId}/edit(unitId=${unit.unitId})}"
-                 class="btn btn-warning pull-right btn-action">
-                <span class="glyphicon glyphicon-pencil"></span>
-              </a>
-
-              <a th:href="@{delete/{unitId}(unitId=${unit.unitId})}"
-                 th:id="'delete-unit-' + ${unit.unitId}"
-                 class="btn btn-danger pull-right btn-action">
-                <span class="glyphicon glyphicon-trash"></span>
-              </a>
-              <div class="clearfix"></div>
+<!--<h1>Hello WOlrd</h1>-->
+<div layout:replace="layout :: site-content">
+  <div layout:fragment="content" th:remove="tag">
+    <!--/*@thymesVar id="course" type="com.eugene.domain.Course"*/-->
+    <header
+      th:style="'background-image:linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)),url(' + ${course.courseImageUrl} + ');'">
+      <p class="course-name" th:text="${course.courseName}"></p>
+      <p class="course-summary" th:text="${course.courseSummary}"></p>
+    </header>
+    <div id="my-layout"
+         class="my-mdl-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <div class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="#">Unit</a>
+            <a class="mdl-navigation__link" href="#">Assignment</a>
+            <a class="mdl-navigation__link" href="#">Summary</a>
+          </nav>
+          <div sec:authorize="isAuthenticated()"
+               class="search-box mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width">
+            <button class="mdl-button mdl-js-button mdl-button--icon" id="add-button">
+              <i class="material-icons">add</i>
+            </button>
+            <div class="mdl-textfield__expandable-holder">
+              <!--<input class="mdl-textfield__input" type="text" id="search-field"/>-->
             </div>
-            <div th:id="${'demo' + unit.unitId}" class="collapse">
-              <div class="panel-body">
-                <div
-                >
-                  <p th:if="${unit.unitDetail.length() > 0}" th:remove="tag"
-                     th:utext="${unit.unitDetail}">
-                  </p>
-                  <p th:if="${unit.unitDetail.length() == 0}" th:remove="tag"
-                     th:utext="${'There is no unit detail yet'}">
-                  </p>
-                </div>
-              </div>
+            <!--<div>-->
+            <button class="mdl-button mdl-js-button mdl-button--icon" id="more-button">
+              <i class="material-icons">more_vert</i>
+            </button>
+            <div class="mdl-textfield__expandable-holder">
+              <!--<input class="mdl-textfield__input" type="text" id="search-field"/>-->
             </div>
+            <!--</div>-->
           </div>
         </div>
       </div>
+      <div class="mdl-layout__drawer">
+        <nav layout:include="layout :: site-drawer-navigation" class="mdl-navigation">
+        </nav>
+      </div>
+      <div class="content mdl-layout__content">
+        <a name="top"></a>
+        <main>
+          <!--&lt;!&ndash;/*@thymesVar id="message" type=""*/&ndash;&gt;
+          <div class="row alert alert-info message-row" th:if="${message}">
+          <div class="container">
+          <div>
+          <span th:text="${message}"></span>
+          <span class="pull-right" id="close">&times;</span>
+          </div>
+          </div>
+          </div>
+          <div class="jumbotron">
+          <div class="container">
+          &lt;!&ndash;/*@thymesVar id="course" type="com.eugene.domain.Course"*/&ndash;&gt;
+          <h3
+          th:text="${course.courseName + ' (' + course.courseWeekCount + (course.courseWeekCount > 1 ? ' weeks' : ' week') + ')'}"></h3>
+          <p>
+          <span th:remove="tag" th:utext="${course.courseSummary}"></span>
+          </p>
+          <p th:if="${course.courseOutline.length() != 0}">
+          <a href="#"
+          class="collapsed"
+          data-toggle="collapse"
+          data-target="#demo"
+          >
+          Click to see Course outline &nbsp;
+          </a>
+          </p>
+          <div id="demo"
+          class="collapse">
+          <p th:remove="tag"
+          th:utext="${course.courseOutline}">
+          </p>
+          </div>
+          </div>
+          </div>
+          <div class="container unit-container">
+          <div class="row">
+          <div class="col-md-8">
+          <h3 th:if="${units.size() > 0}"
+          th:inline="text">
+          [[${'Total: ' + course.unitList.size() + (course.unitList.size() > 1 ? ' units' : ' unit')}]]
+          <a th:href="@{__${#httpServletRequest.requestURI}__/units/new}"
+          class="btn btn-info pull-right">
+          Create Unit
+          </a>
+          </h3>
+          <h3 th:if="${units.size() == 0}"
+          th:inline="text">
+          &lt;!&ndash;[[${'Total: ' + course.unitList.size() + (course.unitList.size() > 1 ? ' units' : ' unit')}]]&ndash;&gt;
+          [[${"There's no Unit yet"}]]
+          <a th:href="@{__${#httpServletRequest.requestURI}__/units/new}"
+          class="btn btn-info pull-right">
+          Create Unit
+          </a>
+          </h3>
+          <hr/>
+          &lt;!&ndash;/*@thymesVar id="units" type="java.util.List<com.eugene.domain.Unit>"*/&ndash;&gt;
+          <div class="unit" th:each="unit : ${units}">
+          <div class="panel panel-default" th:id="'panel-' + ${unit.unitId}">
+          <div class="panel-heading">
+          <h4 class="panel-title">
+          <a
+          th:inline="text"
+          class="unit-name collapsed panel-title pull-left"
+          data-toggle="collapse"
+          th:attr="data-target='#demo' + ${unit.unitId}"
+          data-target="#demo1">
+          [[${'Unit ' + unit.unitPosition + ': ' + unit.unitName}]]
+          <small th:if="${unit.unitSummary.length() > 0}" th:text="${' - ' + unit.unitSummary}"></small>
+          </a>
+          </h4>
+          <a th:href="@{__${#httpServletRequest.requestURI}__/units/{unitId}/edit(unitId=${unit.unitId})}"
+          class="btn btn-warning pull-right btn-action">
+          <span class="glyphicon glyphicon-pencil"></span>
+          </a>
+
+          <a th:href="@{delete/{unitId}(unitId=${unit.unitId})}"
+          th:id="'delete-unit-' + ${unit.unitId}"
+          class="btn btn-danger pull-right btn-action">
+          <span class="glyphicon glyphicon-trash"></span>
+          </a>
+          <div class="clearfix"></div>
+          </div>
+          <div th:id="${'demo' + unit.unitId}" class="collapse">
+          <div class="panel-body">
+          <div
+          >
+          <p th:if="${unit.unitDetail.length() > 0}" th:remove="tag"
+          th:utext="${unit.unitDetail}">
+          </p>
+          <p th:if="${unit.unitDetail.length() == 0}" th:remove="tag"
+          th:utext="${'There is no unit detail yet'}">
+          </p>
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>-->
+        </main>
+      </div>
     </div>
   </div>
-</main>
-<footer layout:replace="layout :: site-footer"></footer>
+</div>
+<footer layout:replace="layout :: site-footer" th:remove="tag">
+</footer>
 <script type="text/javascript">
   $(document).ready(function () {
     $("#close").on('click', function (event) {
@@ -162,7 +210,21 @@
         });
       }).catch(swal.noop);
     });
+
+
+    let layout = $(".mdl-layout__content");
+
+    let top = $("#my-layout").offset().top; //gets offset of header
+    $(layout).scroll(function () {
+      if (Math.round($(layout).scrollTop()) >= (Math.round(top))) {
+        $("#top-nav").hide();
+      }
+      else {
+        $("#top-nav").show();
+      }
+    });
   });
 </script>
+
 </body>
 </html>

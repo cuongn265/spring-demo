@@ -16,6 +16,9 @@ main .row.courses-body {
     border-radius: 0;
     width: 100%;
     box-shadow: 0 20px 20px rgba(0, 0, 0, 0.08); }
+    main .row.courses-body .box img {
+      max-height: 150px;
+      min-width: 100%; }
   main .row.courses-body [class*="col-"] .caption {
     margin-bottom: 30px; }
   main .row.courses-body [class*="col-"] .course-footer {
