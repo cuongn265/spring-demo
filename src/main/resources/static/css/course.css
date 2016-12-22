@@ -27,6 +27,8 @@ header {
   header p.course-name {
     font-size: 36px; }
 
+.my-mdl-layout .content {
+  width: 100%; }
 .my-mdl-layout .mdl-layout__header .mdl-layout__header-row .mdl-menu a {
   font-size: 14px;
   color: black; }
@@ -61,6 +63,8 @@ header {
     text-decoration: none; }
     .my-mdl-layout .mdl-layout__drawer .mdl-navigation__link.mdl-navigation__link:hover .material-icons {
       opacity: 1; }
+.my-mdl-layout .mdl-layout__content .mdl-grid {
+  margin: 20px 80px; }
 
 @media (max-width: 900px) {
   .header {
@@ -79,32 +83,30 @@ header {
       top: -9px; }
   .my-mdl-layout .mdl-layout__header .mdl-layout__drawer-button {
     display: block; } }
-main {
-  margin: 80px auto; }
-  main .unit-container .unit .panel.panel-default .panel-heading .btn-action {
-    margin: 0 5px; }
-  main .unit-container .unit .panel.panel-default .panel-heading .panel-title {
-    font-weight: bold; }
-    main .unit-container .unit .panel.panel-default .panel-heading .panel-title .panel-title:hover {
-      cursor: pointer; }
-  main .unit-container .unit .unit-name {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: normal;
-    width: 75%;
-    padding-top: 8px; }
-  main .jumbotron p {
-    font-size: 16px; }
-  main .jumbotron .container a, main .jumbotron .container u {
-    text-decoration: none; }
-  main .jumbotron .container a:after {
-    font-family: "Glyphicons Halflings";
-    content: ""; }
-  main .jumbotron .container a.collapsed:after {
-    font-family: "Glyphicons Halflings";
-    content: ""; }
-  main .message-row .container span#close:hover {
+main .unit-container .unit .panel.panel-default .panel-heading .btn-action {
+  margin: 0 5px; }
+main .unit-container .unit .panel.panel-default .panel-heading .panel-title {
+  font-weight: bold; }
+  main .unit-container .unit .panel.panel-default .panel-heading .panel-title .panel-title:hover {
     cursor: pointer; }
+main .unit-container .unit .unit-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: normal;
+  width: 75%;
+  padding-top: 8px; }
+main .jumbotron p {
+  font-size: 16px; }
+main .jumbotron .container a, main .jumbotron .container u {
+  text-decoration: none; }
+main .jumbotron .container a:after {
+  font-family: "Glyphicons Halflings";
+  content: ""; }
+main .jumbotron .container a.collapsed:after {
+  font-family: "Glyphicons Halflings";
+  content: ""; }
+main .message-row .container span#close:hover {
+  cursor: pointer; }
 
 /*# sourceMappingURL=course.css.map */

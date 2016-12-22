@@ -18,26 +18,11 @@
           </div>
         </div>
       </div>
-      <!--<div class="jumbotron">
-        <div class="container">
-          <h2>Welcome to C Learning Management System</h2>
-          <p>Easy to use, hard to give up and be your the best assistant</p>
-          <p>
-            <a class="btn btn-primary btn-lg"
-               role="button"
-               th:href="@{courses/new}">
-              <span class="glyphicon glyphicon-plus"></span>
-              Create Course
-            </a>
-          </p>
-        </div>
-
-      </div>-->
-      <div class="container">
+      <div class="container course-container">
         <div class="row courses-body">
           <!--/*@thymesVar id="courseList" type="java.util.List<com.eugene.domain.Course>"*/-->
           <div class="col-sm-6 col-md-4 col-xs-12" th:each="course: ${courseList}">
-            <a th:href="@{/courses/{courseId}(courseId=${course.courseId})}">
+            <a th:href="@{/courses/{courseId}/units/1(courseId=${course.courseId})}">
               <div class="thumbnail box">
                 <img th:src="${course.courseImageUrl}" alt="img"/>
                 <div class="caption">

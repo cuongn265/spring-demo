@@ -1,0 +1,20 @@
+.mdl-data-table {
+  width: 100%; }
+  .mdl-data-table tbody tr.is-active {
+    background: #009688; }
+    .mdl-data-table tbody tr.is-active td .mdl-navigation__link {
+      color: white; }
+  .mdl-data-table tbody tr:hover {
+    cursor: pointer;
+    background: #009688; }
+    .mdl-data-table tbody tr:hover td .mdl-navigation__link {
+      color: white; }
+  .mdl-data-table tbody tr td.mdl-data-table__cell--non-numeric {
+    padding: 18px 18px;
+    text-align: center; }
+    .mdl-data-table tbody tr td.mdl-data-table__cell--non-numeric .mdl-navigation__link {
+      text-decoration: none;
+      font-size: 16px;
+      opacity: 1; }
+
+/*# sourceMappingURL=week_table.css.map */

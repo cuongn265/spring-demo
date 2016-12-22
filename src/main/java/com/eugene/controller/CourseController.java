@@ -94,16 +94,14 @@ public class CourseController {
   }
 
   // GET show page
-  @RequestMapping("/courses/{courseId}")
-  public String showCourse(@PathVariable Integer courseId, Model model) {
+  @RequestMapping("/courses/{courseId}/units/{weekId}")
+  public String showCourse(@PathVariable Integer courseId, @PathVariable Integer weekId, Model model) {
     Course course = courseRepository.findOne(courseId.longValue());
-    List<Unit> units = unitRepository.findAllByCourseOrderByUnitPositionAsc(course);
-    for (Unit unit : units) {
-      System.out.println("UNIT:" + unit.getUnitName());
-    }
-
+//    List<Unit> units = unitRepository.findAllByCourseOrderByUnitPositionAsc(course);
+    Unit unit = unitRepository.findFirstByUnitPosition(weekId);
     model.addAttribute("course", course);
-    model.addAttribute("units", units);
+    model.addAttribute("unit", unit);
+    model.addAttribute("week", weekId);
     return "courses/show";
   }
 
@@ -158,7 +156,7 @@ public class CourseController {
 
     courseRepository.save(course);
 
-    return "redirect:/courses/" + course.getCourseId();
+    return "redirect:/courses/" + course.getCourseId() + "/units/1";
   }
 
   private void uploadFile(AmazonS3 s3client, String bucketName, MultipartFile file, String name, Course course) {

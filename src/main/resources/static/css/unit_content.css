@@ -1,0 +1,12 @@
+.unit-content .demo-card-wide {
+  width: 100%;
+  height: 100%; }
+  .unit-content .demo-card-wide .mdl-card__supporting-text .title-text {
+    font-weight: bold; }
+.unit-content .demo-card-wide > .mdl-card__title {
+  color: #fff;
+  background: #009688; }
+.unit-content .demo-card-wide > .mdl-card__menu {
+  color: #fff; }
+
+/*# sourceMappingURL=unit_content.css.map */

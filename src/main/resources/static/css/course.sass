@@ -31,6 +31,9 @@ header
     font-size: 36px
 
 .my-mdl-layout
+  .content
+    width: 100%
+    //overflow: hidden
   .mdl-layout__header
     .mdl-layout__header-row
       .mdl-menu
@@ -72,7 +75,9 @@ header
         text-decoration: none
         .material-icons
           opacity: 1
-
+  .mdl-layout__content
+    .mdl-grid
+      margin: 20px 80px
 @media (max-width: 900px)
   .header
     display: none !important
@@ -92,7 +97,6 @@ header
       .mdl-layout__drawer-button
         display: block
 main
-  margin: 80px auto
   .unit-container
     .unit
       .panel.panel-default
