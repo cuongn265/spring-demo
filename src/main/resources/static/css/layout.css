@@ -1,6 +1,8 @@
 body {
   font-family: "Noto Sans", sans-serif !important;
   background-color: #eee !important; }
+  body #create-unit {
+    display: none; }
   body .panel.panel-default .panel-heading.heading {
     background-color: #009688;
     color: white; }

@@ -91,7 +91,7 @@ public class CourseController {
 
     courseRepository.save(course);
 
-    return "redirect:/courses/" + course.getCourseId();
+    return "redirect:/courses/" + course.getCourseId() + "/weeks/1" ;
   }
 
   // GET show page

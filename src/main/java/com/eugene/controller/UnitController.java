@@ -36,9 +36,10 @@ public class UnitController {
   }
 
   @RequestMapping(value = "/units/new")
-  public String addUnit(Model model, @PathVariable Integer courseId) {
+  public String addUnit(Model model, @PathVariable Integer courseId, @PathVariable Integer weekId) {
     Unit unit = new Unit();
     unit.setCourse(courseRepository.findOne(courseId.longValue()));
+    unit.setUnitWeek(weekId);
     model.addAttribute("unit", unit);
     return "courses/units/new";
   }
@@ -50,7 +51,7 @@ public class UnitController {
       return "courses/units/new";
     }
     unitRepository.save(unit);
-    return "redirect:/courses/{courseId}";
+    return "redirect:/courses/{courseId}/weeks/{weekId}";
   }
 
   //  TODO: Make response body when deleting fail

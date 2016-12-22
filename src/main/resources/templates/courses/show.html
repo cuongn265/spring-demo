@@ -23,13 +23,14 @@
           <nav class="mdl-navigation mdl-cell">
             <a class="mdl-navigation__link flex-link mdl-cell" href="#"></a>
             <a class="mdl-navigation__link flex-link mdl-cell mdl-typography--text-uppercase is-active"
+               id="unit-nav-link"
                th:href="@{/courses/{courseId}/weeks/1(courseId=${course.courseId})}">
               Units
             </a>
             <a class="mdl-navigation__link flex-link mdl-cell mdl-typography--text-uppercase" href="#">Assignments</a>
             <a class="mdl-navigation__link flex-link mdl-cell mdl-typography--text-uppercase"
                th:href="@{/courses/{courseId}/summary(courseId=${course.courseId})}"
-               id="btn-summary">
+               id="summary-nav-link">
               Summary
             </a>
             <a class="mdl-navigation__link flex-link mdl-cell" href="#"></a>
@@ -57,7 +58,7 @@
             <li class="mdl-menu__item"><a th:href="@{/logout}">Sign out</a></li>
           </ul>
           <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="add-button-1">
-            <li class="mdl-menu__item"><a th:href="@{/courses/new}">Create course</a></li>
+            <li class="mdl-menu__item"><a th:href="@{courses/new}">Create course</a></li>
             <li class="drawer-separator"></li>
             <li class="mdl-menu__item"><a th:href="@{/}">Some action else</a></li>
           </ul>
@@ -70,8 +71,8 @@
       <div class="content mdl-layout__content" id="body-content">
         <a name="top"></a>
         <div class="mdl-grid" id="main-grid">
-          <div class="mdl-cell mdl-cell--3-col mdl-cell--3-col-tablet mdl-shadow--2dp">
-            <table class="mdl-data-table mdl-js-data-table">
+          <div class="mdl-cell mdl-cell--3-col mdl-cell--3-col-tablet">
+            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
               <tbody>
               <tr th:each="i : ${#numbers.sequence(1, course.courseWeekCount, 1)}"
                   th:classappend="${week==i} ? 'is-active' : 'non-active'">
@@ -105,6 +106,9 @@
                   <li class="mdl-menu__item"><a th:href="@{delete/{unitId}(unitId=${unit.unitId})}"
                                                 th:id="'delete-unit-' + ${unit.unitId}">Delete</a></li>
                 </ul>
+              </div>
+              <div th:with="flag=${unit!=null}">
+
               </div>
             </div>
             <div class="demo-card-wide mdl-card mdl-shadow--2dp" th:if="${unit==null}">
@@ -149,6 +153,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </div>
 <footer layout:replace="layout :: site-footer" th:remove="tag">
@@ -246,14 +251,45 @@
 
     $('#body-content').perfectScrollbar({});
 
-    $('#btn-summary').on('click', function (e) {
+    $('#summary-nav-link').on('click', function (e) {
       let summary_grid = $('#summary-grid');
       e.preventDefault();
-      $('#main-grid').replaceWith($(summary_grid));
+//      $('#main-grid').replaceWith($(summary_grid));
+      $('#main-grid').hide();
+      $(summary_grid).show();
       $(summary_grid).css({"display": "flex"});
-    })
+      $('#unit-nav-link').removeClass('is-active');
+      $('#summary-nav-link').addClass('is-active');
+    });
+
+    $('#unit-nav-link').on('click', function (e) {
+      let summary_grid = $('#summary-grid');
+      e.preventDefault();
+//      $(summary_grid).replaceWith($('#main-grid'));
+      $('#main-grid').show();
+      $(summary_grid).hide();
+      $('#main-grid').css({"display": "flex"});
+      $('#unit-nav-link').addClass('is-active');
+      $('#summary-nav-link').removeClass('is-active');
+    });
   });
   //]]>
+</script>
+<script th:inline="javascript" type="text/javascript">
+  /*<![CDATA[*/
+  $(document).ready(function () {
+    let flag = /*[[${unit!=null}]]*/ 'value';
+    let create_unit = $("#create-unit");
+    let func = (function (event) {
+      if (flag) {
+        event.preventDefault();
+        $('#disable-tooltip').css({"display": "block"});
+      }
+    });
+    $(create_unit).on("click", func);
+    $(create_unit).hover(func);
+  });
+  /*]]>*/
 </script>
 </body>
 </html>

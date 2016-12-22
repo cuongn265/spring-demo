@@ -13,7 +13,7 @@
           <div class="col-md-10 col-sm-12 col-md-offset-1">
             <div class="panel panel-default">
               <div class="panel-heading heading">
-                <h4>EDIT UNIT</h4>
+                <h4>Edit Unit</h4>
               </div>
               <div class="panel-body">
                 <div>
@@ -25,7 +25,7 @@
                         method="post">
                     <input type="hidden" th:field="*{unitId}"/>
                     <input type="hidden" th:field="*{course}" th:value="${unit.getCourse().getCourseId()}"/>
-                    <!--<input type="hidden" th:field="*{user}" th:value="${course.getUser().getUserId()}"/>-->
+                    <input type="hidden" th:field="*{unitWeek}"/>
                     <div class="form-group">
                       <label class="col-sm-2 control-label">Unit Name:</label>
                       <div class="col-sm-10">
@@ -33,15 +33,6 @@
                         <span th:if="${#fields.hasErrors('unitName')}" th:errors="*{unitName}">Name Error</span>
                       </div>
                     </div>
-
-                    <div class="form-group">
-                      <label class="col-sm-2 control-label">Unit Position (Week):</label>
-                      <div class="col-sm-10">
-                        <input type="number" class="form-control" th:field="*{unitWeek}"/>
-                        <span th:if="${#fields.hasErrors('unitWeek')}" th:errors="*{unitWeek}">Position Error</span>
-                      </div>
-                    </div>
-
                     <div class="form-group">
                       <label class="col-sm-2 control-label">Unit Summary:</label>
                       <div class="col-sm-10">
