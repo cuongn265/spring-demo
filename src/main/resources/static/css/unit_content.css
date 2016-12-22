@@ -3,6 +3,9 @@
   height: 100%; }
   .unit-content .demo-card-wide .mdl-card__supporting-text .title-text {
     font-weight: bold; }
+  .unit-content .demo-card-wide .mdl-card__menu .mdl-menu a {
+    color: black;
+    text-decoration: none; }
 .unit-content .demo-card-wide > .mdl-card__title {
   color: #fff;
   background: #009688; }

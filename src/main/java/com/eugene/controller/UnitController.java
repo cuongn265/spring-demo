@@ -20,7 +20,7 @@ import javax.validation.groups.Default;
  * Created by Eugene on 12/5/2016.
  */
 @Controller
-@RequestMapping("/courses/{courseId}")
+@RequestMapping("/courses/{courseId}/weeks/{weekId}")
 public class UnitController {
 
   private final UnitRepository unitRepository;
@@ -77,6 +77,6 @@ public class UnitController {
     }
     unitRepository.save(unit);
     redirectAttributes.addFlashAttribute("message", "Course was successfully updated!!");
-    return "redirect:/courses/{courseId}";
+    return "redirect:/courses/{courseId}/weeks/{weekId}";
   }
 }

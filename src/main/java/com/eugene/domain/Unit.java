@@ -24,8 +24,8 @@ public class Unit {
   private String unitSummary;
   @NotNull
   @Min(1)
-  @Column(name = "position", nullable = false)
-  private Integer unitPosition;
+  @Column(name = "week", nullable = false)
+  private Integer unitWeek;
 
   @ManyToOne()
   @JoinColumn(name = "courseId", referencedColumnName = "course_id")
@@ -38,10 +38,10 @@ public class Unit {
   public Unit() {
   }
 
-  public Unit(String unitName, String unitSummary, Integer unitPosition, Course course) {
+  public Unit(String unitName, String unitSummary, Integer unitWeek, Course course) {
     this.unitName = unitName;
     this.unitSummary = unitSummary;
-    this.unitPosition = unitPosition;
+    this.unitWeek = unitWeek;
     this.course = course;
   }
 
@@ -69,12 +69,12 @@ public class Unit {
     this.unitSummary = unitSummary;
   }
 
-  public Integer getUnitPosition() {
-    return unitPosition;
+  public Integer getUnitWeek() {
+    return unitWeek;
   }
 
-  public void setUnitPosition(Integer unitPosition) {
-    this.unitPosition = unitPosition;
+  public void setUnitWeek(Integer unitWeek) {
+    this.unitWeek = unitWeek;
   }
 
   public Course getCourse() {

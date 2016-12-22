@@ -23,9 +23,15 @@
           <nav class="mdl-navigation mdl-cell">
             <a class="mdl-navigation__link flex-link mdl-cell" href="#"></a>
             <a class="mdl-navigation__link flex-link mdl-cell mdl-typography--text-uppercase is-active"
-               href="#">Unit</a>
-            <a class="mdl-navigation__link flex-link mdl-cell mdl-typography--text-uppercase" href="#">Assignment</a>
-            <a class="mdl-navigation__link flex-link mdl-cell mdl-typography--text-uppercase" href="#">Summary</a>
+               th:href="@{/courses/{courseId}/weeks/1(courseId=${course.courseId})}">
+              Units
+            </a>
+            <a class="mdl-navigation__link flex-link mdl-cell mdl-typography--text-uppercase" href="#">Assignments</a>
+            <a class="mdl-navigation__link flex-link mdl-cell mdl-typography--text-uppercase"
+               th:href="@{/courses/{courseId}/summary(courseId=${course.courseId})}"
+               id="btn-summary">
+              Summary
+            </a>
             <a class="mdl-navigation__link flex-link mdl-cell" href="#"></a>
           </nav>
           <div sec:authorize="isAuthenticated()"
@@ -63,11 +69,12 @@
       </div>
       <div class="content mdl-layout__content" id="body-content">
         <a name="top"></a>
-        <div class="mdl-grid">
-          <div class="mdl-cell mdl-cell--3-col mdl-cell--3-col-tablet">
+        <div class="mdl-grid" id="main-grid">
+          <div class="mdl-cell mdl-cell--3-col mdl-cell--3-col-tablet mdl-shadow--2dp">
             <table class="mdl-data-table mdl-js-data-table">
               <tbody>
-              <tr th:each="i : ${#numbers.sequence(1, course.courseWeekCount, 1)}" th:classappend="${week==i} ? 'is-active' : 'non-active'">
+              <tr th:each="i : ${#numbers.sequence(1, course.courseWeekCount, 1)}"
+                  th:classappend="${week==i} ? 'is-active' : 'non-active'">
                 <td class="mdl-data-table__cell--non-numeric">
                   <a class="mdl-navigation__link" th:href="@{${i}}" th:text="'Week ' + ${i}"></a>
                 </td>
@@ -92,8 +99,11 @@
                   <i class="material-icons">more_vert</i>
                 </button>
                 <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="unit-menu">
-                  <li class="mdl-menu__item"><a th:href="@{__${#httpServletRequest.requestURI}__/units/{unitId}/edit(unitId=${unit.unitId})}">Edit</a></li>
-                  <li class="mdl-menu__item"><a th:href="@{delete/{unitId}(unitId=${unit.unitId})}" th:id="'delete-unit-' + ${unit.unitId}">Delete</a></li>
+                  <li class="mdl-menu__item"><a
+                    th:href="@{__${#httpServletRequest.requestURI}__/units/{unitId}/edit(unitId=${unit.unitId})}">Edit</a>
+                  </li>
+                  <li class="mdl-menu__item"><a th:href="@{delete/{unitId}(unitId=${unit.unitId})}"
+                                                th:id="'delete-unit-' + ${unit.unitId}">Delete</a></li>
                 </ul>
               </div>
             </div>
@@ -103,6 +113,36 @@
               </div>
               <div class="mdl-card__supporting-text">
                 <p>There are no content here. Create one and let's rock!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mdl-grid" id="summary-grid" style="display: none">
+          <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet unit-content">
+            <!--/*@thymesVar id="unit" type="com.eugene.domain.Unit"*/-->
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+              <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text">Teacher</h2>
+              </div>
+              <div class="mdl-card__supporting-text">
+                <p><b>Name: </b><span th:text="${course.user.fullName}"></span></p>
+                <p><b>Email: </b><span th:text="${course.user.email}"></span></p>
+                <p><b>Phone number: </b><span th:text="${course.user.phoneNumber}"></span></p>
+              </div>
+            </div>
+          </div>
+          <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet unit-content">
+            <!--/*@thymesVar id="unit" type="com.eugene.domain.Unit"*/-->
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+              <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text" th:text="${course.courseName}">Course name</h2>
+              </div>
+              <div class="mdl-card__supporting-text">
+                <p><b>Weeks: </b><span th:text="${course.courseWeekCount}"></span></p>
+                <p><b>Summary: </b></p>
+                <p th:text="${course.courseSummary}"></p>
+                <p><b>Outline: </b></p>
+                <p th:utext="${course.courseOutline}"></p>
               </div>
             </div>
           </div>
@@ -143,7 +183,7 @@
       event.preventDefault();
       let prefix = window.location.pathname;
       let suffix = $(this).attr("href");
-      let url = prefix + "/" +suffix;
+      let url = prefix + "/" + suffix;
       console.log(url);
       swal({
         title: "Are you sure?",
@@ -204,9 +244,14 @@
       }
     });
 
-    $('#body-content').perfectScrollbar({
+    $('#body-content').perfectScrollbar({});
 
-    });
+    $('#btn-summary').on('click', function (e) {
+      let summary_grid = $('#summary-grid');
+      e.preventDefault();
+      $('#main-grid').replaceWith($(summary_grid));
+      $(summary_grid).css({"display": "flex"});
+    })
   });
   //]]>
 </script>

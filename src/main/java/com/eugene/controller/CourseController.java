@@ -7,6 +7,7 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.*;
 import com.eugene.domain.Course;
 import com.eugene.domain.Unit;
+import com.eugene.domain.User;
 import com.eugene.inter.CreateCourse;
 import com.eugene.repository.CourseRepository;
 import com.eugene.repository.UnitRepository;
@@ -94,11 +95,10 @@ public class CourseController {
   }
 
   // GET show page
-  @RequestMapping("/courses/{courseId}/units/{weekId}")
+  @RequestMapping("/courses/{courseId}/weeks/{weekId}")
   public String showCourse(@PathVariable Integer courseId, @PathVariable Integer weekId, Model model) {
     Course course = courseRepository.findOne(courseId.longValue());
-//    List<Unit> units = unitRepository.findAllByCourseOrderByUnitPositionAsc(course);
-    Unit unit = unitRepository.findFirstByUnitPosition(weekId);
+    Unit unit = unitRepository.findFirstByUnitWeekAndCourse(weekId, course);
     model.addAttribute("course", course);
     model.addAttribute("unit", unit);
     model.addAttribute("week", weekId);
@@ -156,7 +156,7 @@ public class CourseController {
 
     courseRepository.save(course);
 
-    return "redirect:/courses/" + course.getCourseId() + "/units/1";
+    return "redirect:/courses/" + course.getCourseId() + "/weeks/1";
   }
 
   private void uploadFile(AmazonS3 s3client, String bucketName, MultipartFile file, String name, Course course) {
@@ -172,5 +172,14 @@ public class CourseController {
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  @RequestMapping("/courses/{courseId}/summary")
+  public String showCourse(@PathVariable Integer courseId, Model model) {
+    Course course = courseRepository.findOne(courseId.longValue());
+    User teacher = userRepository.findOne(course.getUser().getUserId());
+    model.addAttribute("course", course);
+    model.addAttribute("teacher", teacher);
+    return "/courses/summary";
   }
 }
