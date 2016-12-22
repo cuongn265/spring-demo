@@ -129,23 +129,66 @@
         <!-- children goes here -->
       </div>
     </div>
-    <a
-      class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast mdl-button--fab"
-      id="create-unit"
-      th:href="@{__${#httpServletRequest.requestURI}__/units/new}"
-      target="_blank"
-      data-upgraded=",MaterialButton,MaterialRipple"
-    >
-      <i class="material-icons">add</i>
-      <span class="mdl-button__ripple-container">
+    <div id="menu-container">
+      <a
+        class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast mdl-button--fab"
+        id="create-unit"
+        href="#"
+        target="_blank"
+        data-upgraded=",MaterialButton,MaterialRipple"
+      >
+        <i class="material-icons">add</i>
+        <span class="mdl-button__ripple-container">
         <span class="mdl-ripple"></span>
       </span>
-    </a>
+      </a>
+    </div>
+    <div id="action-container"
+         >
+      <a
+        class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast mdl-button--fab"
+        id="create-unit-1"
+        th:href="@{__${#httpServletRequest.requestURI}__/units/new}"
+        target="_blank"
+        data-upgraded=",MaterialButton,MaterialRipple"
+      >
+        <i class="material-icons">book</i>
+        <span class="mdl-button__ripple-container">
+        <span class="mdl-ripple"></span>
+      </span>
+      </a>
+      <a
+        class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast mdl-button--fab"
+        id="create-unit-2"
+        th:href="@{__${#httpServletRequest.requestURI}__/units/new}"
+        target="_blank"
+        data-upgraded=",MaterialButton,MaterialRipple"
+      >
+        <i class="material-icons">assignment
+        </i>
+        <span class="mdl-button__ripple-container">
+        <span class="mdl-ripple"></span>
+      </span>
+      </a>
+    </div>
+
     <div class="mdl-tooltip mdl-tooltip--large mdl-tooltip--left"
-         for="create-unit"
+         for="create-unit-1"
          id="disable-tooltip"
          style="display: none;">
       This course already has unit
+    </div>
+    <div class="mdl-tooltip mdl-tooltip--large mdl-tooltip--left"
+         for="create-unit-1"
+         id="unit-tooltip"
+    >
+      Create unit
+    </div>
+    <div class="mdl-tooltip mdl-tooltip--large mdl-tooltip--left"
+         for="create-unit-2"
+         id="assignment-tooltip"
+    >
+      Create assignment
     </div>
   </div>
 </div>
@@ -166,6 +209,11 @@
     src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.15/js/perfect-scrollbar.jquery.min.js"></script>
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.15/js/perfect-scrollbar.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+//      $('#action-container').hide();
+    })
+  </script>
 </footer>
 </body>
 </html>

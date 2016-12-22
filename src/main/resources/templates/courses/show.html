@@ -280,14 +280,27 @@
   $(document).ready(function () {
     let flag = /*[[${unit!=null}]]*/ 'value';
     let create_unit = $("#create-unit");
-    let func = (function (event) {
+    let create_unit_1 = $("#create-unit-1");
+    let clicked = false;
+    let func1 = (function (event) {
+      event.preventDefault();
+      clicked = !clicked;
+      if (clicked) {
+        /*TODO make animation for this change*/
+        $('#action-container').addClass('is-active')
+      } else {
+        $('#action-container').removeClass('is-active')
+      }
+    });
+    let func2 = (function (event) {
       if (flag) {
         event.preventDefault();
         $('#disable-tooltip').css({"display": "block"});
+        $('#unit-tooltip').css({"display": "none"});
       }
     });
-    $(create_unit).on("click", func);
-    $(create_unit).hover(func);
+    $(create_unit).on("click", func1);
+    $(create_unit_1).hover(func2).click(func2);
   });
   /*]]>*/
 </script>

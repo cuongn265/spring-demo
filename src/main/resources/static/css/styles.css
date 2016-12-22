@@ -17,7 +17,7 @@ main .course-container .row.courses-body {
     width: 100%;
     box-shadow: 0 20px 20px rgba(0, 0, 0, 0.08); }
     main .course-container .row.courses-body .box img {
-      max-height: 150px;
+      max-height: 180px;
       min-width: 100%; }
   main .course-container .row.courses-body [class*="col-"] .caption {
     margin-bottom: 30px; }

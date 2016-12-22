@@ -1,12 +1,24 @@
 @import "variable"
-#create-unit
+#action-container
+  visibility: hidden
+  opacity: 0
+#action-container.is-active
+  visibility: visible
+  opacity: 1
+#create-unit, #create-unit-1, #create-unit-2
   position: fixed
   display: block !important
-  right: 0
+  right: 20px
   bottom: 0
   margin-right: 40px
   margin-bottom: 40px
   z-index: 900
+  &:focus
+    outline: transparent
+#create-unit-1
+  margin-bottom: 120px
+#create-unit-2
+  margin-bottom: 200px
 .mdl-layout__header--waterfall.is-casting-shadow
   box-shadow: none !important
 .header
@@ -20,8 +32,8 @@
 .mdl-menu__container
   margin-right: 20px
 header
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://freewallpaperspictures.com/wp-content/uploads/2016/02/Wallpapers-Full-HD-random-35881387-1920-1080.jpg)
   height: 30vh
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://freewallpaperspictures.com/wp-content/uploads/2016/02/Wallpapers-Full-HD-random-35881387-1920-1080.jpg) center center
 
   background-size: cover
   display: flex
