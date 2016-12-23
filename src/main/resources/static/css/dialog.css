@@ -1,0 +1,10 @@
+dialog {
+  width: 60% !important;
+  padding: 0; }
+  dialog .mdl-dialog__title {
+    background-color: #009688;
+    color: white;
+    font-size: 16px;
+    padding: 16px 16px; }
+
+/*# sourceMappingURL=dialog.css.map */

@@ -5,10 +5,12 @@ import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.*;
+import com.eugene.domain.Assignment;
 import com.eugene.domain.Course;
 import com.eugene.domain.Unit;
 import com.eugene.domain.User;
 import com.eugene.inter.CreateCourse;
+import com.eugene.repository.AssignmentRepository;
 import com.eugene.repository.CourseRepository;
 import com.eugene.repository.UnitRepository;
 import com.eugene.repository.UserRepository;
@@ -24,7 +26,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.Valid;
 import javax.validation.groups.Default;
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,12 +39,14 @@ public class CourseController {
   private final CourseRepository courseRepository;
   private final UserRepository userRepository;
   private final UnitRepository unitRepository;
+  private final AssignmentRepository assignmentRepository;
 
   @Autowired
-  public CourseController(CourseRepository courseRepository, UserRepository userRepository, UnitRepository unitRepository) {
+  public CourseController(CourseRepository courseRepository, UserRepository userRepository, UnitRepository unitRepository, AssignmentRepository assignmentRepository) {
     this.courseRepository = courseRepository;
     this.userRepository = userRepository;
     this.unitRepository = unitRepository;
+    this.assignmentRepository = assignmentRepository;
   }
 
   //GET new page
@@ -99,9 +102,11 @@ public class CourseController {
   public String showCourse(@PathVariable Integer courseId, @PathVariable Integer weekId, Model model) {
     Course course = courseRepository.findOne(courseId.longValue());
     Unit unit = unitRepository.findFirstByUnitWeekAndCourse(weekId, course);
+    List<Assignment> assignments = assignmentRepository.findAllByUnit(unit);
     model.addAttribute("course", course);
     model.addAttribute("unit", unit);
     model.addAttribute("week", weekId);
+    model.addAttribute("assignments", assignments);
     return "courses/show";
   }
 

@@ -19,10 +19,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   private final UserDetailsService userDetailsService;
+  private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
   @Autowired
-  public WebSecurityConfig(UserDetailsService userDetailsService) {
+  public WebSecurityConfig(UserDetailsService userDetailsService, CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler) {
     this.userDetailsService = userDetailsService;
+    this.customAuthenticationSuccessHandler = customAuthenticationSuccessHandler;
   }
 
   @Autowired
@@ -33,13 +35,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests()
-      .antMatchers("/login", "/css/**", "/built/**", "/images/**", "/layout").permitAll()
+      .antMatchers("/login", "/css/**", "/js/**", "/built/**", "/images/**", "/layout").permitAll()
+      .antMatchers("/admin/**").access("hasRole('ADMIN')")
       .anyRequest().authenticated()
       .and()
       .formLogin()
       .loginPage("/login")
       .usernameParameter("username").passwordParameter("password")
-      .defaultSuccessUrl("/", true)
+      .successHandler(customAuthenticationSuccessHandler)
       .and()
       .httpBasic()
       .and()

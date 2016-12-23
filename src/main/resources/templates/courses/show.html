@@ -5,9 +5,43 @@
   <link rel="stylesheet" th:href="@{/css/course.css}"/>
   <link rel="stylesheet" th:href="@{/css/week_table.css}"/>
   <link rel="stylesheet" th:href="@{/css/unit_content.css}"/>
+  <link rel="stylesheet" th:href="@{/css/dialog.css}"/>
   <title>Course Detail</title>
 </head>
 <body>
+<div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar">
+  <div class="mdl-snackbar__text"></div>
+  <button type="button" class="mdl-snackbar__action"></button>
+</div>
+<dialog class="mdl-dialog">
+  <div class="mdl-dialog__title">
+    <span class="pull-left">
+      <i class="material-icons">assignment</i>
+    </span>
+    &nbsp;&nbsp; Assignment
+    <span class="pull-right">
+      <i class="material-icons close" role="button">clear</i>
+    </span>
+  </div>
+  <div class="mdl-dialog__content">
+    <form action="#">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+        <label class="mdl-button mdl-js-button mdl-button--icon" for="sample6">
+          <i class="material-icons">search</i>
+        </label>
+        <div class="mdl-textfield__expandable-holder">
+          <input class="mdl-textfield__input" type="text" id="sample6"/>
+          <label class="mdl-textfield__label" for="sample-expandable">Expandable Input</label>
+        </div>
+      </div>
+    </form>
+
+  </div>
+  <div class="mdl-dialog__actions">
+    <button type="button" class="mdl-button">Yes</button>
+    <button type="button" class="mdl-button close">No</button>
+  </div>
+</dialog>
 <div layout:replace="layout :: site-content">
   <div layout:fragment="content" th:remove="tag">
     <!--/*@thymesVar id="course" type="com.eugene.domain.Course"*/-->
@@ -27,7 +61,11 @@
                th:href="@{/courses/{courseId}/weeks/1(courseId=${course.courseId})}">
               Units
             </a>
-            <a class="mdl-navigation__link flex-link mdl-cell mdl-typography--text-uppercase" href="#">Assignments</a>
+            <a class="mdl-navigation__link flex-link mdl-cell mdl-typography--text-uppercase"
+               href="#"
+               id="assignment-nav-link">
+              Assignments
+            </a>
             <a class="mdl-navigation__link flex-link mdl-cell mdl-typography--text-uppercase"
                th:href="@{/courses/{courseId}/summary(courseId=${course.courseId})}"
                id="summary-nav-link">
@@ -71,7 +109,7 @@
       <div class="content mdl-layout__content" id="body-content">
         <a name="top"></a>
         <div class="mdl-grid" id="main-grid">
-          <div class="mdl-cell mdl-cell--3-col mdl-cell--3-col-tablet">
+          <div class="mdl-cell mdl-cell--3-col mdl-cell--2-col-tablet">
             <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
               <tbody>
               <tr th:each="i : ${#numbers.sequence(1, course.courseWeekCount, 1)}"
@@ -83,7 +121,7 @@
               </tbody>
             </table>
           </div>
-          <div class="mdl-cell mdl-cell mdl-cell--9-col mdl-cell--9-col-tablet unit-content">
+          <div class="mdl-cell mdl-cell mdl-cell--9-col mdl-cell--6-col-tablet unit-content">
             <!--/*@thymesVar id="unit" type="com.eugene.domain.Unit"*/-->
             <div class="demo-card-wide mdl-card mdl-shadow--2dp" th:if="${unit!=null}">
               <div class="mdl-card__title">
@@ -107,9 +145,6 @@
                                                 th:id="'delete-unit-' + ${unit.unitId}">Delete</a></li>
                 </ul>
               </div>
-              <div th:with="flag=${unit!=null}">
-
-              </div>
             </div>
             <div class="demo-card-wide mdl-card mdl-shadow--2dp" th:if="${unit==null}">
               <div class="mdl-card__title">
@@ -122,7 +157,7 @@
           </div>
         </div>
         <div class="mdl-grid" id="summary-grid" style="display: none">
-          <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet unit-content">
+          <div class="mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet unit-content">
             <!--/*@thymesVar id="unit" type="com.eugene.domain.Unit"*/-->
             <div class="demo-card-wide mdl-card mdl-shadow--2dp">
               <div class="mdl-card__title">
@@ -135,7 +170,7 @@
               </div>
             </div>
           </div>
-          <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet unit-content">
+          <div class="mdl-cell mdl-cell--8-col mdl-cell--5-col-tablet unit-content">
             <!--/*@thymesVar id="unit" type="com.eugene.domain.Unit"*/-->
             <div class="demo-card-wide mdl-card mdl-shadow--2dp">
               <div class="mdl-card__title">
@@ -143,17 +178,79 @@
               </div>
               <div class="mdl-card__supporting-text">
                 <p><b>Weeks: </b><span th:text="${course.courseWeekCount}"></span></p>
-                <p><b>Summary: </b></p>
-                <p th:text="${course.courseSummary}"></p>
+                <p><b>Summary: </b><span th:text="${course.courseSummary}"></span></p>
                 <p><b>Outline: </b></p>
                 <p th:utext="${course.courseOutline}"></p>
               </div>
             </div>
           </div>
         </div>
+        <div class="mdl-grid" id="assignment-grid" style="display: none">
+          <div class="mdl-cell mdl-cell--3-col mdl-cell--2-col-tablet">
+            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+              <tbody>
+              <tr th:each="i : ${#numbers.sequence(1, course.courseWeekCount, 1)}"
+                  th:classappend="${week == i} ? 'is-active' : 'non-active'">
+                <td class="mdl-data-table__cell--non-numeric">
+                  <a class="mdl-navigation__link" th:href="@{${i}}" th:text="'Week ' + ${i}"></a>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <!--TODO: show-->
+          <div class="mdl-cell mdl-cell mdl-cell--9-col mdl-cell--6-col-tablet unit-content">
+            <!--/*@thymesVar id="unit" type="com.eugene.domain.Unit"*/-->
+            <!--/*@thymesVar id="assignments" type="java.util.List<com.eugene.domain.Assignment>"*/-->
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp assignment-card"
+                 th:if="${assignments.size() > 0}"
+                 th:each="assignment: ${assignments}">
+              <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text" th:text="${assignment.assignmentName}">Welcome</h2>
+              </div>
+              <div class="mdl-card__supporting-text">
+                <div class="row">
+                  <div class="col-md-2 col-sm-2 col-xs-2">
+                    <p class="title-text">From: </p>
+                    <p class="title-text">To: </p>
+                    <p class="title-text">Detail: </p>
+                  </div>
+                  <div class="col-md-10 col-sm-10 col-xs-10">
+                    <p th:text="${assignment.assignmentStartDate}"></p>
+                    <p th:text="${assignment.assignmentEndDate}"></p>
+                    <p th:text="${assignment.assignmentDetail}"></p>
+                  </div>
+                </div>
+              </div>
+              <div class="mdl-card__menu">
+                <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="assignment-menu">
+                  <i class="material-icons">more_vert</i>
+                </button>
+                <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="assignment-menu">
+                  <li class="mdl-menu__item"><a
+                    th:href="@{__${#httpServletRequest.requestURI}__/units/{unitId}/edit(unitId=${unit.unitId})}">Edit</a>
+                  </li>
+                  <li class="mdl-menu__item">
+                    <a th:href="@{delete/{unitId}(unitId=${unit.unitId})}"
+                       th:id="'delete-unit-' + ${unit.unitId}">
+                      Delete
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp" th:if="${assignments.size() == 0}">
+              <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text">Opps!!!</h2>
+              </div>
+              <div class="mdl-card__supporting-text">
+                <p>There are no content here. Create one and let's rock!</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
   </div>
 </div>
 <footer layout:replace="layout :: site-footer" th:remove="tag">
@@ -161,6 +258,7 @@
 <script type="text/javascript">
   //<![CDATA[
   $(document).ready(function () {
+    //
     let top = $("#my-layout").offset().top; //gets offset of header
     window.onresize = function (event) {
       console.log("resize cmnr");
@@ -252,14 +350,17 @@
     $('#body-content').perfectScrollbar({});
     let summary_grid = $('#summary-grid');
     let main_grid = $('#main-grid');
+    let assignment_grid = $('#assignment-grid');
     $('#summary-nav-link').on('click', function (e) {
       e.preventDefault();
 //      $('#main-grid').replaceWith($(summary_grid));
       $(main_grid).hide();
       $(summary_grid).show();
+      $(assignment_grid).hide();
       $(summary_grid).css({"display": "flex"});
       $('#unit-nav-link').removeClass('is-active');
       $('#summary-nav-link').addClass('is-active');
+      $('#assignment-nav-link').removeClass('is-active');
     });
 
     $('#unit-nav-link').on('click', function (e) {
@@ -268,9 +369,24 @@
 //      $(summary_grid).replaceWith($('#main-grid'));
       $(main_grid).show();
       $(summary_grid).hide();
+      $(assignment_grid).hide();
       $(main_grid).css({"display": "flex"});
       $('#unit-nav-link').addClass('is-active');
       $('#summary-nav-link').removeClass('is-active');
+      $('#assignment-nav-link').removeClass('is-active');
+    });
+
+    $('#assignment-nav-link').on('click', function (e) {
+      let summary_grid = $('#summary-grid');
+      e.preventDefault();
+//      $(summary_grid).replaceWith($('#main-grid'));
+      $(main_grid).hide();
+      $(summary_grid).hide();
+      $(assignment_grid).show();
+//      $(main_grid).css({"display": "flex"});
+      $('#unit-nav-link').removeClass('is-active');
+      $('#summary-nav-link').removeClass('is-active');
+      $('#assignment-nav-link').addClass('is-active');
     });
   });
   //]]>
@@ -281,6 +397,7 @@
     let flag = /*[[${unit!=null}]]*/ 'value';
     let create_unit = $("#create-unit");
     let create_unit_1 = $("#create-unit-1");
+    let create_unit_2 = $("#create-unit-2");
     let clicked = false;
     let func1 = (function (event) {
       event.preventDefault();
@@ -301,6 +418,17 @@
     });
     $(create_unit).on("click", func1);
     $(create_unit_1).hover(func2).click(func2);
+
+    let messageNotice = /*[[${message!=null}]]*/ 'value';
+    let messageInfo = /*[[${message}]]*/ 'value';
+    let notification = document.querySelector('.mdl-js-snackbar');
+    if (messageNotice) {
+      notification.MaterialSnackbar.showSnackbar(
+        {
+          message: messageInfo
+        }
+      );
+    }
   });
   /*]]>*/
 </script>

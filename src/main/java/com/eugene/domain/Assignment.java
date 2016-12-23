@@ -1,8 +1,11 @@
 package com.eugene.domain;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -15,25 +18,32 @@ public class Assignment {
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "assignment_id")
   private Long assignmentId;
-  @NotEmpty
+  @NotEmpty(message = "Assignment name must not be empty")
   @Column(name =  "name", nullable = false, unique = true)
   private String assignmentName;
-  @NotEmpty
+  @Column(name =  "detail")
+  private String assignmentDetail;
+  @Future(message = "Start date must be in the future")
+  @NotNull(message = "Start date must not be null")
+  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
   @Column(name = "start_date", nullable = false)
   private Date assignmentStartDate;
-  @NotEmpty
+  @Future(message = "End date must be in the future")
+  @NotNull(message = "End date must not be null")
+  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
   @Column(name = "end_date", nullable = false)
   private Date assignmentEndDate;
 
-  @ManyToOne(optional = false)
-  @JoinColumn(name = "unitId", referencedColumnName = "unit_id", insertable = false, updatable = false)
+  @ManyToOne()
+  @JoinColumn(name = "unitId", referencedColumnName = "unit_id")
   private Unit unit;
 
   public Assignment() {
   }
 
-  public Assignment(String assignmentName, Date assignmentStartDate, Date assignmentEndDate, Unit unit) {
+  public Assignment(String assignmentName, String assignmentDetail, Date assignmentStartDate, Date assignmentEndDate, Unit unit) {
     this.assignmentName = assignmentName;
+    this.assignmentDetail = assignmentDetail;
     this.assignmentStartDate = assignmentStartDate;
     this.assignmentEndDate = assignmentEndDate;
     this.unit = unit;
@@ -69,6 +79,14 @@ public class Assignment {
 
   public void setAssignmentEndDate(Date assignmentEndDate) {
     this.assignmentEndDate = assignmentEndDate;
+  }
+
+  public String getAssignmentDetail() {
+    return assignmentDetail;
+  }
+
+  public void setAssignmentDetail(String assignmentDetail) {
+    this.assignmentDetail = assignmentDetail;
   }
 
   public Unit getUnit() {

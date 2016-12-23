@@ -56,4 +56,9 @@ public class HomeController {
   public String error() {
     return "application/403";
   }
+
+  @RequestMapping("/dialog")
+  public String showDialog() {
+    return "dialog";
+  }
 }
