@@ -21,6 +21,7 @@
                    src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_light_clr_74x24px.svg"/>
             </a>
           </span>
+
     </div>
     <!-- Tabs -->
     <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
@@ -32,21 +33,21 @@
     <span class="mdl-layout-title">Admin</span>
     <nav class="mdl-navigation">
       <div>
-        <a class="mdl-navigation__link admin-link" th:href="@{/admin}">
-          <i class="material-icons">home</i>
-          <span class="nav-text">Home</span>
-        </a>
-      </div>
-      <div>
-        <a class="mdl-navigation__link" href="#">
+        <a class="mdl-navigation__link" th:href="@{/profile}">
           <i class="material-icons">people</i>
-          <span class="nav-text">User</span>
+          <span class="nav-text">Change profile</span>
         </a>
       </div>
       <div>
-        <a class="mdl-navigation__link" href="#">
+        <a class="mdl-navigation__link" th:href="@{/password}">
           <i class="material-icons">vpn_key</i>
-          <span class="nav-text">Password</span>
+          <span class="nav-text">Change password</span>
+        </a>
+      </div>
+      <div>
+        <a class="mdl-navigation__link admin-link" th:href="@{/logout}">
+          <i class="material-icons">exit_to_app</i>
+          <span class="nav-text">Sign out</span>
         </a>
       </div>
     </nav>

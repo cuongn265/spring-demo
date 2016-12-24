@@ -1,16 +1,31 @@
-<!DOCTYPE html >
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
-  <title>Access Denied Page - ProgrammingFree</title>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head layout:replace="layout :: site-head">
+  <link rel="stylesheet" th:href="@{/css/form.css}"/>
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet"/>
+  <title>Access Denied</title>
 </head>
-<body>  
- <div class="alert-danger">
-    <h3>You do not have permission to access this page!</h3>
-   </div>
- <form th:action="@{/logout}" method="post">
-    <input type="submit" class="button red big" value="Sign in as different user" />
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-   </form>  
+<body>
+<div layout:replace="layout :: site-content">
+  <div layout:fragment="content" th:remove="tag">
+    <div class="mdl-grid">
+      <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h2 class="mdl-card__title-text">You do not have permission to access this page</h2>
+        </div>
+        <div class="mdl-card__actions">
+          <form th:action="@{/logout}" method="post">
+            <input type="submit" class="button mdl-button--raised mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" value="Sign in as different user"/>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> 
+          </form>
+        </div>
+
+      </div>
+       
+    </div>
+
+    <footer layout:replace="layout :: site-footer"></footer>
+  </div>
+</div>
 </body>
 </html>
