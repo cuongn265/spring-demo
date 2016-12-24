@@ -1,0 +1,28 @@
+@import "variable"
+.mdl-layout__header
+  .mdl-layout__tab-bar
+    .mdl-layout__tab
+      &:hover, &:visited, &:focus, &:active
+        text-decoration: none
+      &:hover
+        color: $material-color
+.mdl-layout__drawer
+  .mdl-navigation__link.mdl-navigation__link
+    .nav-text
+      vertical-align: middle
+      margin-left: 20px
+    .material-icons
+      opacity: 0.5
+    font-size: 14px
+    color: $text-color
+    &:hover
+      text-decoration: none
+      .material-icons
+        opacity: 1
+
+.mdl-layout__content
+  form
+    text-align: left
+    .action-button
+      //margin-left: -18px
+      text-transform: capitalize

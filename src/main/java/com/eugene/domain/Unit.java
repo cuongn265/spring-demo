@@ -6,6 +6,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Eugene on 11/28/2016.
@@ -31,6 +33,9 @@ public class Unit {
   @JoinColumn(name = "courseId", referencedColumnName = "course_id")
   private Course course;
 
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "unit", cascade = CascadeType.ALL)
+  private Set<Assignment> assignments = new HashSet<>();
+
   @Column(name = "detail", columnDefinition = "LONGTEXT")
   private String unitDetail;
 
@@ -38,11 +43,12 @@ public class Unit {
   public Unit() {
   }
 
-  public Unit(String unitName, String unitSummary, Integer unitWeek, Course course) {
+  public Unit(String unitName, String unitSummary, Integer unitWeek, Course course, Set<Assignment> assignments) {
     this.unitName = unitName;
     this.unitSummary = unitSummary;
     this.unitWeek = unitWeek;
     this.course = course;
+    this.assignments = assignments;
   }
 
   public Long getUnitId() {
@@ -91,5 +97,13 @@ public class Unit {
 
   public void setUnitDetail(String unitDetail) {
     this.unitDetail = unitDetail;
+  }
+
+  public Set<Assignment> getAssignments() {
+    return assignments;
+  }
+
+  public void setAssignments(Set<Assignment> assignments) {
+    this.assignments = assignments;
   }
 }

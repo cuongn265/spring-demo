@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head layout:replace="layout :: site-head">
+  <meta charset="UTF-8"/>
+  <title>Admin</title>
+  <link rel="stylesheet" th:href="@{/css/admin.css}"/>
+</head>
+<body>
+<div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar">
+  <div class="mdl-snackbar__text"></div>
+  <button type="button" class="mdl-snackbar__action"></button>
+</div>
+<div class="admin-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="title mdl-layout-title">
+            <a th:href="@{/}">
+              <img class="logo-image"
+                   src="https://www.gstatic.com/images/branding/googlelogo/svg/googlelogo_light_clr_74x24px.svg"/>
+            </a>
+          </span>
+    </div>
+    <!-- Tabs -->
+    <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+      <a href="#scroll-tab-1" class="mdl-layout__tab is-active">Active</a>
+      <a href="#scroll-tab-2" class="mdl-layout__tab">Inactive</a>
+    </div>
+  </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Admin</span>
+    <nav class="mdl-navigation">
+      <div>
+        <a class="mdl-navigation__link admin-link" th:href="@{/admin}">
+          <i class="material-icons">home</i>
+          <span class="nav-text">Home</span>
+        </a>
+      </div>
+      <div>
+        <a class="mdl-navigation__link" href="#">
+          <i class="material-icons">people</i>
+          <span class="nav-text">User</span>
+        </a>
+      </div>
+      <div>
+        <a class="mdl-navigation__link" href="#">
+          <i class="material-icons">vpn_key</i>
+          <span class="nav-text">Password</span>
+        </a>
+      </div>
+    </nav>
+  </div>
+  <main class="mdl-layout__content">
+    <section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
+      <div class="page-content">
+        <div class="mdl-grid" id="active-grid">
+          <table class="mdl-data-table mdl-js-data-table mdl-cell mdl-cell--12-col">
+            <thead>
+            <tr>
+              <th class="mdl-data-table__cell--non-numeric">Username</th>
+              <th class="mdl-data-table__cell--non-numeric">Email</th>
+              <th class="mdl-data-table__cell--non-numeric">Full name</th>
+              <th class="mdl-data-table__cell--non-numeric">Phone</th>
+              <th class="mdl-data-table__cell--non-numeric" colspan="2">Action</th>
+            </tr>
+            </thead>
+            <tbody th:if="${activeUsers.size() > 0}">
+            <!--/*@thymesVar id="activeUsers" type="java.util.List<com.eugene.domain.User>"*/-->
+            <tr th:each="activeUser: ${activeUsers}">
+              <td class="mdl-data-table__cell--non-numeric" th:text="${activeUser.username}">Acrylic (Transparent)
+              </td>
+              <td class="mdl-data-table__cell--non-numeric" th:text="${activeUser.email}">Acrylic (Transparent)</td>
+              <td class="mdl-data-table__cell--non-numeric" th:text="${activeUser.fullName}">Acrylic (Transparent)
+              </td>
+              <td class="mdl-data-table__cell--non-numeric" th:text="${activeUser.phoneNumber}">Acrylic (Transparent)
+              </td>
+              <td>
+                <form th:action="@{/admin/users/{userId}/changeState(userId=${activeUser.getUserId()})}"
+                      method="post">
+                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored action-button">
+                    disable
+                  </button>
+                </form>
+              </td>
+              <td>
+                <form th:action="@{/admin/users/{userId}/resetPassword(userId=${activeUser.getUserId()})}"
+                      method="post">
+                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent action-button">
+                    Reset Password
+                  </button>
+                </form>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <section class="mdl-layout__tab-panel" id="scroll-tab-2">
+      <div class="page-content">
+        <div class="mdl-grid" id="deActive-grid">
+          <table class="mdl-data-table mdl-js-data-table mdl-cell mdl-cell--12-col">
+            <thead>
+            <tr>
+              <th class="mdl-data-table__cell--non-numeric">Username</th>
+              <th class="mdl-data-table__cell--non-numeric">Email</th>
+              <th class="mdl-data-table__cell--non-numeric">Full name</th>
+              <th class="mdl-data-table__cell--non-numeric">Phone</th>
+              <th class="mdl-data-table__cell--non-numeric" colspan="2">Action</th>
+            </tr>
+            </thead>
+            <tbody th:if="${deActiveUsers.size() > 0}">
+            <!--/*@thymesVar id="deActiveUsers" type="java.util.List<com.eugene.domain.User>"*/-->
+            <tr th:each="deActiveUser: ${deActiveUsers}">
+              <td class="mdl-data-table__cell--non-numeric"
+                  th:text="${deActiveUser.username}">Acrylic (Transparent)
+              </td>
+              <td class="mdl-data-table__cell--non-numeric"
+                  th:text="${deActiveUser.email}">Acrylic (Transparent)
+              </td>
+              <td class="mdl-data-table__cell--non-numeric"
+                  th:text="${deActiveUser.fullName}">Acrylic (Transparent)
+              </td>
+              <td class="mdl-data-table__cell--non-numeric"
+                  th:text="${deActiveUser.phoneNumber}">Acrylic (Transparent)
+              </td>
+              <td>
+                <form th:action="@{/admin/users/{userId}/changeState(userId=${deActiveUser.getUserId()})}"
+                      method="post">
+                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored action-button">
+                    enable
+                  </button>
+                </form>
+              </td>
+              <td>
+                <form th:action="@{/admin/users/{userId}/resetPassword(userId=${deActiveUser.getUserId()})}"
+                      method="post">
+                  <button class="mdl-button mdl-js-button mdl-button--raised  mdl-button--accent action-button">
+                    Reset password
+                  </button>
+                </form>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+  </main>
+</div>
+
+<footer layout:replace="layout :: site-footer" th:remove="tag">
+</footer>
+<script th:inline="javascript">
+  /*<![CDATA[*/
+  $(document).ready(function () {
+    let messageNotice = /*[[${message!=null}]]*/ 'value';
+    let messageInfo = /*[[${message}]]*/ 'value';
+    let notification = document.querySelector('.mdl-js-snackbar');
+    if (messageNotice) {
+      notification.MaterialSnackbar.showSnackbar(
+        {
+          message: messageInfo
+        }
+      );
+    }
+  });
+  /*]]>*/
+</script>
+</body>
+</html>

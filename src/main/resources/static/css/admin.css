@@ -1,0 +1,24 @@
+.mdl-layout__header .mdl-layout__tab-bar .mdl-layout__tab:hover, .mdl-layout__header .mdl-layout__tab-bar .mdl-layout__tab:visited, .mdl-layout__header .mdl-layout__tab-bar .mdl-layout__tab:focus, .mdl-layout__header .mdl-layout__tab-bar .mdl-layout__tab:active {
+  text-decoration: none; }
+.mdl-layout__header .mdl-layout__tab-bar .mdl-layout__tab:hover {
+  color: white; }
+
+.mdl-layout__drawer .mdl-navigation__link.mdl-navigation__link {
+  font-size: 14px;
+  color: black; }
+  .mdl-layout__drawer .mdl-navigation__link.mdl-navigation__link .nav-text {
+    vertical-align: middle;
+    margin-left: 20px; }
+  .mdl-layout__drawer .mdl-navigation__link.mdl-navigation__link .material-icons {
+    opacity: 0.5; }
+  .mdl-layout__drawer .mdl-navigation__link.mdl-navigation__link:hover {
+    text-decoration: none; }
+    .mdl-layout__drawer .mdl-navigation__link.mdl-navigation__link:hover .material-icons {
+      opacity: 1; }
+
+.mdl-layout__content form {
+  text-align: left; }
+  .mdl-layout__content form .action-button {
+    text-transform: capitalize; }
+
+/*# sourceMappingURL=admin.css.map */

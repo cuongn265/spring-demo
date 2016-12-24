@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head layout:replace="layout :: site-head">
   <link rel="stylesheet" th:href="@{/css/form.css}"/>
-  <title>Create new Assignment</title>
+  <title>Edit Assignment</title>
 </head>
 <body>
 <div layout:replace="layout :: site-content">
@@ -13,14 +13,14 @@
           <div class="col-md-6 col-sm-8 col-md-offset-3">
             <div class="panel panel-default">
               <div class="panel-heading heading">
-                <h4>Create Assignment</h4>
+                <h4>Edit Assignment</h4>
               </div>
               <div class="panel-body">
                 <div>
                   <!--/*@thymesVar id="assignment" type="com.eugene.domain.Assignment"*/-->
                   <form class="form"
                         th:object="${assignment}"
-                        th:action="@{add}"
+                        th:action="@{update}"
                         method="post">
                     <input type="hidden" th:field="*{assignmentId}"/>
                     <input type="hidden" th:field="*{unit}" th:value="${assignment.getUnit().getUnitId()}"/>
@@ -70,7 +70,7 @@
                       <!--</div>-->
                       <div class="col-md-12 col-sm-12">
                         <div class="form-group">
-                          <button type="submit" class="btn btn-primary">Create Assignment</button>
+                          <button type="submit" class="btn btn-primary">Update Assignment</button>
                         </div>
                       </div>
                     </div>
@@ -85,7 +85,6 @@
     <footer layout:replace="layout :: site-footer"></footer>
   </div>
 </div>
-
 <script type="text/javascript">
   $(document).ready(function () {
     $('#start-datetimepicker, #end-datetimepicker').datetimepicker({

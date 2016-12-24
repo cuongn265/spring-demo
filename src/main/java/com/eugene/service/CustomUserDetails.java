@@ -16,12 +16,14 @@ public class CustomUserDetails extends User implements UserDetails {
   private List<String> userRoles;
   private Long userId;
   private String userImageUrl;
+  private boolean enabled;
 
-  public CustomUserDetails(User user, List<String> userRoles, Long userId, String userImageUrl) {
+  public CustomUserDetails(User user, List<String> userRoles, Long userId, String userImageUrl, boolean enabled) {
     super(user);
     this.userRoles = userRoles;
     this.userId = userId;
     this.userImageUrl = userImageUrl;
+    this.enabled = enabled;
   }
 
   @Override
@@ -48,7 +50,7 @@ public class CustomUserDetails extends User implements UserDetails {
 
   @Override
   public boolean isEnabled() {
-    return true;
+    return super.getEnabled();
   }
 
 

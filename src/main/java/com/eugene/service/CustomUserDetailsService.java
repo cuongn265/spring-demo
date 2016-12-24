@@ -31,9 +31,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     User user = userRepository.findFirstByUsername(username);
     if (null == user) {
       throw new UsernameNotFoundException("No user present with username: " + username);
+    } else if (!user.getEnabled()) {
+      throw new UsernameNotFoundException("User was deactive: " + username);
     } else {
       List<String> userRoles = userRolesRepository.findRoleByUserName(username);
-      return new CustomUserDetails(user, userRoles, user.getUserId(), user.getUserImageUrl());
+      return new CustomUserDetails(user, userRoles, user.getUserId(), user.getUserImageUrl(), user.getEnabled());
     }
   }
 

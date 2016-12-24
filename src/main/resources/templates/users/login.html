@@ -9,7 +9,6 @@
   <link rel="stylesheet" th:href="@{css/form.css}"/>
 </head>
 <body>
-
 <div layout:include="layout :: site-content">
   <div layout:fragment="content" th:remove="tag">
     <main class="container login-container">
@@ -17,7 +16,7 @@
         <div class="col-md-6 col-md-offset-3 col-sm-12">
           <!--/*@thymesVar id="param" type=""*/-->
           <div th:if="${param.error}" class="alert alert-danger">
-            Invalid username and password.
+            Invalid username and password or your account was blocked.
           </div>
           <div th:if="${param.logout}" class="alert alert-info">
             You have been logged out.
@@ -53,7 +52,6 @@
     </main>
   </div>
 </div>
-<div layout:fragment="content">Hello2</div>
 <footer layout:replace="layout :: site-footer"></footer>
 </body>
 </html>

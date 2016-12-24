@@ -23,7 +23,6 @@ import java.util.List;
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
   @Override
   public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
-    HttpSession session = httpServletRequest.getSession();
     Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
 
     if (authorities.iterator().next().getAuthority().equals("ROLE_ADMIN")) {

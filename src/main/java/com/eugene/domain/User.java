@@ -5,6 +5,7 @@ package com.eugene.domain;
  */
 
 import com.eugene.inter.ChangePassword;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import java.io.Serializable;
@@ -27,7 +28,7 @@ public class User implements Serializable {
   @Column(name = "email", nullable = false, unique = true)
   private String email;
   @Column(name = "enabled", nullable = false)
-  private int enabled = 1;
+  private boolean enabled = true;
   @Column(name = "image_url")
   private String userImageUrl;
   @ManyToOne(optional = false)
@@ -100,11 +101,11 @@ public class User implements Serializable {
     this.email = email;
   }
 
-  public int getEnabled() {
+  public Boolean getEnabled() {
     return enabled;
   }
 
-  public void setEnabled(int enabled) {
+  public void setEnabled(boolean enabled) {
     this.enabled = enabled;
   }
 

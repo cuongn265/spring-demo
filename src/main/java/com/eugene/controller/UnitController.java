@@ -35,7 +35,7 @@ public class UnitController {
     this.unitNameValidator = unitNameValidator;
   }
 
-  @RequestMapping(value = "/units/new")
+  @RequestMapping(value = "units/new")
   public String addUnit(Model model, @PathVariable Integer courseId, @PathVariable Integer weekId) {
     Unit unit = new Unit();
     unit.setCourse(courseRepository.findOne(courseId.longValue()));
@@ -44,7 +44,7 @@ public class UnitController {
     return "courses/units/new";
   }
 
-  @RequestMapping(value = "/units/add", method = RequestMethod.POST)
+  @RequestMapping(value = "units/add", method = RequestMethod.POST)
   public String addUnit(@Valid Unit unit,BindingResult bindingResult) {
     unitNameValidator.validate(unit, bindingResult);
     if (bindingResult.hasErrors()) {
@@ -55,21 +55,21 @@ public class UnitController {
   }
 
   //  TODO: Make response body when deleting fail
-  @RequestMapping(value="units/{weekId}/delete/{unitId}", method=RequestMethod.DELETE,
+  @RequestMapping(value="delete/{unitId}", method=RequestMethod.DELETE,
     produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
   @ResponseBody
   public void deleteUnit(@PathVariable Integer unitId) {
     unitRepository.delete(unitId.longValue());
   }
 
-  @RequestMapping(value = "/units/{unitId}/edit")
+  @RequestMapping(value = "units/{unitId}/edit")
   public String editUnit(@PathVariable Integer courseId, @PathVariable Integer unitId, Model model) {
     Unit unit = unitRepository.findOne(unitId.longValue());
     model.addAttribute("unit", unit);
     return "courses/units/edit";
   }
 
-  @RequestMapping(value = "/units/{unitId}/edit", method = RequestMethod.POST)
+  @RequestMapping(value = "units/{unitId}/edit", method = RequestMethod.POST)
   public String editUnitPost(@ModelAttribute @Validated({Default.class}) Unit unit,
                              BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) {
