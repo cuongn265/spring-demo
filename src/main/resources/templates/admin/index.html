@@ -67,7 +67,7 @@
             </tr>
             </thead>
             <tbody th:if="${activeUsers.size() > 0}">
-            <!--/*@thymesVar id="activeUsers" type="java.util.List<com.eugene.domain.User>"*/-->
+            <!--/*@thymesVar id="activeUsers" type="java.util.List<com.eugene.domain.NgoManhCuong_05_User>"*/-->
             <tr th:each="activeUser: ${activeUsers}">
               <td class="mdl-data-table__cell--non-numeric" th:text="${activeUser.username}">Acrylic (Transparent)
               </td>
@@ -112,7 +112,7 @@
             </tr>
             </thead>
             <tbody th:if="${deActiveUsers.size() > 0}">
-            <!--/*@thymesVar id="deActiveUsers" type="java.util.List<com.eugene.domain.User>"*/-->
+            <!--/*@thymesVar id="deActiveUsers" type="java.util.List<com.eugene.domain.NgoManhCuong_05_User>"*/-->
             <tr th:each="deActiveUser: ${deActiveUsers}">
               <td class="mdl-data-table__cell--non-numeric"
                   th:text="${deActiveUser.username}">Acrylic (Transparent)

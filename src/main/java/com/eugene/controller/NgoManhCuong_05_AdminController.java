@@ -1,7 +1,7 @@
 package com.eugene.controller;
 
-import com.eugene.domain.User;
-import com.eugene.repository.UserRepository;
+import com.eugene.domain.NgoManhCuong_05_User;
+import com.eugene.repository.NgoManhCuong_05_UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -16,39 +16,50 @@ import java.security.Principal;
 import java.util.List;
 
 /**
- * Created by Eugene on 12/24/2016.
+ * Created by Ngô Mạnh Cường on 12/24/2016.
+ */
+
+/**
+ * Controller cho admin
+ * Xem danh sách người dùng active, deactive
+ * Khóa, mở khóa người dùng
+ * Reset mật khẩu về 123456
  */
 @Controller
 @RequestMapping("/admin")
-public class AdminController {
-  private final UserRepository userRepository;
+public class NgoManhCuong_05_AdminController {
+  /*lấy bean user repository*/
+  private final NgoManhCuong_05_UserRepository userRepository;
 
   @Autowired
-  public AdminController(UserRepository userRepository) {
+  public NgoManhCuong_05_AdminController(NgoManhCuong_05_UserRepository userRepository) {
     this.userRepository = userRepository;
   }
 
+  /* Xem trang index, gắn list các deactive user và active user */
   @RequestMapping("")
   public String index(Model model, Principal principal) {
-    List<User> activeUsers = userRepository.findAllByEnabledAndUsernameNot(true, principal.getName());
-    List<User> deActiveUsers = userRepository.findAllByEnabledAndUsernameNot(false, principal.getName());
+    List<NgoManhCuong_05_User> activeUsers = userRepository.findAllByStatus(true, principal.getName(), 1L);
+    List<NgoManhCuong_05_User> deActiveUsers = userRepository.findAllByStatus(false, principal.getName(), 1L);
     model.addAttribute("activeUsers", activeUsers);
     model.addAttribute("deActiveUsers", deActiveUsers);
     return "admin/index";
   }
 
+  /*Thay đổi trạng thái người dùng (chặn, mở)*/
   @RequestMapping(value = "users/{userId}/changeState", method = RequestMethod.POST)
   String changeState(@PathVariable Integer userId, HttpServletRequest request, RedirectAttributes redirectAttributes) {
-    User user = userRepository.findOne(userId.longValue());
+    NgoManhCuong_05_User user = userRepository.findOne(userId.longValue());
     userRepository.updateState(!user.getEnabled(), userId.longValue());
     String referer = request.getHeader("Referer");
     redirectAttributes.addFlashAttribute("message", "User state was successfully updated");
     return "redirect:" + referer;
   }
 
+  /*Reset mật khẩu cho người dùng*/
   @RequestMapping(value = "users/{userId}/resetPassword", method = RequestMethod.POST)
   String resetPassword(@PathVariable Integer userId, HttpServletRequest request, RedirectAttributes redirectAttributes) {
-    User user = userRepository.findOne(userId.longValue());
+    NgoManhCuong_05_User user = userRepository.findOne(userId.longValue());
 
     BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
     String newPassword = bCryptPasswordEncoder.encode("1");

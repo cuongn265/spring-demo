@@ -1,29 +1,34 @@
 package com.eugene.domain;
 
-import com.eugene.inter.CreateCourse;
-import com.eugene.validator.NotExistingCourseName;
+import com.eugene.group.NgoManhCuong_05_CreateCourse;
+import com.eugene.validator.NgoManhCuong_05_NotExistingCourseName;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.groups.Default;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by Eugene on 11/28/2016.
+ * Created by Ngô Mạnh Cường on 11/28/2016.
+ */
+
+/**Entity cho khóa học
+ * có các thuộc tính như dưới, có liên kết nhiều 1 với user
+ * có liên kết 1 nhiều với bài học
+ * có chức năng kiểm tra hợp lệ
  */
 @Entity
 @Table(name = "courses")
-public class Course {
+public class NgoManhCuong_05_Course {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "course_id")
   private Long courseId;
 
   @Column(name = "name", nullable = false, unique = true)
-  @NotExistingCourseName(groups = CreateCourse.class)
+  @NgoManhCuong_05_NotExistingCourseName(groups = NgoManhCuong_05_CreateCourse.class)
   @NotEmpty(message = "Course name should not be empty")
   private String courseName;
 
@@ -38,18 +43,18 @@ public class Course {
   private String courseImageUrl;
   @ManyToOne(optional = false)
   @JoinColumn(name = "userId", referencedColumnName = "user_id")
-  private User user;
+  private NgoManhCuong_05_User user;
 
   @Column(name = "outline", columnDefinition = "LONGTEXT")
   private String courseOutline;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "course", cascade = CascadeType.ALL)
-  private Set<Unit> unitList = new HashSet<>();
+  private Set<NgoManhCuong_05_Unit> unitList = new HashSet<>();
 
-  public Course() {
+  public NgoManhCuong_05_Course() {
   }
 
-  public Course(String courseName, String courseSummary, Integer courseWeekCount, User user, Set<Unit> unitList, String courseOutline, String courseImageUrl) {
+  public NgoManhCuong_05_Course(String courseName, String courseSummary, Integer courseWeekCount, NgoManhCuong_05_User user, Set<NgoManhCuong_05_Unit> unitList, String courseOutline, String courseImageUrl) {
     this.courseName = courseName;
     this.courseSummary = courseSummary;
     this.courseWeekCount = courseWeekCount;
@@ -99,19 +104,19 @@ public class Course {
     this.courseImageUrl = courseImageUrl;
   }
 
-  public User getUser() {
+  public NgoManhCuong_05_User getUser() {
     return user;
   }
 
-  public void setUser(User user) {
+  public void setUser(NgoManhCuong_05_User user) {
     this.user = user;
   }
 
-  public Set<Unit> getUnitList() {
+  public Set<NgoManhCuong_05_Unit> getUnitList() {
     return unitList;
   }
 
-  public void setUnitList(Set<Unit> unitList) {
+  public void setUnitList(Set<NgoManhCuong_05_Unit> unitList) {
     this.unitList = unitList;
   }
 

@@ -3,11 +3,16 @@ package com.eugene.domain;
 import javax.persistence.*;
 
 /**
- * Created by Eugene on 11/26/2016.
+ * Created by Ngô Mạnh Cường on 11/26/2016.
+ */
+
+/**Entity cho quyền người dùng
+ * có các thuộc tính như dưới, có liên kết với user
+ * có chức năng kiểm tra hợp lệ
  */
 @Entity
 @Table(name = "roles")
-public class UserRole {
+public class NgoManhCuong_05_UserRole {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "role_id")

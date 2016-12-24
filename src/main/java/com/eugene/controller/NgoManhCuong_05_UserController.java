@@ -5,11 +5,11 @@ import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.*;
-import com.eugene.domain.User;
-import com.eugene.inter.ChangePassword;
-import com.eugene.repository.UserRepository;
-import com.eugene.service.CustomUserDetails;
-import com.eugene.validator.PasswordValidator;
+import com.eugene.domain.NgoManhCuong_05_User;
+import com.eugene.group.NgoManhCuong_05_ChangePassword;
+import com.eugene.repository.NgoManhCuong_05_UserRepository;
+import com.eugene.service.NgoManhCuong_05_CustomUserDetails;
+import com.eugene.validator.NgoManhCuong_05_PasswordValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -31,39 +31,41 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Created by Eugene on 12/12/2016.
+ * Created by Ngô Mạnh Cường on 12/12/2016.
  */
-@Controller
-public class UserController {
 
-  private final
-  UserRepository userRepository;
-  private final
-  PasswordValidator passwordValidator;
+/*Controller cho người dùng*/
+@Controller
+public class NgoManhCuong_05_UserController {
+
+  private final NgoManhCuong_05_UserRepository userRepository;
+  private final NgoManhCuong_05_PasswordValidator passwordValidator;
 
   @Autowired
-  public UserController(UserRepository userRepository, PasswordValidator passwordValidator) {
+  public NgoManhCuong_05_UserController(NgoManhCuong_05_UserRepository userRepository, NgoManhCuong_05_PasswordValidator passwordValidator) {
     this.userRepository = userRepository;
     this.passwordValidator = passwordValidator;
   }
 
+  /*Gọi trang sửa thông tin cá nhân*/
   @RequestMapping("/profile")
   public String profile(Model model) {
-    CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    NgoManhCuong_05_CustomUserDetails userDetails = (NgoManhCuong_05_CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     Long userId = userDetails.getUserId();
-    User user = userRepository.findOne(userId);
+    NgoManhCuong_05_User user = userRepository.findOne(userId);
     model.addAttribute("user", user);
     return "users/profile";
   }
 
+  /*Sửa thông tin cá nhân, tương tự khóa học, up hình lên AWS S3*/
   @RequestMapping(value = "/profile/update", method = RequestMethod.POST)
-  public String updateUser(@Valid User user,
+  public String updateUser(@Valid NgoManhCuong_05_User user,
                            BindingResult result,
                            @RequestParam("file") MultipartFile file,
                            @RequestParam("name") String name,
                            RedirectAttributes redirectAttributes) {
 
-    if(result.hasErrors()){
+    if (result.hasErrors()) {
       return "users/profile";
     }
 
@@ -94,7 +96,7 @@ public class UserController {
 
     SecurityContext context = SecurityContextHolder.getContext();
     Authentication auth = context.getAuthentication();
-    CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
+    NgoManhCuong_05_CustomUserDetails userDetails = (NgoManhCuong_05_CustomUserDetails) auth.getPrincipal();
     userDetails.setUserImageUrl(user.getUserImageUrl());
     redirectAttributes.addFlashAttribute("message", "Your profile was successfully updated!!");
     user.setPassword(user.getPassword());
@@ -102,27 +104,30 @@ public class UserController {
     return "redirect:/profile";
   }
 
+  /*Gọi trang sửa mật khẩu*/
   @RequestMapping("/password")
   public String password(Model model) {
-    CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    NgoManhCuong_05_CustomUserDetails userDetails = (NgoManhCuong_05_CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     Long userId = userDetails.getUserId();
-    User user = userRepository.findOne(userId);
+    NgoManhCuong_05_User user = userRepository.findOne(userId);
     user.setPassword(user.getPassword());
     model.addAttribute("user", user);
     return "users/password";
   }
 
+  /*Sửa mật khẩu*/
   @RequestMapping(value = "password/update", method = RequestMethod.POST)
-  public String updatePassword(@ModelAttribute @Validated({ChangePassword.class}) User user,
+  public String updatePassword(@ModelAttribute("user") @Validated({NgoManhCuong_05_ChangePassword.class}) NgoManhCuong_05_User user,
                                BindingResult result,
                                RedirectAttributes redirectAttributes) {
     passwordValidator.validate(user, result);
-    if(result.hasErrors()){
+    if (result.hasErrors()) {
+
       return "users/password";
     }
     BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     String hashedPassword = passwordEncoder.encode(user.getNewPassword());
-    CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    NgoManhCuong_05_CustomUserDetails userDetails = (NgoManhCuong_05_CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     userDetails.setPassword(hashedPassword);
     userRepository.changeUserPassword(hashedPassword, user.getUserId());
     redirectAttributes.addFlashAttribute("message", "Your password was successfully updated!");

@@ -1,9 +1,9 @@
 package com.eugene.controller;
 
-import com.eugene.domain.Unit;
-import com.eugene.repository.CourseRepository;
-import com.eugene.repository.UnitRepository;
-import com.eugene.validator.UnitNameValidator;
+import com.eugene.domain.NgoManhCuong_05_Unit;
+import com.eugene.repository.NgoManhCuong_05_CourseRepository;
+import com.eugene.repository.NgoManhCuong_05_UnitRepository;
+import com.eugene.validator.NgoManhCuong_05_UnitNameValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -17,35 +17,38 @@ import javax.validation.Valid;
 import javax.validation.groups.Default;
 
 /**
- * Created by Eugene on 12/5/2016.
+ * Created by Ngô Mạnh Cường on 12/5/2016.
  */
+
+/*Controller cho bài học*/
 @Controller
 @RequestMapping("/courses/{courseId}/weeks/{weekId}")
-public class UnitController {
+public class NgoManhCuong_05_UnitController {
 
-  private final UnitRepository unitRepository;
-  private final CourseRepository courseRepository;
-  @Autowired
-  private final UnitNameValidator unitNameValidator;
+  private final NgoManhCuong_05_UnitRepository unitRepository;
+  private final NgoManhCuong_05_CourseRepository courseRepository;
+  private final NgoManhCuong_05_UnitNameValidator unitNameValidator;
 
   @Autowired
-  public UnitController(UnitRepository unitRepository, CourseRepository courseRepository, UnitNameValidator unitNameValidator) {
+  public NgoManhCuong_05_UnitController(NgoManhCuong_05_UnitRepository unitRepository, NgoManhCuong_05_CourseRepository courseRepository, NgoManhCuong_05_UnitNameValidator unitNameValidator) {
     this.unitRepository = unitRepository;
     this.courseRepository = courseRepository;
     this.unitNameValidator = unitNameValidator;
   }
 
+  /*Gọi trang thêm bài học*/
   @RequestMapping(value = "units/new")
   public String addUnit(Model model, @PathVariable Integer courseId, @PathVariable Integer weekId) {
-    Unit unit = new Unit();
+    NgoManhCuong_05_Unit unit = new NgoManhCuong_05_Unit();
     unit.setCourse(courseRepository.findOne(courseId.longValue()));
     unit.setUnitWeek(weekId);
     model.addAttribute("unit", unit);
     return "courses/units/new";
   }
 
+  /*Thêm bài học*/
   @RequestMapping(value = "units/add", method = RequestMethod.POST)
-  public String addUnit(@Valid Unit unit,BindingResult bindingResult) {
+  public String addUnit(@Validated @ModelAttribute("unit") NgoManhCuong_05_Unit unit, BindingResult bindingResult) {
     unitNameValidator.validate(unit, bindingResult);
     if (bindingResult.hasErrors()) {
       return "courses/units/new";
@@ -54,6 +57,7 @@ public class UnitController {
     return "redirect:/courses/{courseId}/weeks/{weekId}";
   }
 
+  /*Xóa bài học*/
   //  TODO: Make response body when deleting fail
   @RequestMapping(value="delete/{unitId}", method=RequestMethod.DELETE,
     produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -62,15 +66,17 @@ public class UnitController {
     unitRepository.delete(unitId.longValue());
   }
 
+  /*Gọi trang sửa bài học*/
   @RequestMapping(value = "units/{unitId}/edit")
   public String editUnit(@PathVariable Integer courseId, @PathVariable Integer unitId, Model model) {
-    Unit unit = unitRepository.findOne(unitId.longValue());
+    NgoManhCuong_05_Unit unit = unitRepository.findOne(unitId.longValue());
     model.addAttribute("unit", unit);
     return "courses/units/edit";
   }
 
+  /*Sửa bài học*/
   @RequestMapping(value = "units/{unitId}/edit", method = RequestMethod.POST)
-  public String editUnitPost(@ModelAttribute @Validated({Default.class}) Unit unit,
+  public String editUnitPost(@ModelAttribute("unit") @Validated({Default.class}) NgoManhCuong_05_Unit unit,
                              BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {

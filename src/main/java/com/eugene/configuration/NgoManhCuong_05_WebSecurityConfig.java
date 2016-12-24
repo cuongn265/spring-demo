@@ -1,6 +1,6 @@
 package com.eugene.configuration;
 
-import com.eugene.service.CustomUserDetailsService;
+import com.eugene.service.NgoManhCuong_05_CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,26 +12,38 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
+/**
+ * Created by Ngô Mạnh Cường on 28/11/2016.
+ */
+/*Hàm cấu hình việc xác thực người dùng*/
 @Configuration
 @EnableWebSecurity
-@ComponentScan(basePackageClasses = CustomUserDetailsService.class)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+@ComponentScan(basePackageClasses = NgoManhCuong_05_CustomUserDetailsService.class)
+public class NgoManhCuong_05_WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   private final UserDetailsService userDetailsService;
-  private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+  private final NgoManhCuong_05_CustomAuthenticationSuccessHandler ngoManhCuong05CustomAuthenticationSuccessHandler;
 
+  /*Gọi các bean*/
   @Autowired
-  public WebSecurityConfig(UserDetailsService userDetailsService, CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler) {
+  public NgoManhCuong_05_WebSecurityConfig(UserDetailsService userDetailsService, NgoManhCuong_05_CustomAuthenticationSuccessHandler ngoManhCuong05CustomAuthenticationSuccessHandler) {
     this.userDetailsService = userDetailsService;
-    this.customAuthenticationSuccessHandler = customAuthenticationSuccessHandler;
+    this.ngoManhCuong05CustomAuthenticationSuccessHandler = ngoManhCuong05CustomAuthenticationSuccessHandler;
   }
 
+  /*Thực hiện đăng nhập với username và password đã được encode*/
   @Autowired
   public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
     auth.userDetailsService(userDetailsService).passwordEncoder(passwordencoder());
   }
 
+  /**Cấu hình việc xác thực người dùng, cấp độ truy cập cho các file static
+   * các URL được truy cập không cần đăng nhập
+   * các URL được truy cập cần đăng nhập
+   * handler cho việc đăng nhập
+   * cho các request không có quyền
+   * ...
+   */
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests()
@@ -44,7 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
       .formLogin()
       .loginPage("/login")
       .usernameParameter("username").passwordParameter("password")
-      .successHandler(customAuthenticationSuccessHandler)
+      .successHandler(ngoManhCuong05CustomAuthenticationSuccessHandler)
       .and()
       .httpBasic()
       .and()
@@ -57,6 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
       .csrf().disable();
   }
 
+  /*Tạo bean để encode password*/
   @Bean(name = "passwordEncoder")
   public PasswordEncoder passwordencoder() {
     return new BCryptPasswordEncoder(4);

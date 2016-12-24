@@ -9,17 +9,22 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
- * Created by Eugene on 11/28/2016.
+ * Created by Ngô Mạnh Cường on 11/28/2016.
+ */
+
+/**Entity cho bài tập
+ * có các thuộc tính như dưới, có liên kết nhiều 1 với bài học
+ * có chức năng kiểm tra hợp lệ
  */
 @Entity
 @Table(name = "assignments")
-public class Assignment {
+public class NgoManhCuong_05_Assignment {
   @javax.persistence.Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "assignment_id")
   private Long assignmentId;
   @NotEmpty(message = "Assignment name must not be empty")
-  @Column(name =  "name", nullable = false, unique = true)
+  @Column(name =  "name", nullable = false)
   private String assignmentName;
   @Column(name =  "detail")
   private String assignmentDetail;
@@ -36,12 +41,12 @@ public class Assignment {
 
   @ManyToOne()
   @JoinColumn(name = "unitId", referencedColumnName = "unit_id")
-  private Unit unit;
+  private NgoManhCuong_05_Unit unit;
 
-  public Assignment() {
+  public NgoManhCuong_05_Assignment() {
   }
 
-  public Assignment(String assignmentName, String assignmentDetail, Date assignmentStartDate, Date assignmentEndDate, Unit unit) {
+  public NgoManhCuong_05_Assignment(String assignmentName, String assignmentDetail, Date assignmentStartDate, Date assignmentEndDate, NgoManhCuong_05_Unit unit) {
     this.assignmentName = assignmentName;
     this.assignmentDetail = assignmentDetail;
     this.assignmentStartDate = assignmentStartDate;
@@ -89,11 +94,11 @@ public class Assignment {
     this.assignmentDetail = assignmentDetail;
   }
 
-  public Unit getUnit() {
+  public NgoManhCuong_05_Unit getUnit() {
     return unit;
   }
 
-  public void setUnit(Unit unit) {
+  public void setUnit(NgoManhCuong_05_Unit unit) {
     this.unit = unit;
   }
 }

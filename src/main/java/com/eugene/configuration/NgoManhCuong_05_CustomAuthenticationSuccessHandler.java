@@ -17,10 +17,15 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Created by Eugene on 12/23/2016.
+ * Created by Ngô Mạnh Cường on 12/23/2016.
+ */
+
+/**
+ * Custom Handler để chuyển trang theo quyền của người dùng
  */
 @Component
-public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+public class NgoManhCuong_05_CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+  /*Override lại hàm có săn của Spring để chuyển trang*/
   @Override
   public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
     Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();

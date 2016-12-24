@@ -1,19 +1,27 @@
 package com.eugene.domain;
 
 /**
- * Created by Eugene on 11/26/2016.
+ * Created by Ngô Mạnh Cường on 11/26/2016.
  */
 
-import com.eugene.inter.ChangePassword;
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import com.eugene.group.NgoManhCuong_05_ChangePassword;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+
+/**
+ * Entity cho bài học
+ * có các thuộc tính như dưới, có liên kết nhiều 1 với khóa học
+ * có liên kết với quyền người dùng
+ * có chức năng kiểm tra hợp lệ
+ */
 
 @Entity
 @Table(name = "users")
-public class User implements Serializable {
+public class NgoManhCuong_05_User implements Serializable {
   private static final long serialVersionUID = 1;
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,8 +31,9 @@ public class User implements Serializable {
   @Column(name = "username", nullable = false, unique = true)
   private String username;
   @Column(name = "password", nullable = false)
+  @Size(min = 6)
   private String password;
-  @NotEmpty(message="Email should not be empty")
+  @NotEmpty(message = "Email should not be empty")
   @Column(name = "email", nullable = false, unique = true)
   private String email;
   @Column(name = "enabled", nullable = false)
@@ -33,7 +42,7 @@ public class User implements Serializable {
   private String userImageUrl;
   @ManyToOne(optional = false)
   @JoinColumn(name = "roleId", referencedColumnName = "role_id", insertable = false, updatable = false)
-  private UserRole userRole;
+  private NgoManhCuong_05_UserRole userRole;
   @Column(name = "full_name")
   private String fullName;
   @Column(name = "phone_number")
@@ -42,19 +51,19 @@ public class User implements Serializable {
   private String bio;
 
   @Transient
-  @NotEmpty(message = "New password may not be empty" ,groups = ChangePassword.class)
+  @NotEmpty(message = "New password may not be empty", groups = NgoManhCuong_05_ChangePassword.class)
   private String newPassword;
-  @NotEmpty(message = "Confirm password may not be empty", groups = ChangePassword.class)
+  @NotEmpty(message = "Confirm password may not be empty", groups = NgoManhCuong_05_ChangePassword.class)
   @Transient
   private String retypePassword;
   @Transient
-  @NotEmpty(message = "Old password may not be empty", groups = ChangePassword.class)
+  @NotEmpty(message = "Old password may not be empty", groups = NgoManhCuong_05_ChangePassword.class)
   private String oldPassword;
 
-  public User() {
+  public NgoManhCuong_05_User() {
   }
 
-  public User(User user) {
+  public NgoManhCuong_05_User(NgoManhCuong_05_User user) {
     this.userId = user.userId;
     this.username = user.username;
     this.email = user.email;
@@ -109,11 +118,11 @@ public class User implements Serializable {
     this.enabled = enabled;
   }
 
-  public UserRole getUserRole() {
+  public NgoManhCuong_05_UserRole getUserRole() {
     return userRole;
   }
 
-  public void setUserRole(UserRole userRole) {
+  public void setUserRole(NgoManhCuong_05_UserRole userRole) {
     this.userRole = userRole;
   }
 

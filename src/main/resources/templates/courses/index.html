@@ -20,7 +20,7 @@
       </div>
       <div class="container course-container">
         <div class="row courses-body">
-          <!--/*@thymesVar id="courseList" type="java.util.List<com.eugene.domain.Course>"*/-->
+          <!--/*@thymesVar id="courseList" type="java.util.List<com.eugene.domain.NgoManhCuong_05_Course>"*/-->
           <div class="col-sm-6 col-md-4 col-xs-12" th:each="course: ${courseList}">
             <a th:href="@{/courses/{courseId}/weeks/1(courseId=${course.courseId})}">
               <div class="thumbnail box">

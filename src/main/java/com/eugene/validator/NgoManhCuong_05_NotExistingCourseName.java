@@ -5,13 +5,19 @@ import javax.validation.Payload;
 import java.lang.annotation.*;
 
 /**
- * Created by Eugene on 12/3/2016.
+ * Created by Ngô Mạnh Cường on 12/3/2016.
+ */
+
+/**
+ * Mẫu hàm cho validator
+ * message là thông báo lỗi
+ * group là nhóm để thực hiện kiểm tra báo lỗi
  */
 @Target({ElementType.FIELD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = CourseNameValidator.class)
+@Constraint(validatedBy = NgoManhCuong_05_CourseNameValidator.class)
 @Documented
-public @interface NotExistingCourseName {
+public @interface NgoManhCuong_05_NotExistingCourseName {
 
   String message() default "Course name already exist";
 

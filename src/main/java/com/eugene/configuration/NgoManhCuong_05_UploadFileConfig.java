@@ -12,11 +12,13 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import javax.servlet.MultipartConfigElement;
 
 /**
- * Created by Eugene on 12/2/2016.
+ * Created by Ngô Mạnh Cường on 12/2/2016.
  */
+/*Cấu hình cho việc upload các hình*/
 @Configuration
 @ComponentScan
-public class UploadFileConfig {
+public class NgoManhCuong_05_UploadFileConfig {
+  /*Cấu hình dung lượng tối đa của file upload lên*/
   @Bean
   public MultipartConfigElement multipartConfigElement() {
     MultipartConfigFactory factory = new MultipartConfigFactory();

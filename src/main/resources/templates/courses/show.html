@@ -44,7 +44,7 @@
 </dialog>
 <div layout:replace="layout :: site-content">
   <div layout:fragment="content" th:remove="tag">
-    <!--/*@thymesVar id="course" type="com.eugene.domain.Course"*/-->
+    <!--/*@thymesVar id="course" type="com.eugene.domain.NgoManhCuong_05_Course"*/-->
     <header
       th:style="'background-image:linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)),url(' + ${course.courseImageUrl} + ');'">
       <p class="course-name" th:text="${course.courseName}"></p>
@@ -122,7 +122,7 @@
             </table>
           </div>
           <div class="mdl-cell mdl-cell mdl-cell--9-col mdl-cell--6-col-tablet unit-content">
-            <!--/*@thymesVar id="unit" type="com.eugene.domain.Unit"*/-->
+            <!--/*@thymesVar id="unit" type="com.eugene.domain.NgoManhCuong_05_Unit"*/-->
             <div class="demo-card-wide mdl-card mdl-shadow--2dp" th:if="${unit!=null}">
               <div class="mdl-card__title">
                 <h2 class="mdl-card__title-text" th:text="${unit.unitName}">Welcome</h2>
@@ -159,7 +159,7 @@
         </div>
         <div class="mdl-grid" id="summary-grid" style="display: none">
           <div class="mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet unit-content">
-            <!--/*@thymesVar id="unit" type="com.eugene.domain.Unit"*/-->
+            <!--/*@thymesVar id="unit" type="com.eugene.domain.NgoManhCuong_05_Unit"*/-->
             <div class="demo-card-wide mdl-card mdl-shadow--2dp">
               <div class="mdl-card__title">
                 <h2 class="mdl-card__title-text">Teacher</h2>
@@ -172,7 +172,7 @@
             </div>
           </div>
           <div class="mdl-cell mdl-cell--8-col mdl-cell--5-col-tablet unit-content">
-            <!--/*@thymesVar id="unit" type="com.eugene.domain.Unit"*/-->
+            <!--/*@thymesVar id="unit" type="com.eugene.domain.NgoManhCuong_05_Unit"*/-->
             <div class="demo-card-wide mdl-card mdl-shadow--2dp">
               <div class="mdl-card__title">
                 <h2 class="mdl-card__title-text" th:text="${course.courseName}">Course name</h2>
@@ -201,8 +201,8 @@
           </div>
           <!--TODO: show-->
           <div class="mdl-cell mdl-cell mdl-cell--9-col mdl-cell--6-col-tablet unit-content">
-            <!--/*@thymesVar id="unit" type="com.eugene.domain.Unit"*/-->
-            <!--/*@thymesVar id="assignments" type="java.util.List<com.eugene.domain.Assignment>"*/-->
+            <!--/*@thymesVar id="unit" type="com.eugene.domain.NgoManhCuong_05_Unit"*/-->
+            <!--/*@thymesVar id="assignments" type="java.util.List<com.eugene.domain.NgoManhCuong_05_Assignment>"*/-->
             <div class="demo-card-wide mdl-card mdl-shadow--2dp assignment-card"
                  th:if="${assignments.size() > 0}"
                  th:each="assignment: ${assignments}">
